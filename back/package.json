@@ -11,8 +11,10 @@
     "bcrypt": "^5.0.1",
     "bunyan": "^1.8.15",
     "cors": "^2.8.5",
+    "debug": "^4.3.3",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-jsdoc-swagger": "^1.6.7",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.3",
     "swagger-ui": "^4.5.2"
