@@ -1,0 +1,14 @@
+@use 'src/styles/vars';
+
+.header {
+    padding: 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(226, 226, 226);
+
+    &__logout-button {
+        background-color: transparent;
+        border: none;
+    }
+}
