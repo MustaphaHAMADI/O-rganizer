@@ -1,0 +1,18 @@
+@use 'src/styles/vars';
+
+.header {
+    position: relative;
+    background-color: vars.$dark-purple;
+    color: vars.$light-color;
+    padding: 1.5em;
+    text-align: center;
+
+    &__logout-button {
+        position: absolute;
+        top: 1.5em;
+        right: 1.5em;
+        background-color: transparent;
+        border: none;
+        color: vars.$light-color;
+    }
+}
