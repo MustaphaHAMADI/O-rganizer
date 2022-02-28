@@ -18,6 +18,8 @@ const config = {};
 
 // si j'exécute l'appli sur Héroku, je complète mon object de config
 if (process.env.NODE_ENV === 'production') {
+  console.log('je suis arrivé la');
+  console.log('database url', process.env.DATABASE_URL);
   config.connectionString = process.env.DATABASE_URL;
   // ici, on désactive l'obligation pour notre app node de se
   // connecter à la BDD en ssl (mode sécurisé)
