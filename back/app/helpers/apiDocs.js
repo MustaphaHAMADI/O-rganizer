@@ -8,7 +8,7 @@ const options = {
   },
   baseDir: __dirname,
   // On analyse tous les fichiers du projet
-  filesPattern: ['../routers/**/*.js', '../models/*.js', '../errors/*.js'],
+  filesPattern: ['../routers/*.js', '../models/*.js', '../errors/*.js'],
   // URL où sera disponible la page de documentation
   swaggerUIPath: process.env.API_DOCUMENTATION_ROUTE,
   // Activation de la documentation à travers une route de l'API
