@@ -26,6 +26,7 @@
     "eslint-plugin-react": "^7.29.0",
     "eslint-plugin-react-hooks": "^4.3.0"
   },
+
   "dependencies": {
     "bcrypt": "^5.0.1",
     "bunyan": "^1.8.15",
@@ -38,4 +39,5 @@
     "pg": "^8.7.3",
     "swagger-ui": "^4.5.2"
   }
+
 }
