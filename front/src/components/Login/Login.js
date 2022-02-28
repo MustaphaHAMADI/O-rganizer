@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Button, Paper } from '@mui/material';
+import { TextField, Paper } from '@mui/material';
 import Btn from '../Btn/Btn';
 import './Login.scss';
 import LoginImg from '../../assets/login-img.jpg';
