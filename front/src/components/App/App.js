@@ -1,9 +1,13 @@
 import React from 'react';
-import Header from './Header/Header';
+import Header from '../Header/Header';
+import Login from '../Login/Login';
 
 const App = () => {
   return (
-    <Header />
+    <div>
+      <Header />
+      <Login />
+    </div>
   );
 };
 

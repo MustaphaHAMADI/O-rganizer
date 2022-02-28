@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextField, Button, Paper } from '@mui/material';
+import Btn from '../Btn/Btn';
 import './Login.scss';
 import LoginImg from '../../assets/login-img.jpg';
 
@@ -27,9 +28,7 @@ const Login = () => {
             />
           </div>
           <div className='form__textfield'>
-            <Button className='btn' variant='outlined'>
-              Se connecter
-            </Button>
+            <Btn text='Se connecter' fullWidth={true} />
           </div>
         </form>
       </Paper>
