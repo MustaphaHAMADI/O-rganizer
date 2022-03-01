@@ -25,4 +25,34 @@ module.exports = {
 
     return result.rows;
   },
+
+  async updateEmployee(employee) {
+    // console.log('employee', employee);
+    const result = await client.query(
+      `UPDATE "employee" 
+        SET 
+          "reg_number" = $1, 
+          "name" = $2, 
+          "lastname" = $3 , 
+          "role" = $4, 
+          "password" = $5, 
+          "function" = $6, 
+          "profile_picture" = $7, 
+          "team_id" = $8
+        WHERE 
+          "id"= $9 ;`,
+      [
+        employee.reg_number,
+        employee.name,
+        employee.lastname,
+        employee.role,
+        employee.password,
+        employee.function,
+        employee.profile_picture,
+        employee.team_id,
+        employee.id,
+      ],
+    );
+    return result.rows[0];
+  },
 };

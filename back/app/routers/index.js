@@ -16,6 +16,8 @@ router.all('/', controller.home);
 */
 router.get('/employee', controllerHandler(controller.getAllEmployee));
 
+router.get('/updateEmployee', controllerHandler(controller.updateAllEmployee));
+
 router.use((err, _, response, next) => {
   errorHandler(err, response, next);
 });
