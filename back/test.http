@@ -1,0 +1,16 @@
+
+@endpoint = http://localhost:3000
+
+### Login
+POST {{ endpoint }}/login
+content-type: application/json
+
+{
+  "regNumber": "U000001",
+  "password": "ADMIN"
+}
+
+
+### Liste des employés
+GET {{ endpoint }}/employee
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDYxNTEwMDAsImV4cCI6MTY0NjE1MTAwMX0.jMD5cBr3juJ9l938e3wu6rluBgoLhNJT50jEQc0T16Q

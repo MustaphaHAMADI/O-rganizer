@@ -1,7 +1,7 @@
 {
   "scripts": {
     "resetDB": "sqitch revert -y; sqitch deploy;",
-    "start": "DEBUG=*,-express:*,-nodemon*,-body-parser:*,-agentkeepalive npx nodemon"
+    "start": "DEBUG=*,-express:*,-nodemon*,-body-parser:*,-send*,-agentkeepalive npx nodemon"
   },
   "devDependencies": {
     "eslint": "^8.9.0",
