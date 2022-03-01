@@ -1,10 +1,14 @@
-import axiosClient from '../../../utils/axios/axiosClient';
+import axios from 'axios';
 
 const login = async (userData) => {
-  const response = await axiosClient.post('/login', userData);
+  const response = await axios.post(
+    'https://organizer-ygg.herokuapp.com/login',
+    userData
+  );
 
-  if (response.data.accessToken) {
+  if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data));
+    console.log(response.data);
   }
 
   return response.data;
