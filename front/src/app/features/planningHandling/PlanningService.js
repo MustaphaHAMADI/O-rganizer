@@ -2,10 +2,10 @@ import axiosClient from '../../../utils/axios/axiosClient';
 
 const authHeader = () => {
   const user = JSON.parse(localStorage.getItem('user'));
-  if (user && user.accessToken) {
-    return { 'x-access-token': user.accessToken };
+  if (user && user.token) {
+    return { 'x-access-token': user.token };
   } else {
-    return {};
+    return;
   }
 };
 
