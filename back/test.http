@@ -13,4 +13,4 @@ content-type: application/json
 
 ### Liste des employés
 GET {{ endpoint }}/employee
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDYxNDY5NjIsImV4cCI6MTY0NjE1NDE2Mn0.H8sN3i8AyTR-OzaXx6giKmCUaT6VcAUi-seiNB2-xrc
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDYxNTEwMDAsImV4cCI6MTY0NjE1MTAwMX0.jMD5cBr3juJ9l938e3wu6rluBgoLhNJT50jEQc0T16Q
