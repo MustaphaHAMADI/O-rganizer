@@ -17,7 +17,7 @@ const Header = ({logout}) => {
         <h1 className='header__banner-title'>O'rganizer</h1>
       </div>
       <div className='header__btns'>
-        <Btn text='Se déconnecter' icon={<LogoutIcon />} />
+        <Btn text='Se déconnecter' icon={<LogoutIcon />} clicked={logout} />
       </div>
     </div>
   )
