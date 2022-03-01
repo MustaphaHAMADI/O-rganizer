@@ -9,7 +9,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Btn from '../Btn/Btn';
 import logo from '../../assets/logo.png';
 
-const Header = ({logout}) => {
+const Header = ({ logout }) => {
   return (
     <div className='header'>
       <div className='header__banner'>
@@ -20,15 +20,15 @@ const Header = ({logout}) => {
         <Btn text='Se déconnecter' icon={<LogoutIcon />} />
       </div>
     </div>
-  )
-}
+  );
+};
 
 Header.propTypes = {
   logout: PropTypes.func.isRequired,
-}
+};
 
 Header.defaultProps = {
   logout: () => () => console.log('logout clicked'),
-}
+};
 
-export default Header
+export default Header;
