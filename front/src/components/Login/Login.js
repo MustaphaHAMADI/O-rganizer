@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from '../../app/features/userAuth/userAuthSlice';
 import Btn from '../Btn/Btn';
 
 // import style
@@ -7,31 +9,60 @@ import './login.scss';
 // import elements
 import { TextField, Paper } from '@mui/material';
 
+const defaultValues = {
+  regNumber: '',
+  password: '',
+};
+
 const Login = () => {
+  const [formValues, setFormValues] = useState(defaultValues);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
+  const dispatch = useDispatch();
+  const handleLogin = async () => {
+    try {
+      await dispatch(login(formValues));
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className='login'>
       <div className='login__img'></div>
       <Paper className='login__paper' elevation={2}>
-        <h2 className='login__title'>Connectez-vous pour accéder à votre planning</h2>
-        <form className='login__form' action='submit'>
+        <h2 className='login__title'>
+          Connectez-vous pour accéder à votre planning
+        </h2>
+        <form className='login__form' action='submit' onSubmit={handleLogin}>
           <div className='login__form-textfield'>
             <TextField
-              id='username'
-              label='Username'
-              type='username'
+              id='regNumber'
+              label='regNumber'
+              name='regNumber'
+              type='text'
+              value={formValues.regNumber}
+              onChange={handleInputChange}
               fullWidth
             />
           </div>
           <div className='login__form-textfield'>
             <TextField
               id='password'
-              label='Password'
+              label='password'
+              name='password'
               type='password'
+              value={formValues.password}
+              onChange={handleInputChange}
               fullWidth
             />
           </div>
           <div className='login__form-textfield'>
-            <Btn text='Se connecter' fullWidth={true} />
+            <Btn text='Se connecter' fullWidth={true} clicked={handleLogin} />
           </div>
         </form>
       </Paper>

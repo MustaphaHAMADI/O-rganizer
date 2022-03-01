@@ -5,7 +5,7 @@ import './btn.scss';
 
 const Btn = ({ text, icon, clicked, disabled, fullWidth }) => {
   const [loading, setLoading] = useState(false);
-  const handleClick = async () => {
+  const handleClick = async (e) => {
     setLoading(true);
     // remove the setTimeout onece we have the API call
     setTimeout(() => {
@@ -23,7 +23,10 @@ const Btn = ({ text, icon, clicked, disabled, fullWidth }) => {
       fullWidth={fullWidth}
       size='large'
     >
-      <span className='btn__content'>{icon}{text}</span>
+      <span className='btn__content'>
+        {icon}
+        {text}
+      </span>
     </LoadingButton>
   );
 };

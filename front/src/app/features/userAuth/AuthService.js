@@ -1,10 +1,10 @@
-import axiosClient from '../../../utils/axios/axiosClient';
+import AxiosClient from '../../../utils/axios/axiosClient';
 
 const login = async (userData) => {
-  const response = await axiosClient.post('/login', userData);
+  const response = await AxiosClient.post('/login', userData);
 
-  if (response.data.accessToken) {
-    localStorage.setItem('user', JSON.stringify(response.data.accessToken));
+  if (response.data) {
+    localStorage.setItem('user', JSON.stringify(response.data));
   }
 
   return response.data;
@@ -21,5 +21,3 @@ const authService = {
 };
 
 export default authService;
-
-// localStorage.setItem('user', JSON.stringify({id:2,username:'mouss',accessToken:'mjvdnvfjd'}))
