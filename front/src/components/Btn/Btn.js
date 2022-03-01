@@ -2,9 +2,9 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-const Btn = ({ text, clicked, disabled }) => {
+const Btn = ({ text, clicked, disabled, fullWidth }) => {
   const [loading, setLoading] = useState(false);
-  const handleClick = () => {
+  const handleClick = async () => {
     setLoading(true);
     // remove the setTimeout onece we have the API call
     setTimeout(() => {
@@ -19,6 +19,8 @@ const Btn = ({ text, clicked, disabled }) => {
       disabled={disabled}
       loading={loading}
       loadingIndicator='Loading...'
+      fullWidth={fullWidth}
+      size='large'
     >
       {text}
     </LoadingButton>
@@ -31,6 +33,7 @@ Btn.propTypes = {
 Btn.defaultProps = {
   clicked: () => console.log('cliked'),
   disabled: false,
+  fullWidth: false,
 };
 
 export default Btn;
