@@ -1,7 +1,0 @@
- POST https://organizer-ygg.herokuapp.com/login
-Content-Type:  application/json
-
-{
-  "regNumber": "U000001",
-  "password": "ADMIN"
-}
