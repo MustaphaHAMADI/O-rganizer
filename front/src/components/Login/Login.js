@@ -6,16 +6,15 @@ import './login.scss';
 
 // import elements
 import { TextField, Paper } from '@mui/material';
-import LoginImg from '../../assets/login-img.jpg';
 
 const Login = () => {
   return (
-    <div className='container'>
-      <img src={LoginImg} className='login--img' alt='planning' />
-      <Paper className='paper' elevation={2}>
-        <h2 className='title'>Connectez-vous pour accéder à votre planning</h2>
-        <form className='form' action='submit'>
-          <div className='form__textfield'>
+    <div className='login'>
+      <div className='login__img'></div>
+      <Paper className='login__paper' elevation={2}>
+        <h2 className='login__title'>Connectez-vous pour accéder à votre planning</h2>
+        <form className='login__form' action='submit'>
+          <div className='login__form-textfield'>
             <TextField
               id='username'
               label='Username'
@@ -23,7 +22,7 @@ const Login = () => {
               fullWidth
             />
           </div>
-          <div className='form__textfield'>
+          <div className='login__form-textfield'>
             <TextField
               id='password'
               label='Password'
@@ -31,7 +30,7 @@ const Login = () => {
               fullWidth
             />
           </div>
-          <div className='form__textfield'>
+          <div className='login__form-textfield'>
             <Btn text='Se connecter' fullWidth={true} />
           </div>
         </form>
