@@ -23,7 +23,7 @@ router.all('/', controller.home);
  * @param {loginBody} request.body.required - JSON include reg_number and password of the employee
  * @return {Employee} 200 - sucess response - application/json
  */
-router.post('/login', controller.login);
+router.post('/login', controllerHandler(controller.login));
 
 /**
 * GET /employee
