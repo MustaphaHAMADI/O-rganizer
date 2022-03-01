@@ -21,3 +21,5 @@ const authService = {
 };
 
 export default authService;
+
+// localStorage.setItem('user', JSON.stringify({id:2,username:'mouss',accessToken:'mjvdnvfjd'}))
