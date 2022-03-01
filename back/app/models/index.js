@@ -1,5 +1,7 @@
 const client = require('../config/db');
-const { ApiError } = require('../errors/apiErrors');
+const {
+  ApiError
+} = require('../errors/apiErrors');
 
 /**
  * @typedef {object} Employee
@@ -24,6 +26,20 @@ module.exports = {
     const result = await client.query('SELECT * FROM "employee";');
 
     return result.rows;
+  },
+
+  /**
+   * Returing one employee selected based on his reg_number
+   * @param {string} regNumber - reg_number of the employee
+   * @returns { Employee } - The finded employe
+   */
+  async findOneEmployeeByReg_number(regNumber) {
+    const result = await client.query(
+      'SELECT * FROM "employee" WHERE "reg_number"= $1',
+      [regNumber],
+    );
+
+    return result.rows[0];
   },
 
   async updateEmployee(employee) {
