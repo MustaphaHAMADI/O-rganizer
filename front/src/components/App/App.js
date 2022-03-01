@@ -6,6 +6,7 @@ import Home from '../Home/Home';
 import Footer from '../Footer/Footer';
 import Planning from '../Planning/Planning';
 import RequireAuth from '../RequireAuth/RequireAuth';
+import NoAuthRequired from '../NoAuthRequired/NoAuthRequired';
 
 const theme = createTheme({
   palette: {
@@ -24,7 +25,9 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <Header />
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route element={<NoAuthRequired />}>
+            <Route path='/' element={<Home />} />
+          </Route>
           <Route element={<RequireAuth />}>
             <Route path='/planning' element={<Planning />} />
           </Route>
