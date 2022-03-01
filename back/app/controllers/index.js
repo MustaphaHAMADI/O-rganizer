@@ -18,6 +18,11 @@ module.exports = {
 
   async getAllEmployee(_, res) {
     const employees = await models.getAllEmployee();
+    employees.forEach(employee => {
+      delete employee.password;
+      delete employee.created_at;
+      delete employee.updated_at;
+    });
     return res.json(employees);
   },
 
@@ -59,7 +64,7 @@ module.exports = {
         },
         process.env.TOKEN_KEY,
         {
-          expiresIn: '2h',
+          expiresIn: process.env.TOKEN_VALIDITY,
         },
       );
 
@@ -67,6 +72,9 @@ module.exports = {
       user.token = token;
 
       // user
+      delete user.password;
+      delete user.created_at;
+      delete user.updated_at;
       res.status(200).json(user);
     }
     res.status(400).send('Invalid Credentials');
