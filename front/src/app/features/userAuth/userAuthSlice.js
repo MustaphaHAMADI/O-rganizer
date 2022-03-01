@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  status: false,
-  user: '',
-  role: '',
-};
+const user = JSON.parse(localStorage.getItem('user'));
+
+const initialState = user
+  ? { isLoggedIn: true, user }
+  : { isLoggedIn: false, user: null };
 
 export const userAuthSlice = createSlice({
   name: 'auth',
