@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../Header/Header';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Home from '../Home/Home';
+import Footer from '../Footer/Footer';
 
 const theme = createTheme({
   palette: {
@@ -20,6 +21,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <Header />
         <Home />
+        <Footer />
       </ThemeProvider>
     </div>
   );
