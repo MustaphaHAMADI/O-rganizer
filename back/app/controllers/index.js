@@ -48,12 +48,9 @@ module.exports = {
     // Validate if user exist in our database
     const user = await models.findOneEmployeeByReg_number(regNumber);
 
-    console.log('user', user);
-    
-    const goodPassword = await bcrypt.compare(password, user.password);
-
-    console.log('goodPassword',goodPassword);
-
+    // console.log('user', user);
+    // const goodPassword = await bcrypt.compare(password, user.password);
+    // console.log('goodPassword',goodPassword);
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
       const token = jwt.sign(
