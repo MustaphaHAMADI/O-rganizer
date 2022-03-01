@@ -1,8 +1,9 @@
 import LoadingButton from '@mui/lab/LoadingButton';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import './btn.scss';
 
-const Btn = ({ text, clicked, disabled, fullWidth }) => {
+const Btn = ({ text, icon, clicked, disabled, fullWidth }) => {
   const [loading, setLoading] = useState(false);
   const handleClick = async () => {
     setLoading(true);
@@ -22,18 +23,21 @@ const Btn = ({ text, clicked, disabled, fullWidth }) => {
       fullWidth={fullWidth}
       size='large'
     >
-      {text}
+      <span className='btn__content'>{icon}{text}</span>
     </LoadingButton>
   );
 };
 
 Btn.propTypes = {
   text: PropTypes.string.isRequired,
+  icon: PropTypes.element,
 };
+
 Btn.defaultProps = {
-  clicked: () => console.log('cliked'),
+  clicked: () => console.log('clicked'),
   disabled: false,
   fullWidth: false,
+  icon: null,
 };
 
 export default Btn;

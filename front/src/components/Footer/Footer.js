@@ -1,11 +1,13 @@
 import React from 'react';
-import './Footer.scss';
+import './footer.scss';
 
 const Footer = () => (
-  <div className='footer'>
-    <p>Plan du site</p>
-    <p>Contact</p>
-  </div>
-);
+    <div className='footer'>
+      <a className='footer__navlink' href='#'>Plan du site</a>
+      <a className='footer__navlink' href='#'>Contact</a>
+    </div>
+  );
+  
+
 
 export default React.memo(Footer);

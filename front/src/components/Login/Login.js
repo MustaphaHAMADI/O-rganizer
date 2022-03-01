@@ -1,7 +1,11 @@
 import React from 'react';
-import { TextField, Paper } from '@mui/material';
 import Btn from '../Btn/Btn';
-import './Login.scss';
+
+// import style
+import './login.scss';
+
+// import elements
+import { TextField, Paper } from '@mui/material';
 import LoginImg from '../../assets/login-img.jpg';
 
 const Login = () => {
@@ -9,7 +13,7 @@ const Login = () => {
     <div className='container'>
       <img src={LoginImg} className='login--img' alt='planning' />
       <Paper className='paper' elevation={2}>
-        <h2 className='title'>Connectez vous pour acceder à votre planning</h2>
+        <h2 className='title'>Connectez-vous pour accéder à votre planning</h2>
         <form className='form' action='submit'>
           <div className='form__textfield'>
             <TextField

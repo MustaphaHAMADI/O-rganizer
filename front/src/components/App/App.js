@@ -1,12 +1,19 @@
 import React from 'react';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Routes, Route } from 'react-router-dom';
+
+// import components
 import Header from '../Header/Header';
 import Home from '../Home/Home';
 import Footer from '../Footer/Footer';
 import Planning from '../Planning/Planning';
 import RequireAuth from '../RequireAuth/RequireAuth';
 import NoAuthRequired from '../NoAuthRequired/NoAuthRequired';
+
+// import style
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import './app.scss';
+
+
 
 const theme = createTheme({
   palette: {
@@ -21,7 +28,7 @@ const theme = createTheme({
 
 const App = () => {
   return (
-    <div>
+    <div className='app'>
       <ThemeProvider theme={theme}>
         <Header />
         <Routes>
