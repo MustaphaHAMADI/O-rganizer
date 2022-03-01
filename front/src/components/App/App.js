@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../Header/Header';
-import Login from '../Login/Login';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Home from '../Home/Home';
 
 const theme = createTheme({
   palette: {
@@ -19,7 +19,7 @@ const App = () => {
     <div>
       <ThemeProvider theme={theme}>
         <Header />
-        <Login />
+        <Home />
       </ThemeProvider>
     </div>
   );
