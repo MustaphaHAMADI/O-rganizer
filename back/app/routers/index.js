@@ -3,6 +3,7 @@ const express = require('express');
 const controller = require('../controllers');
 const controllerHandler = require('../helpers/apiControllerHandler');
 const { errorHandler } = require('../helpers/errorHandler');
+const adminAuth = require('../helpers/adminAuth');
 const auth = require('../helpers/auth');
 
 const router = express.Router();
@@ -22,7 +23,7 @@ router.all('/', controller.home);
  * @param {loginBody} request.body.required - JSON include reg_number and password of the employee
  * @return {Employee} 200 - sucess response - application/json
  */
-router.post('/login', controllerHandler(controller.login));
+router.post('/login', controller.login);
 
 /**
 * GET /employee

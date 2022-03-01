@@ -61,6 +61,7 @@ module.exports = {
       const token = jwt.sign(
         {
           user_id: user.regNumber,
+          role: user.role,
         },
         process.env.TOKEN_KEY,
         {
@@ -75,7 +76,7 @@ module.exports = {
       delete user.password;
       delete user.created_at;
       delete user.updated_at;
-      res.status(200).json(user);
+      return res.status(200).header('x-auth-header', token).json(user);
     }
     res.status(400).send('Invalid Credentials');
   },
