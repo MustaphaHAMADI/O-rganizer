@@ -25,7 +25,6 @@ const Login = () => {
   };
   const dispatch = useDispatch();
   const handleLogin = async () => {
-    console.log(formValues);
     try {
       await dispatch(login(formValues));
     } catch (err) {

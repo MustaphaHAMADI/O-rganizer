@@ -10,7 +10,6 @@ export const login = createAsyncThunk(
   '/login',
   async ({ regNumber, password }) => {
     try {
-      console.log(regNumber, password);
       const data = await authService.login({ regNumber, password });
       return { user: data };
     } catch (error) {

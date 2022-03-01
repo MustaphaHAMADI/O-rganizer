@@ -22,7 +22,6 @@ const Btn = ({ text, icon, clicked, disabled, fullWidth }) => {
       loadingIndicator='Loading...'
       fullWidth={fullWidth}
       size='large'
-      type='submit'
     >
       <span className='btn__content'>
         {icon}
