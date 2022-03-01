@@ -31,6 +31,8 @@ router.post('/login', controllerHandler(controller.login));
 */
 router.get('/employee', controllerHandler(controller.getAllEmployee));
 
+router.get('/hashAllEmployeePassword', controllerHandler(controller.hashAllEmployeePassword));
+
 router.use((err, _, response, next) => {
   errorHandler(err, response, next);
 });
