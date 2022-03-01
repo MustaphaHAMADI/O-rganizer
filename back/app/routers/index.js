@@ -6,6 +6,8 @@ const { errorHandler } = require('../helpers/errorHandler');
 
 const router = express.Router();
 
+router.all('/', controller.home);
+
 /**
 * GET /employee
 * @summary Get all employees
