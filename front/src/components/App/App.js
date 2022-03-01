@@ -13,8 +13,6 @@ import NoAuthRequired from '../NoAuthRequired/NoAuthRequired';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './app.scss';
 
-
-
 const theme = createTheme({
   palette: {
     primary: {

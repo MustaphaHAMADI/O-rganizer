@@ -1,6 +1,7 @@
 @use 'src/styles/vars';
 
 .footer {
+    position: relative;
     background-color: vars.$dark-purple;
     color: vars.$light-color;
     padding: 1.3em;
@@ -18,5 +19,10 @@
         width: 2rem;
         border-bottom-right-radius: 2rem;
         box-shadow: 0 2rem 0 0 vars.$dark-purple;
+    }
+
+    &__navlink:hover {
+        transform: scale(1.3);
+        transition-duration: 500ms;
     }
 }
