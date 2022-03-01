@@ -3,6 +3,7 @@ const express = require('express');
 const controller = require('../controllers');
 const controllerHandler = require('../helpers/apiControllerHandler');
 const { errorHandler } = require('../helpers/errorHandler');
+const auth = require('../helpers/auth');
 
 const router = express.Router();
 
@@ -27,9 +28,10 @@ router.post('/login', controllerHandler(controller.login));
 * GET /employee
 * @summary Get all employees
 * @tags Employee
+* @param {string} request.body.required - JSON Web Token
 * @return {Employee} 200 - success response - application/json
 */
-router.get('/employee', controllerHandler(controller.getAllEmployee));
+router.get('/employee', auth, controllerHandler(controller.getAllEmployee));
 
 router.get('/hashAllEmployeePassword', controllerHandler(controller.hashAllEmployeePassword));
 

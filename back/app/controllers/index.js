@@ -21,19 +21,19 @@ module.exports = {
     return res.json(employees);
   },
 
-  // async updateAllEmployee(req, res) {
-  //   const employees = await models.getAllEmployee();
+  async hashAllEmployeePassword(req, res) {
+    const employees = await models.getAllEmployee();
 
-  //   employees.forEach(async (employee) => {
-  //     // console.log('Je suis dans le foreach');
-  //     const encryptedPassword = await bcrypt.hash(employee.password, 10);
-  //     // console.log(encryptedPassword);
-  //     employee.password = encryptedPassword;
-  //     await models.updateEmployee(employee);
-  //   });
+    employees.forEach(async (employee) => {
+      // console.log('Je suis dans le foreach');
+      const encryptedPassword = await bcrypt.hash(employee.password, 10);
+      // console.log(encryptedPassword);
+      employee.password = encryptedPassword;
+      await models.updateEmployee(employee);
+    });
 
-  //   return res.json('done');
-  // },
+    return res.json('done');
+  },
 
   async login(req, res) {
     const {
