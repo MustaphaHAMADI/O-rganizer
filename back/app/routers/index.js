@@ -3,6 +3,7 @@ const express = require('express');
 const controller = require('../controllers');
 const controllerHandler = require('../helpers/apiControllerHandler');
 const { errorHandler } = require('../helpers/errorHandler');
+const adminAuth = require('../helpers/adminAuth');
 const auth = require('../helpers/auth');
 
 const router = express.Router();

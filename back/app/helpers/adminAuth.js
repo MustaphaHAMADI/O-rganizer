@@ -9,11 +9,13 @@ const verifyToken = (req, res, next) => {
     return res.status(403).send('A token is required for authentication');
   }
   try {
-    jwt.verify(token, config.TOKEN_KEY);
+    const decoded = jwt.verify(token, config.TOKEN_KEY);
+    if (decoded.role !== 'admin') {
+      return res.status(401).send('Permission not allowed');
+    }
   } catch (err) {
     return res.status(401).send('Invalid Token');
   }
-
   return next();
 };
 

@@ -6,11 +6,12 @@ POST {{ endpoint }}/login
 content-type: application/json
 
 {
-  "regNumber": "U000001",
-  "password": "ADMIN"
+  "regNumber": "U000002",
+  "password": "USER"
 }
 
 
 ### Liste des employés
 GET {{ endpoint }}/employee
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDYxNTEwMDAsImV4cCI6MTY0NjE1MTAwMX0.jMD5cBr3juJ9l938e3wu6rluBgoLhNJT50jEQc0T16Q
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlhdCI6MTY0NjE2OTMzNCwiZXhwIjoxNjQ2MTc2NTM0fQ.2YeNQj7wDIzteIiS8OpihIScVykeqWt3uWHNoexdRM4
+
