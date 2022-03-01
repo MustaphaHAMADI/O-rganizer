@@ -27,4 +27,8 @@ Header.propTypes = {
   logout: PropTypes.func.isRequired,
 }
 
+Header.defaultProps = {
+  logout: () => () => console.log('logout clicked'),
+}
+
 export default Header
