@@ -1,10 +1,7 @@
-import axios from 'axios';
+import AxiosClient from '../../../utils/axios/axiosClient';
 
 const login = async (userData) => {
-  const response = await axios.post(
-    'https://organizer-ygg.herokuapp.com/login',
-    userData
-  );
+  const response = await AxiosClient.post('/login', userData);
 
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data));
@@ -25,5 +22,3 @@ const authService = {
 };
 
 export default authService;
-
-// localStorage.setItem('user', JSON.stringify({id:2,username:'mouss',accessToken:'mjvdnvfjd'}))
