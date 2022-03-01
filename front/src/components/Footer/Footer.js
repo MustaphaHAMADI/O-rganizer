@@ -1,10 +1,10 @@
 import React from 'react';
-import './footer=.scss';
+import './footer.scss';
 
 const Footer = () => (
-    <div className="footer">
-      <p>Plan du site</p> 
-      <p>Contact</p>
+    <div className='footer'>
+      <a className='footer__navlink' href='#'>Plan du site</a>
+      <a className='footer__navlink' href='#'>Contact</a>
     </div>
   );
   

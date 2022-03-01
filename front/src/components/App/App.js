@@ -1,7 +1,13 @@
 import React from 'react';
+
+// import components
 import Header from '../Header/Header';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Home from '../Home/Home';
+import Footer from '../Footer/Footer';
+
+// import style
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import './app.scss';
 
 const theme = createTheme({
   palette: {
@@ -16,10 +22,11 @@ const theme = createTheme({
 
 const App = () => {
   return (
-    <div>
+    <div className='app'>
       <ThemeProvider theme={theme}>
         <Header />
         <Home />
+        <Footer />
       </ThemeProvider>
     </div>
   );

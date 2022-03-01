@@ -2,7 +2,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-const Btn = ({ text, clicked, disabled, fullWidth }) => {
+const Btn = ({ text, icon, clicked, disabled, fullWidth }) => {
   const [loading, setLoading] = useState(false);
   const handleClick = async () => {
     setLoading(true);
@@ -22,6 +22,7 @@ const Btn = ({ text, clicked, disabled, fullWidth }) => {
       fullWidth={fullWidth}
       size='large'
     >
+      {icon}
       {text}
     </LoadingButton>
   );
@@ -29,11 +30,13 @@ const Btn = ({ text, clicked, disabled, fullWidth }) => {
 
 Btn.propTypes = {
   text: PropTypes.string.isRequired,
+  icon: PropTypes.element,
 };
 Btn.defaultProps = {
   clicked: () => console.log('cliked'),
   disabled: false,
   fullWidth: false,
+  icon: null,
 };
 
 export default Btn;

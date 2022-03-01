@@ -2,17 +2,39 @@
 
 .header {
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: vars.$dark-purple;
     color: vars.$light-color;
-    padding: 1.5em;
-    text-align: center;
+    padding: 1.3rem;
+    box-shadow: 10px 5px 8px rgba(0, 0, 0, 0.5);
 
-    &__logout-button {
+    &::before {
+        content:'';
         position: absolute;
-        top: 1.5em;
-        right: 1.5em;
         background-color: transparent;
-        border: none;
-        color: vars.$light-color;
+        bottom: -4rem;
+        left: 0;
+        height: 4rem;
+        width: 2rem;
+        border-top-left-radius: 2rem;
+        box-shadow: 0 -2rem 0 0 vars.$dark-purple;
+    }
+
+    &__banner {
+        display: flex;
+        align-items: center;
+        column-gap: 0.5rem;
+
+        &-logo {
+            width: 60px;
+            filter: drop-shadow(0.5px 0.5px 5px #fafafa);
+        }
+
+        &-title {
+            font-family: vars.$special-font;
+            font-size: 2rem;
+        }
     }
 }
