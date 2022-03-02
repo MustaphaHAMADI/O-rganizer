@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { login } from '../../app/features/userAuth/userAuthSlice';
 import Btn from '../Btn/Btn';
 
 // import style
@@ -14,7 +12,7 @@ const defaultValues = {
   password: '',
 };
 
-const Login = () => {
+const Login = ({ getLogin }) => {
   const [formValues, setFormValues] = useState(defaultValues);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,10 +21,16 @@ const Login = () => {
       [name]: value,
     });
   };
-  const dispatch = useDispatch();
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleLogin();
+    }
+  };
+
   const handleLogin = async () => {
     try {
-      await dispatch(login(formValues));
+      getLogin(formValues);
     } catch (err) {
       console.log(err);
     }
@@ -38,7 +42,12 @@ const Login = () => {
         <h2 className='login__title'>
           Connectez-vous pour accéder à votre planning
         </h2>
-        <form className='login__form' action='submit' onSubmit={handleLogin}>
+        <form
+          className='login__form'
+          action='submit'
+          onSubmit={handleLogin}
+          onKeyPress={handleKeyPress}
+        >
           <div className='login__form-textfield'>
             <TextField
               id='regNumber'
