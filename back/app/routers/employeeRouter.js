@@ -19,7 +19,7 @@ router.route('/:id/date/:date')
  * @param {string} comment.request.body - ID of the status
  * @return {Affected_status} 200 - Affected status created
  */
-.post(controllerHandler(controller.addStatusOnAnEmployee));
+.post(adminAuth, controllerHandler(controller.addStatusOnAnEmployee));
 
 /**
 * GET /employee
