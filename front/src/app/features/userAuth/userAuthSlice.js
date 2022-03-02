@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from './AuthService';
+import { toast } from 'react-toastify';
 const user = JSON.parse(localStorage.getItem('user'));
 
 const initialState = user
@@ -11,8 +12,10 @@ export const login = createAsyncThunk(
   async ({ regNumber, password }) => {
     try {
       const data = await authService.login({ regNumber, password });
+      toast.success('Connecté');
       return { user: data };
     } catch (error) {
+      toast.error('Couple identifiant, mot de passe invalides');
       console.log(error);
     }
   }
@@ -20,6 +23,7 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk('/logout', async () => {
   await authService.logout();
+  toast.success('Déconnecté');
 });
 
 export const userAuthSlice = createSlice({
