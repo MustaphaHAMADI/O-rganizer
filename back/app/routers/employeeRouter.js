@@ -35,6 +35,12 @@ router.route('/:id/date/:date')
 */
 router.get('/', auth, controllerHandler(controller.getAllEmployee));
 
+/**
+* GET /employee/team
+* @summary Get all teams, and all employees in the team
+* @tags Employee
+* @return {object} 200 - success response - application/json
+*/
 router.get('/team', controllerHandler(controller.getAllTeam));
 
 router.get('/hashAllEmployeePassword', controllerHandler(controller.hashAllEmployeePassword));
