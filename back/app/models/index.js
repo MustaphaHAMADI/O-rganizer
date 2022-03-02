@@ -17,7 +17,7 @@ const {
 
 /**
  * @typedef {object} Affected_status
- * @property {number} id - ID of the affected Status
+ * @property {number} employee_id - ID of the affected Status
  * @property {string} date - Date of the affectation
  * @property {number} employee_id - ID of the employee
  * @property {number} status_id - ID of the status
@@ -64,6 +64,20 @@ module.exports = {
   },
 
   /**
+   * Returing one employee selected based on his reg_number
+   * @param {number} id - ID of the employee
+   * @returns { Employee } - The finded employee
+   */
+  async findOneEmployeeByID(id) {
+    const result = await client.query(
+      'SELECT * FROM "employee" WHERE "id"= $1',
+      [id],
+    );
+
+    return result.rows[0];
+  },
+
+  /**
    * Returning the status of a dedicated employee on a specific date
    * @param {number} id - ID of the employee
    * @param {string} date - Date of the affected status
@@ -87,7 +101,7 @@ module.exports = {
    * @param {number} comment - Comment of the affected status
    * @returns {Affected_status} - The new affected status registered in the database
    */
-  async addStatusToEmployee(id, date, statusId, teamId, comment) {
+  async addStatusToEmployee(id, date, statusId, teamId = null, comment = '') {
     const newStatus = await client.query(
       `INSERT INTO "affected_status" ("employee_id","date","status_id","team_id","comment") VALUES
       ($1,$2,$3,$4,$5) RETURNING *`,

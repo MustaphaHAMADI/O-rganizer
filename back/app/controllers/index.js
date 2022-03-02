@@ -68,6 +68,12 @@ module.exports = {
       comment,
     } = req.body;
 
+    const user = await models.findOneEmployeeByID(id);
+
+    if (!user) {
+      return res.status(400).send('This user ID does not exist');
+    }
+
     const isThereAStatus = await models.findStatusForAnEmployeeForADate(id, date);
 
     if (isThereAStatus.length !== 0) {

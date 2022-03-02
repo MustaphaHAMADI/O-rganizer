@@ -6,6 +6,12 @@ const auth = require('../helpers/auth');
 
 const router = express.Router();
 
+/**
+ * @typedef {object} AffectedStatusBody
+ * @property {number} statusId.required - ID of the status
+ * @property {number} teamId.request.body - ID of the replacement team
+ * @property {string} comment.request.body - Comment of the affected status
+ */
 
 router.route('/:id/date/:date')
 /**
@@ -14,12 +20,10 @@ router.route('/:id/date/:date')
  * @tags Employee
  * @param {number}  id.path.required - id of the user
  * @param {string}  date.path.required - date for the affectation eq: 2022-01-01
- * @param {number} status_id.request.body.required - ID of the status
- * @param {number} team_id.request.body - ID of the replacement team
- * @param {string} comment.request.body - ID of the status
+ * @param {AffectedStatusBody} request.body.required - JSON
  * @return {Affected_status} 200 - Affected status created
  */
-.post(adminAuth, controllerHandler(controller.addStatusOnAnEmployee));
+  .post(adminAuth, controllerHandler(controller.addStatusOnAnEmployee));
 
 /**
 * GET /employee
