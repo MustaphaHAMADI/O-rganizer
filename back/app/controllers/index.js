@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { getAllTeam } = require('../models');
 const models = require('../models');
 
 module.exports = {
@@ -26,9 +27,7 @@ module.exports = {
     const employees = await models.getAllEmployee();
 
     employees.forEach(async (employee) => {
-      // console.log('Je suis dans le foreach');
       const encryptedPassword = await bcrypt.hash(employee.password, 10);
-      // console.log(encryptedPassword);
       employee.password = encryptedPassword;
       await models.updateEmployee(employee);
     });
@@ -132,4 +131,9 @@ module.exports = {
     res.status(400).send('Invalid Credentials');
   },
 
+  async getAllTeam(_, res) {
+    const teams = await models.getAllTeam();
+
+    return res.status(200).json(teams);
+  },
 };

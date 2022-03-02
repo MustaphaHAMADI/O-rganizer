@@ -35,6 +35,8 @@ router.route('/:id/date/:date')
 */
 router.get('/', auth, controllerHandler(controller.getAllEmployee));
 
+router.get('/team', controllerHandler(controller.getAllTeam));
+
 router.get('/hashAllEmployeePassword', controllerHandler(controller.hashAllEmployeePassword));
 
 module.exports = router;
