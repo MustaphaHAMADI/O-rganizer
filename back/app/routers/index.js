@@ -4,8 +4,8 @@ const controller = require('../controllers');
 const controllerHandler = require('../helpers/apiControllerHandler');
 const employeeRouter = require('./employeeRouter');
 const { errorHandler } = require('../helpers/errorHandler');
-const adminAuth = require('../helpers/adminAuth');
-const auth = require('../helpers/auth');
+// const adminAuth = require('../helpers/adminAuth');
+// const auth = require('../helpers/auth');
 
 const router = express.Router();
 
