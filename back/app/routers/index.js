@@ -35,6 +35,15 @@ router.use('/employee', employeeRouter);
 router.post('/login', controllerHandler(controller.login));
 
 /**
+ * GET /planning
+ * @summary get the full planning
+ * @tags Planning
+ * @return {object} 200 - sucess response - application/json
+ */
+
+// router.get('/planning', controllerHandler(controller.getPlanning));
+
+/**
  * Using the errorHanlder to manage the specific error messages
  */
 router.use((err, _, response, next) => {

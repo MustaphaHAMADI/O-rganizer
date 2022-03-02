@@ -1,6 +1,7 @@
 const client = require('../config/db');
+const { getPlanning } = require('../controllers');
 const {
-  ApiError
+  ApiError,
 } = require('../errors/apiErrors');
 
 /**
@@ -30,7 +31,7 @@ module.exports = {
       employee.lastname,
       team.noun as team_noun, 
       employee.role, 
-      employee.function, 
+      employee.function,
       employee.profile_picture 
     FROM 
       employee JOIN team 
@@ -81,5 +82,24 @@ module.exports = {
       ],
     );
     return result.rows[0];
+  },
+
+  async getAllTeam() {
+    const result = await client.query(
+      `SELECT
+        "team"."id" as "id",
+        "team"."noun" as team,
+        array_agg("employee"."name" || ' ' || "employee"."lastname") as employees
+      FROM
+        team
+      JOIN
+        employee on employee.team_id = team.id
+      GROUP BY
+        "team"."noun", "team"."id"
+      ORDER BY
+        "team"."noun"`,
+    );
+
+    return result.rows;
   },
 };
