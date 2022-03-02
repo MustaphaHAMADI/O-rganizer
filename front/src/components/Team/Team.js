@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const TeamHeader = ({
+const Team = ({
     teamName,
     teamMembers,
 }) => {
   return (
-    <div className='teamheader'>
-        <h3 className='teamheader__title'>{teamName}</h3>
-        <ul className='teamheader__members'>
+    <div className='team'>
+        <h3 className='team__title'>{teamName}</h3>
+        <ul className='team__members'>
             {
             teamMembers.map((member) => (
-                <li className='teamheader__member' key={member.id}>
+                <li className='team__member' key={member.id}>
                     {member.name} {member.lastname}
                 </li>
             ))
@@ -21,7 +21,7 @@ const TeamHeader = ({
   )
 }
 
-TeamHeader.propTypes = {
+Team.propTypes = {
     teamName: PropTypes.string.isRequired,
     teamMembers: PropTypes.arrayOf(
         PropTypes.shape({
@@ -32,4 +32,4 @@ TeamHeader.propTypes = {
     ).isRequired,
 }
 
-export default TeamHeader
+export default Team
