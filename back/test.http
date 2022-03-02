@@ -6,11 +6,19 @@ POST {{ endpoint }}/login
 content-type: application/json
 
 {
-  "regNumber": "U000002",
-  "password": "USER"
+  "regNumber": "U000001",
+  "password": "ADMIN"
 }
 
 ### Liste des employés
 GET {{ endpoint }}/employee
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlhdCI6MTY0NjIxOTIxMSwiZXhwIjoxNjQ2MjI2NDExfQ.VldispRYqvlBKsrAdKWylqnqje4SQKMSNidZw5GzwlE
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlhdCI6MTY0NjIzMzUyNSwiZXhwIjoxNjQ2MjQwNzI1fQ.Xnr88cArJRu4mkZVuxYjf5xv8VQovLX7ZU25dL39MVk
 
+### Ajoute un statut sur un employé pour un jour donné
+POST {{ endpoint }}/employee/07/date/2022-06-25
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYyMzk5ODQsImV4cCI6MTY0NjI0NzE4NH0.TI59I7nDU12ORHc7Mk9odbX7QadGWDB9_b_nGweZ4iw
+content-type: application/json
+
+{
+  "statusId": 1
+}

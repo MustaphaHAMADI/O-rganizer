@@ -15,6 +15,16 @@ const {
  * @property {string} profile_picture - URL of the profile picture
  */
 
+/**
+ * @typedef {object} Affected_status
+ * @property {number} employee_id - ID of the affected Status
+ * @property {string} date - Date of the affectation
+ * @property {number} employee_id - ID of the employee
+ * @property {number} status_id - ID of the status
+ * @property {number} team_id - ID of the replacement team
+ * @property {string} comment - Comment of the affected status
+ */
+
 module.exports = {
 
   /**
@@ -42,7 +52,7 @@ module.exports = {
   /**
    * Returing one employee selected based on his reg_number
    * @param {string} regNumber - reg_number of the employee
-   * @returns { Employee } - The finded employe
+   * @returns { Employee } - The finded employee
    */
   async findOneEmployeeByReg_number(regNumber) {
     const result = await client.query(
@@ -51,6 +61,58 @@ module.exports = {
     );
 
     return result.rows[0];
+  },
+
+  /**
+   * Returing one employee selected based on his reg_number
+   * @param {number} id - ID of the employee
+   * @returns { Employee } - The finded employee
+   */
+  async findOneEmployeeByID(id) {
+    const result = await client.query(
+      'SELECT * FROM "employee" WHERE "id"= $1',
+      [id],
+    );
+
+    return result.rows[0];
+  },
+
+  /**
+   * Returning the status of a dedicated employee on a specific date
+   * @param {number} id - ID of the employee
+   * @param {string} date - Date of the affected status
+   * @returns {Affected_status} - The list of the affected status of the employee for the date
+   */
+  async findStatusForAnEmployeeForADate(id, date) {
+    const result = await client.query(
+      'SELECT * FROM "affected_status" WHERE "employee_id"=$1 AND "date" = $2',
+      [id, date],
+    );
+    // console.log("result.rows", result.rows);
+    return result.rows;
+  },
+
+  /**
+   * Assigns a status to an employee for a date
+   * @param {number} id - ID of the employee
+   * @param {string} date - Date of the assignement
+   * @param {number} statusId - ID of the status to be assigned
+   * @param {number} teamId - ID of the replacement team
+   * @param {number} comment - Comment of the affected status
+   * @returns {Affected_status} - The new affected status registered in the database
+   */
+  async addStatusToEmployee(id, date, statusId, teamId = null, comment = '') {
+    const newStatus = await client.query(
+      `INSERT INTO "affected_status" ("employee_id","date","status_id","team_id","comment") VALUES
+      ($1,$2,$3,$4,$5) RETURNING *`,
+      [
+        id,
+        date,
+        statusId,
+        teamId,
+        comment],
+    );
+    return newStatus.rows[0];
   },
 
   async updateEmployee(employee) {
