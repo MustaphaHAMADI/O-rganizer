@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../app/features/userAuth/userAuthSlice';
 
 // import styles
 import './header.scss';
@@ -11,16 +9,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Btn from '../Btn/Btn';
 import logo from '../../assets/logo.png';
 
-const Header = () => {
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const handleLogout = () => {
-    try {
-      dispatch(logout());
-    } catch (err) {
-      console.log(err);
-    }
-  };
+const Header = ({ logout, isLoggedIn }) => {
   return (
     <div className='header'>
       <div className='header__banner'>
@@ -29,11 +18,7 @@ const Header = () => {
       </div>
       <div className='header__btns'>
         {isLoggedIn && (
-          <Btn
-            text='Se déconnecter'
-            icon={<LogoutIcon />}
-            clicked={handleLogout}
-          />
+          <Btn text='Se déconnecter' icon={<LogoutIcon />} clicked={logout} />
         )}
       </div>
     </div>
