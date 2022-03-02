@@ -5,15 +5,14 @@ const {
 
 /**
  * @typedef {object} Employee
- * @property {number} id - identifiant unique de la table
+ * @property {number} id - ID of the user
  * @property {string} reg_number - User code
  * @property {string} name - Employee firstname
  * @property {string} lastname - Employee lastname
+ * @property {number} team_noun - Noun of the employee team
  * @property {string} role - role of the user : user/admin
- * @property {string} password - Employee password
  * @property {string} function - Employee function
  * @property {string} profile_picture - URL of the profile picture
- * @property {number} team_id - id of the employee's team
  */
 
 module.exports = {
@@ -23,7 +22,19 @@ module.exports = {
    * @returns {Employee[]} - All employees in the database
    */
   async getAllEmployee() {
-    const result = await client.query('SELECT * FROM "employee";');
+    const result = await client.query(`
+    SELECT 
+      employee.id, 
+      employee.reg_number, 
+      employee.name, 
+      employee.lastname,
+      team.noun as team_noun, 
+      employee.role, 
+      employee.function, 
+      employee.profile_picture 
+    FROM 
+      employee JOIN team 
+      ON employee.team_id = team.id`);
 
     return result.rows;
   },

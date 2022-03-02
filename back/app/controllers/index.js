@@ -16,13 +16,15 @@ module.exports = {
     return res.redirect(`${fullUrl}${process.env.API_DOCUMENTATION_ROUTE}`);
   },
 
+  /**
+   * Controller used to show aull the employee data
+   * ExpressMiddleware signature :
+   * @param {*} req Express request object (not used)
+   * @param {*} res Express response object
+   * @returns {object} JSON of all the employees
+   */
   async getAllEmployee(_, res) {
     const employees = await models.getAllEmployee();
-    employees.forEach(employee => {
-      delete employee.password;
-      delete employee.created_at;
-      delete employee.updated_at;
-    });
     return res.json(employees);
   },
 
@@ -40,6 +42,13 @@ module.exports = {
     return res.json('done');
   },
 
+  /**
+   * Creation of the JSON web Token, the sign include the user role.
+   * ExpressMiddleware signature :
+   * @param {*} req Express request object
+   * @param {*} res Express response object
+   * @returns {object} JSON of logged in user including token
+   */
   async login(req, res) {
     const {
       regNumber,
@@ -76,7 +85,7 @@ module.exports = {
       delete user.password;
       delete user.created_at;
       delete user.updated_at;
-      return res.status(200).header('x-auth-header', token).json(user);
+      return res.status(200).json(user);
     }
     res.status(400).send('Invalid Credentials');
   },

@@ -2,6 +2,7 @@ const express = require('express');
 
 const controller = require('../controllers');
 const controllerHandler = require('../helpers/apiControllerHandler');
+const employeeRouter = require('./employeeRouter');
 const { errorHandler } = require('../helpers/errorHandler');
 const adminAuth = require('../helpers/adminAuth');
 const auth = require('../helpers/auth');
@@ -14,28 +15,28 @@ const router = express.Router();
  * @property {string} password.required - password of the user
  */
 
+/**
+ * Redirect the main route on the api-docs route
+ */
 router.all('/', controller.home);
+
+/**
+ * Redirection to the employeeRouter all the routes start with /employee
+ */
+router.use('/employee', employeeRouter);
 
 /**
  * POST /login
  * @summary Login of the user
- * @tags Employee
+ * @tags Login
  * @param {loginBody} request.body.required - JSON include reg_number and password of the employee
  * @return {Employee} 200 - sucess response - application/json
  */
 router.post('/login', controllerHandler(controller.login));
 
 /**
-* GET /employee
-* @summary Get all employees
-* @tags Employee
-* @param {string} request.body.required - JSON Web Token
-* @return {Employee} 200 - success response - application/json
-*/
-router.get('/employee', auth, controllerHandler(controller.getAllEmployee));
-
-router.get('/hashAllEmployeePassword', controllerHandler(controller.hashAllEmployeePassword));
-
+ * Using the errorHanlder to manage the specific error messages
+ */
 router.use((err, _, response, next) => {
   errorHandler(err, response, next);
 });
