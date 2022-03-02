@@ -12,5 +12,14 @@ content-type: application/json
 
 ### Liste des employés
 GET {{ endpoint }}/employee
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlhdCI6MTY0NjIxOTIxMSwiZXhwIjoxNjQ2MjI2NDExfQ.VldispRYqvlBKsrAdKWylqnqje4SQKMSNidZw5GzwlE
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlhdCI6MTY0NjIzMzUyNSwiZXhwIjoxNjQ2MjQwNzI1fQ.Xnr88cArJRu4mkZVuxYjf5xv8VQovLX7ZU25dL39MVk
 
+### Ajoute un statut sur un employé pour un jour donné
+POST {{ endpoint }}/employee/11/date/2022-06-26
+content-type: application/json
+
+{
+  "statusId": 1,
+  "teamId": null,
+  "comment": ""
+}
