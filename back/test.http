@@ -10,8 +10,7 @@ content-type: application/json
   "password": "USER"
 }
 
-
 ### Liste des employés
 GET {{ endpoint }}/employee
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlhdCI6MTY0NjE2OTMzNCwiZXhwIjoxNjQ2MTc2NTM0fQ.2YeNQj7wDIzteIiS8OpihIScVykeqWt3uWHNoexdRM4
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlhdCI6MTY0NjIxOTIxMSwiZXhwIjoxNjQ2MjI2NDExfQ.VldispRYqvlBKsrAdKWylqnqje4SQKMSNidZw5GzwlE
 
