@@ -8,6 +8,7 @@ import Footer from '../Footer/Footer';
 import Planning from '../Planning/Planning';
 import RequireAuth from '../RequireAuth/RequireAuth';
 import NoAuthRequired from '../NoAuthRequired/NoAuthRequired';
+import NotFound from '../NotFound/NotFound';
 
 // import style
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -36,6 +37,7 @@ const App = () => {
           <Route element={<RequireAuth />}>
             <Route path='/planning' element={<Planning />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </ThemeProvider>
