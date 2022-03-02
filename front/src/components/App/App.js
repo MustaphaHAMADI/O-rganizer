@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // import components
-import Header from '../Header/Header';
+import HeaderContainer from '../../Containers/HeaderContainer/HeaderContainer';
 import Home from '../Home/Home';
 import Footer from '../Footer/Footer';
 import Planning from '../Planning/Planning';
@@ -28,7 +28,7 @@ const App = () => {
   return (
     <div className='app'>
       <ThemeProvider theme={theme}>
-        <Header />
+        <HeaderContainer />
         <Routes>
           <Route element={<NoAuthRequired />}>
             <Route path='/' element={<Home />} />
