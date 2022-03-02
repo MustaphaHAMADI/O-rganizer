@@ -13,9 +13,19 @@ const getPlanning = () => {
   return axiosClient.get('/planning', { headers: authHeader() });
 };
 
+const getEmployees = async () => {
+  try {
+    const response = await axiosClient.get('/employee', { headers: authHeader() });
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 const planningService = {
   authHeader,
   getPlanning,
+  getEmployees,
 };
 
 export default planningService;
