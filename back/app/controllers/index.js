@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { getAllTeam } = require('../models');
 const models = require('../models');
 
 module.exports = {
@@ -17,6 +18,24 @@ module.exports = {
   },
 
   /**
+   * Controller used to hash all the passords on the employee table
+   * @param {object} req Express request object
+   * @param {object} res Express response object
+   * @returns {string} Positive response of the hash
+   */
+  async hashAllEmployeePassword(req, res) {
+    const employees = await models.getAllEmployee();
+
+    employees.forEach(async (employee) => {
+      const encryptedPassword = await bcrypt.hash(employee.password, 10);
+      employee.password = encryptedPassword;
+      await models.updateEmployee(employee);
+    });
+
+    return res.json('done');
+  },
+
+  /**
    * Controller used to show aull the employee data
    * ExpressMiddleware signature :
    * @param {*} req Express request object (not used)
@@ -28,18 +47,42 @@ module.exports = {
     return res.json(employees);
   },
 
-  async hashAllEmployeePassword(req, res) {
-    const employees = await models.getAllEmployee();
+  /**
+   * Controller used to register a new affected_status,
+   * before the insertion in the database, we verify if an affected_status already exist
+   * for the employee on the dedicated date.
+   *@param {*} req Express request object (not used)
+   * @param {*} res Express response object
+   * @returns {object} JSON the new affected_status created
+   */
+  async addStatusOnAnEmployee(req, res) {
+    const {
+      id,
+      date,
+    } = req.params;
 
-    employees.forEach(async (employee) => {
-      // console.log('Je suis dans le foreach');
-      const encryptedPassword = await bcrypt.hash(employee.password, 10);
-      // console.log(encryptedPassword);
-      employee.password = encryptedPassword;
-      await models.updateEmployee(employee);
-    });
+    const {
+      statusId,
+      teamId,
+      comment,
+    } = req.body;
 
-    return res.json('done');
+    const user = await models.findOneEmployeeByID(id);
+
+    if (!user) {
+      return res.status(400).send('This user ID does not exist');
+    }
+
+    const isThereAStatus = await models.findStatusForAnEmployeeForADate(id, date);
+
+    if (isThereAStatus.length !== 0) {
+      return res.status(400).send('A status is already affected to this user for this date');
+    }
+
+    const post = await models.addStatusToEmployee(id, date, statusId, teamId, comment);
+    delete post.created_at;
+    delete post.updated_at;
+    return res.status(200).json(post);
   },
 
   /**
@@ -67,13 +110,11 @@ module.exports = {
     // console.log('goodPassword',goodPassword);
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
-      const token = jwt.sign(
-        {
+      const token = jwt.sign({
           user_id: user.regNumber,
           role: user.role,
         },
-        process.env.TOKEN_KEY,
-        {
+        process.env.TOKEN_KEY, {
           expiresIn: process.env.TOKEN_VALIDITY,
         },
       );
@@ -90,4 +131,9 @@ module.exports = {
     res.status(400).send('Invalid Credentials');
   },
 
+  async getAllTeam(_, res) {
+    const teams = await models.getAllTeam();
+
+    return res.status(200).json(teams);
+  },
 };

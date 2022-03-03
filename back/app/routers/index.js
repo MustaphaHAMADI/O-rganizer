@@ -4,8 +4,8 @@ const controller = require('../controllers');
 const controllerHandler = require('../helpers/apiControllerHandler');
 const employeeRouter = require('./employeeRouter');
 const { errorHandler } = require('../helpers/errorHandler');
-const adminAuth = require('../helpers/adminAuth');
-const auth = require('../helpers/auth');
+// const adminAuth = require('../helpers/adminAuth');
+// const auth = require('../helpers/auth');
 
 const router = express.Router();
 
@@ -33,6 +33,15 @@ router.use('/employee', employeeRouter);
  * @return {Employee} 200 - sucess response - application/json
  */
 router.post('/login', controllerHandler(controller.login));
+
+/**
+ * GET /planning
+ * @summary get the full planning
+ * @tags Planning
+ * @return {object} 200 - sucess response - application/json
+ */
+
+// router.get('/planning', controllerHandler(controller.getPlanning));
 
 /**
  * Using the errorHanlder to manage the specific error messages
