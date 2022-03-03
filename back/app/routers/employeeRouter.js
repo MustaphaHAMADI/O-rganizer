@@ -3,6 +3,7 @@ const controller = require('../controllers');
 const controllerHandler = require('../helpers/apiControllerHandler');
 const adminAuth = require('../helpers/adminAuth');
 const auth = require('../helpers/auth');
+const controllers = require('../controllers');
 
 const router = express.Router();
 
@@ -35,7 +36,17 @@ router.route('/:id/date/:date')
    * @param {AffectedStatusBody} request.body.required - JSON
    * @return {string} 200 - Update is done
    */
-  .patch(adminAuth, controllerHandler(controller.updateStatusOfAnEmployee));
+  .patch(adminAuth, controllerHandler(controller.updateStatusOfAnEmployee))
+  /**
+   * * DELETE /employee/{id}/date/{date}
+   * @summary Delete the status of an employee for a dedicated date
+   *  -- NOTE : Only admins are alloowed to use this route
+   * @tags Employee
+   * @param {number}  id.path.required - id of the user
+   * @param {string}  date.path.required - date for the affectation eq: 2022-01-01
+   * @return {string} 200 - delete is done
+   */
+  .delete(adminAuth, controllerHandler(controller.deleteStatusOfAnEmployee));
 
 /**
 * GET /employee
