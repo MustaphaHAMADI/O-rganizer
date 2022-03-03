@@ -3,7 +3,6 @@ const controller = require('../controllers');
 const controllerHandler = require('../helpers/apiControllerHandler');
 const adminAuth = require('../helpers/adminAuth');
 const auth = require('../helpers/auth');
-const controllers = require('../controllers');
 
 const router = express.Router();
 
@@ -18,7 +17,7 @@ router.route('/:id/date/:date')
   /**
    * POST /employee/{id}/date/{date}
    * @summary Assign a new status on an employee for a dedicated date
-   *  -- NOTE : Only admins are alloowed to use this route
+   *  -- NOTE : Only admins are allowed to use this route
    * @tags Employee
    * @param {number}  id.path.required - id of the user
    * @param {string}  date.path.required - date for the affectation eq: 2022-01-01
@@ -29,7 +28,7 @@ router.route('/:id/date/:date')
   /**
    * PATCH /employee/{id}/date/{date}
    * @summary Update the status of an employee for a dedicated date
-   *  -- NOTE : Only admins are alloowed to use this route
+   *  -- NOTE : Only admins are allowed to use this route
    * @tags Employee
    * @param {number}  id.path.required - id of the user
    * @param {string}  date.path.required - date for the affectation eq: 2022-01-01
@@ -38,9 +37,9 @@ router.route('/:id/date/:date')
    */
   .patch(adminAuth, controllerHandler(controller.updateStatusOfAnEmployee))
   /**
-   * * DELETE /employee/{id}/date/{date}
+   * DELETE /employee/{id}/date/{date}
    * @summary Delete the status of an employee for a dedicated date
-   *  -- NOTE : Only admins are alloowed to use this route
+   *  -- NOTE : Only admins are allowed to use this route
    * @tags Employee
    * @param {number}  id.path.required - id of the user
    * @param {string}  date.path.required - date for the affectation eq: 2022-01-01

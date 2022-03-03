@@ -29,7 +29,7 @@ router.use('/employee', employeeRouter);
 /**
  * Redirection to the employeeRouter all the routes start with /employee
  */
- router.use('/status', statusRouter);
+router.use('/status', statusRouter);
 
 /**
  * POST /login
