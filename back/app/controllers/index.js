@@ -80,15 +80,16 @@ module.exports = {
     }
 
     const verifiedStatus = await models.getOneStatus(statusId);
-    console.log('verifiedStatus',verifiedStatus);
+
     if (!verifiedStatus) {
       return res.status(400).send(`The status code ${statusId} does not exist`);
     }
 
     const post = await models.addStatusToEmployee(id, date, statusId, teamId, comment);
-    delete post.created_at;
-    delete post.updated_at;
-    return res.status(200).json(post);
+
+    const result = await models.findOneAffectedStatusById(post.id);
+
+    return res.status(200).json(result);
   },
 
   /**

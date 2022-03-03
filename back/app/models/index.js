@@ -127,6 +127,43 @@ module.exports = {
     return newStatus.rows[0];
   },
 
+  async findOneAffectedStatusById(id) {
+    const result = await client.query(
+      `select 
+        "affected_status"."id" as "id",
+        "affected_status"."date" as "date",
+        array_agg
+              (
+              json_build_object(
+                'id', "employee"."id",
+                'firstName', "employee"."name",
+                'lastName', "employee"."lastname")
+              ) as employee,
+        array_agg
+              (
+              json_build_object(
+                'id', "status"."id",
+                'label', "status"."label")
+              ) as status,
+        array_agg
+              (
+              json_build_object(
+                'id', "team"."id",
+                'noun', "team"."noun")
+              ) as team,
+        "affected_status"."comment" as "comment"
+      from "affected_status" 
+      left join "employee" on "employee"."id" = "affected_status"."employee_id"
+      left join "status" on "status"."id" = "affected_status"."status_id"
+      left join "team" on "team"."id" = "affected_status"."team_id"
+      where "affected_status"."id" = $1
+      group by "affected_status"."id"
+      order by "affected_status" ASC`,
+      [id],
+    );
+    return result.rows[0];
+  },
+
   async updateEmployee(employee) {
     // console.log('employee', employee);
     const result = await client.query(
@@ -170,7 +207,7 @@ module.exports = {
    * Returning one status
    * @param {number} id - ID of the searched status
    * @returns {Status} - Status found
-  */
+   */
   async getOneStatus(id) {
     const result = await client.query('SELECT * FROM "status" WHERE "id" = $1',
       [id],
