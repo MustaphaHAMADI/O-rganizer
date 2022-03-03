@@ -15,12 +15,22 @@ GET {{ endpoint }}/employee
 x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMDQ3MTQsImV4cCI6MTY0NjMxMTkxNH0.fU6bFpuH1Q-OuD8KpG0deafnWfIUitFK9dCv0srGYME
 
 ### Ajoute un statut sur un employé pour un jour donné
-POST {{ endpoint }}/employee/05/date/2022-07-25
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMDQ3MTQsImV4cCI6MTY0NjMxMTkxNH0.fU6bFpuH1Q-OuD8KpG0deafnWfIUitFK9dCv0srGYME
+POST {{ endpoint }}/employee/5/date/2022-07-26
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMTQyMjEsImV4cCI6MTY0NjMyMTQyMX0.XZaPjvoTgzG_7TBdQly9sE97QV5GXrkvVsu-XsCzen4
 content-type: application/json
 
 {
   "statusId": 4
+}
+
+### Modifie un statut sur un employé pour un jour donné
+PATCH {{ endpoint }}/employee/5/date/2022-07-26
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMTQyMjEsImV4cCI6MTY0NjMyMTQyMX0.XZaPjvoTgzG_7TBdQly9sE97QV5GXrkvVsu-XsCzen4
+content-type: application/json
+
+{
+  "statusId": 4,
+  "comment": "ça marche"
 }
 
 ### Liste des status
