@@ -12,10 +12,10 @@ content-type: application/json
 
 ### Liste des employés
 GET {{ endpoint }}/employee
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlhdCI6MTY0NjIzMzUyNSwiZXhwIjoxNjQ2MjQwNzI1fQ.Xnr88cArJRu4mkZVuxYjf5xv8VQovLX7ZU25dL39MVk
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMDQ3MTQsImV4cCI6MTY0NjMxMTkxNH0.fU6bFpuH1Q-OuD8KpG0deafnWfIUitFK9dCv0srGYME
 
 ### Ajoute un statut sur un employé pour un jour donné
-POST {{ endpoint }}/employee/04/date/2022-07-25
+POST {{ endpoint }}/employee/05/date/2022-07-25
 x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMDQ3MTQsImV4cCI6MTY0NjMxMTkxNH0.fU6bFpuH1Q-OuD8KpG0deafnWfIUitFK9dCv0srGYME
 content-type: application/json
 

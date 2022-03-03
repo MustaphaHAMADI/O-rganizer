@@ -17,6 +17,7 @@ router.route('/:id/date/:date')
 /**
  * POST /employee/{id}/date/{date}
  * @summary Assign a new status on an employee for a dedicated date
+ *  -- NOTE : Only admins are alloowed to use this route
  * @tags Employee
  * @param {number}  id.path.required - id of the user
  * @param {string}  date.path.required - date for the affectation eq: 2022-01-01
