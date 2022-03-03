@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { getAllTeam } = require('../models');
+const { getAllTeam, getAllStatus } = require('../models');
 const models = require('../models');
 
 module.exports = {
@@ -36,7 +36,7 @@ module.exports = {
   },
 
   /**
-   * Controller used to show aull the employee data
+   * Controller used to show all the employee data
    * ExpressMiddleware signature :
    * @param {*} req Express request object (not used)
    * @param {*} res Express response object
@@ -90,6 +90,17 @@ module.exports = {
     const result = await models.findOneAffectedStatusById(post.id);
 
     return res.status(200).json(result);
+  },
+
+  /**
+   * Controller used to send back all the status
+   * @param {*} req Express request object (not used)
+   * @param {*} res Express response object
+   * @returns {object} JSON of all the status
+   */
+  async getAllStatus(_,res) {
+    const status = await models.getAllStatus();
+    return res.json(status);
   },
 
   /**

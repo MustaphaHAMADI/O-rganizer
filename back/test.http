@@ -22,3 +22,7 @@ content-type: application/json
 {
   "statusId": 4
 }
+
+### Liste des status
+GET {{ endpoint }}/status
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMDQ3MTQsImV4cCI6MTY0NjMxMTkxNH0.fU6bFpuH1Q-OuD8KpG0deafnWfIUitFK9dCv0srGYME

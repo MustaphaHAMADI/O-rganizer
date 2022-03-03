@@ -21,6 +21,7 @@ router.route('/:id/date/:date')
  * @tags Employee
  * @param {number}  id.path.required - id of the user
  * @param {string}  date.path.required - date for the affectation eq: 2022-01-01
+ * @param {string}  x-access-token.request.header
  * @param {AffectedStatusBody} request.body.required - JSON
  * @return {Affected_status} 200 - Affected status created
  */
