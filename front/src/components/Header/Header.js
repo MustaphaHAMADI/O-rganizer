@@ -16,9 +16,15 @@ const Header = ({ logout, isLoggedIn }) => {
         <img className='header__banner-logo' src={logo} alt='Logo' />
         <h1 className='header__banner-title'>O'rganizer</h1>
       </div>
-      <div className='header__btns'>
+      <div className='header__btns--desktop'>
         {isLoggedIn && (
           <Btn text='Se déconnecter' icon={<LogoutIcon />} clicked={logout} />
+        )}
+      </div>
+
+      <div className='header__btns--mobile'>
+        {isLoggedIn && (
+          <Btn text='' icon={<LogoutIcon />} clicked={logout} />
         )}
       </div>
     </div>
