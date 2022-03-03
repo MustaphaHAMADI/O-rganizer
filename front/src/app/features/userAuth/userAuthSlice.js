@@ -9,14 +9,14 @@ const initialState = user
 
 export const login = createAsyncThunk(
   '/login',
-  async ({ regNumber, password }) => {
+  async ({ regNumber, password }, thunkAPI) => {
     try {
       const data = await authService.login({ regNumber, password });
-      toast.success('Connecté');
+      toast.success(`Connecté`);
       return { user: data };
     } catch (error) {
       toast.error('Couple identifiant, mot de passe invalides');
-      console.log(error);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
