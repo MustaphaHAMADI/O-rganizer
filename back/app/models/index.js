@@ -148,18 +148,20 @@ module.exports = {
 
   async getAllTeam() {
     const result = await client.query(
-      `SELECT
-        "team"."id" as "id",
-        "team"."noun" as team,
-        array_agg("employee"."name" || ' ' || "employee"."lastname") as employees
-      FROM
-        team
-      JOIN
-        employee on employee.team_id = team.id
-      GROUP BY
-        "team"."noun", "team"."id"
-      ORDER BY
-        "team"."noun"`,
+      `select 
+      "team"."id" as "id",
+       "team"."noun" as "team",
+       array_agg
+        (
+        json_build_object(
+          'id', "employee"."id",
+          'firstName', "employee"."name",
+          'lastName', "employee"."lastname")
+        ) as employees
+      from team
+      join employee on employee.team_id = team.id
+      Group by team.noun, team.id
+      order by "team"."noun"`,
     );
 
     return result.rows;
