@@ -3,8 +3,7 @@ import './footer.scss';
 
 const Footer = () => (
     <div className='footer'>
-      <a className='footer__navlink' href='#'>Plan du site</a>
-      <a className='footer__navlink' href='#'>Contact</a>
+      2021 © O'rganizer
     </div>
   );
   

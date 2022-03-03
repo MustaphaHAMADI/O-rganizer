@@ -8,18 +8,17 @@
     background-color: vars.$dark-purple;
     color: vars.$light-color;
     padding: 1.3rem;
-    //box-shadow: 10px 5px 8px rgba(0, 0, 0, 0.5);
 
     &::before {
         content:'';
         position: absolute;
         background-color: transparent;
-        bottom: -4rem;
-        left: 0;
-        height: 4rem;
-        width: 2rem;
+        bottom: -40vh;
+        left: 2rem;
+        height: 40vh;
+        width: 6rem;
         border-top-left-radius: 2rem;
-        box-shadow: 0 -2rem 0 0 vars.$dark-purple;
+        box-shadow: -3rem -1rem 0 0 vars.$dark-purple;
     }
 
     &__banner {
@@ -29,7 +28,7 @@
 
         &-logo {
             width: 60px;
-            filter: drop-shadow(0.5px 0.5px 5px #fafafa);
+            //filter: drop-shadow(0.5px 0.5px 1px #fafafa);
         }
 
         &-title {
@@ -43,6 +42,12 @@
     }
 }
 
+@media (max-width: 1200px) {
+    .header::before {
+        display: none;
+    }
+}
+
 @media (max-width: 768px) {
     .header {
 
@@ -52,6 +57,10 @@
 
         &__btns--mobile {
             display: block;
+        }
+
+        &::before {
+            display: none;
         }
     }
 }
