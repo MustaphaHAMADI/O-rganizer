@@ -1,6 +1,8 @@
 const client = require('../config/db');
 const {
+  /* eslint-disable no-unused-vars */
   ApiError,
+  /* eslint-disable no-unused-vars */
 } = require('../errors/apiErrors');
 
 /**
@@ -263,8 +265,11 @@ module.exports = {
     );
     return result.rows[0];
   },
-
-  async getAllTeam() {
+  /**
+   * Returns all teams in the database including their members
+   * @returns {object} - all teams found
+   */
+  async getAllTeamWithMembers() {
     const result = await client.query(
       `select 
       "team"."id" as "id",
@@ -288,6 +293,7 @@ module.exports = {
   async getAllShift() {
     const result = await client.query(
       `SELECT
+      "shift"."id",
       "shift"."label",
       "shift"."date"::text,
       "shift"."team_id",
@@ -296,6 +302,26 @@ module.exports = {
       "shift"
     JOIN "team" ON "shift"."team_id" = "team"."id"
       `,
+    );
+    return result.rows;
+  },
+
+  async getAllAffectedStatus() {
+    const result = await client.query(
+      `SELECT 
+        "affected_status"."id",
+        "affected_status"."date"::text, 
+        "team"."noun" as repalcement_team,
+        "employee"."name" as first_name,
+        "employee"."lastname" as last_name,
+        "employee"."team_id" as team_id,
+        "affected_status"."comment" as commentraire,
+        "status"."label" as status
+      FROM 
+        "affected_status"
+      JOIN "status" ON "affected_status"."status_id" = "status"."id"
+      JOIN "employee" ON "affected_status"."employee_id" = "employee"."id"
+      LEFT JOIN "team" ON "affected_status"."team_id" = "team"."id"`,
     );
     return result.rows;
   },

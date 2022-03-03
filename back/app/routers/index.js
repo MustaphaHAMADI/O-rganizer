@@ -4,6 +4,7 @@ const controller = require('../controllers');
 const controllerHandler = require('../helpers/apiControllerHandler');
 const employeeRouter = require('./employeeRouter');
 const statusRouter = require('./statusRouter');
+const teamRouter = require('./teamRouter');
 const { errorHandler } = require('../helpers/errorHandler');
 // const adminAuth = require('../helpers/adminAuth');
 const auth = require('../helpers/auth');
@@ -27,9 +28,14 @@ router.all('/', controller.home);
 router.use('/employee', employeeRouter);
 
 /**
- * Redirection to the employeeRouter all the routes start with /employee
+ * Redirection to the statusRouter all the routes start with /status
  */
 router.use('/status', statusRouter);
+
+/**
+ * Redirection to the teamRouter all the routes start with /team
+ */
+router.use('/team', teamRouter);
 
 /**
  * POST /login
@@ -41,10 +47,32 @@ router.use('/status', statusRouter);
 router.post('/login', controllerHandler(controller.login));
 
 /**
+ * @typedef {object} day - created for every day in the database
+ * @property {string} date - date of the day format : yyyy-mm-dd
+ * @property {array<planningTeam>} teams - every teams for this day
+ */
+
+/**
+ * @typedef {object} planningTeam - one team with planning infos
+ * @property {number} teamId - id of the team
+ * @property {string} team - name of the team
+ * @property {string} shift - M : matin AM : apres-midi N : nuit stays blank if team doesn't work
+ * @property {array<planningStatus>} status - only appears if en employee of the team has a status
+ */
+
+/**
+ * @typedef {object} planningStatus - only appears if en employee of the team has a status
+ * @property {number} statusId - id of the status
+ * @property {string} firstName - employee affected by status first name
+ * @property {string} lastName - employee affected by status lastname
+ * @property {string} status - status label
+ */
+
+/**
  * GET /planning
  * @summary get the full planning
  * @tags Planning
- * @return {object} 200 - sucess response - application/json
+ * @return {array<day>} 200 - sucess response - application/json
  */
 
 router.get('/planning', auth, controllerHandler(controller.getPlanning));

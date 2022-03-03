@@ -1,7 +1,7 @@
 const express = require('express');
 const controller = require('../controllers');
 const controllerHandler = require('../helpers/apiControllerHandler');
-const adminAuth = require('../helpers/adminAuth');
+// const adminAuth = require('../helpers/adminAuth');
 const auth = require('../helpers/auth');
 
 const router = express.Router();
