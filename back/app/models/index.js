@@ -159,6 +159,21 @@ module.exports = {
   },
 
   /**
+   * Delete the affected_status of an employee for a date
+   * @param {number} id - ID of the employee
+   * @param {string} date - Date of the assignement
+   */
+  async deleteStatusToEmployee(id, date) {
+    const result = await client.query(
+      'DELETE FROM "affected_status" WHERE "employee_id" = $1 AND "date" = $2',
+      [id,
+        date,
+      ],
+    );
+    return !!result.rowCount;
+  },
+
+  /**
    * Find one affected status by his id
    * @param {number} id - Id of the affected status searched
    * @returns {object} The affected status searched

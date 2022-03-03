@@ -98,7 +98,7 @@ module.exports = {
    * for the employee on the dedicated date.
    *@param {*} req Express request object (not used)
    * @param {*} res Express response object
-   * @returns {object} JSON the new affected_status created
+   * @returns {object} JSON confirmation of the operation
    */
   async updateStatusOfAnEmployee(req, res) {
     const {
@@ -130,9 +130,38 @@ module.exports = {
       return res.status(400).send(`The status code ${statusId} does not exist`);
     }
 
-    const patch = await models.updateStatusToEmployee(id, date, statusId, teamId, comment);
+    await models.updateStatusToEmployee(id, date, statusId, teamId, comment);
 
     return res.status(200).send('update is done');
+  },
+
+  /**
+   * Controller used to delete an affected_status
+   *@param {*} req Express request object (not used)
+   * @param {*} res Express response object
+   * @returns {object} JSON confirmation of the operation
+   */
+  async deleteStatusOfAnEmployee(req,res) {
+    const {
+      id,
+      date,
+    } = req.params;
+
+    const user = await models.findOneEmployeeByID(id);
+
+    if (!user) {
+      return res.status(400).send('This employee ID does not exist');
+    }
+
+    const isThereAStatus = await models.findStatusForAnEmployeeForADate(id, date);
+
+    if (isThereAStatus.length === 0) {
+      return res.status(400).send('no status exists for this employee on this date');
+    }
+
+    await models.deleteStatusToEmployee(id, date);
+
+    return res.status(200).send('delete is done');
   },
 
   /**
