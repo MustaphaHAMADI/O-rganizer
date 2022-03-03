@@ -1,6 +1,11 @@
+// import dependencies
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+// components
 import Header from '../../components/Header/Header';
+
+// import function
 import { logout } from '../../app/features/userAuth/userAuthSlice';
 
 const HeaderContainer = () => {

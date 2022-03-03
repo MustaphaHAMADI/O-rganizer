@@ -1,11 +1,14 @@
+// import dependencies
 import React from 'react';
 import PropTypes from 'prop-types';
+// styles
 import './team.scss';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 
 const Team = ({
     teamName,
@@ -54,15 +57,16 @@ const Team = ({
     )
 }
 
-Team.propTypes = {
-    teamName: PropTypes.string.isRequired,
-    teamMembers: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            firstName: PropTypes.string.isRequired,
-            lastName: PropTypes.string.isRequired,
-        }).isRequired,
-    ).isRequired,
-}
 
-export default Team
+Team.propTypes = {
+  teamName: PropTypes.string.isRequired,
+  teamMembers: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
+};
+
+export default Team;

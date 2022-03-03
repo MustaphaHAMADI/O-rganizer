@@ -1,3 +1,4 @@
+// import dependencies
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -23,9 +24,7 @@ const Header = ({ logout, isLoggedIn }) => {
       </div>
 
       <div className='header__btns--mobile'>
-        {isLoggedIn && (
-          <Btn text='' icon={<LogoutIcon />} clicked={logout} />
-        )}
+        {isLoggedIn && <Btn text='' icon={<LogoutIcon />} clicked={logout} />}
       </div>
     </div>
   );
