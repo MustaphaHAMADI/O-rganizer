@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import planningService from '../../app/features/planningHandling/PlanningService';
+<<<<<<< HEAD
+import Team from '../Team/Team';
+import './planning.scss';
+=======
+>>>>>>> develop
 
 const Planning = () => {
   const [membersData, setMembersData] = useState([]);
@@ -10,7 +15,15 @@ const Planning = () => {
 
   return (
     <div className='planning'>
-      Planning
+      <div className='planning__container'>
+        <div className='planning__header'>
+          {membersData.map((team) => 
+            <Team 
+              key={team.id} teamName={team.team} teamMembers={team.employees}
+            />
+        )}
+        </div>
+      </div>
     </div>
   );
 };

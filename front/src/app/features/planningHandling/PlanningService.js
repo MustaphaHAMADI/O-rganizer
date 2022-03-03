@@ -15,7 +15,7 @@ const getPlanning = () => {
 
 const getEmployees = async () => {
   try {
-    const response = await axiosClient.get('/employee', { headers: authHeader() });
+    const response = await axiosClient.get('/employee/team', { headers: authHeader() });
     return response;
   } catch (err) {
     return err.response;

@@ -1,5 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
+import './team.scss';
 
 const Team = ({
     teamName,
@@ -12,7 +13,7 @@ const Team = ({
             {
             teamMembers.map((member) => (
                 <li className='team__member' key={member.id}>
-                    {member.name} {member.lastname}
+                    {member.firstName} {member.lastName}
                 </li>
             ))
             }
@@ -26,8 +27,8 @@ Team.propTypes = {
     teamMembers: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number.isRequired,
-            name: PropTypes.string.isRequired,
-            lastname: PropTypes.string.isRequired,
+            firstName: PropTypes.string.isRequired,
+            lastName: PropTypes.string.isRequired,
         }).isRequired,
     ).isRequired,
 }

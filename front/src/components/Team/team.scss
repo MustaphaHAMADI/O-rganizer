@@ -1,0 +1,14 @@
+.team {
+    text-align: center;
+
+    &__title {
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+
+    &__members {
+        font-size: 0.8rem;
+        line-height: 1.3;
+    }
+}
