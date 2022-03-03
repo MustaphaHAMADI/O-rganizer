@@ -1,5 +1,8 @@
+// import dependencies
 import { useDispatch } from 'react-redux';
+// function
 import { login } from '../../app/features/userAuth/userAuthSlice';
+// components
 import Login from '../../components/Login/Login';
 
 const LoginContainer = () => {

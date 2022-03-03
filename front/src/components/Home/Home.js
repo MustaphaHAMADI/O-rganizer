@@ -2,7 +2,7 @@ import React from 'react';
 import LoginContainer from '../../Containers/LoginContainer/loginContainer';
 import './home.scss';
 
-const Home = (props) => {
+const Home = () => {
   return (
     <div className='home'>
       <LoginContainer />

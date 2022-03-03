@@ -1,12 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from './AuthService';
 import { toast } from 'react-toastify';
-const user = JSON.parse(localStorage.getItem('user'));
 
+// assign localStorage value to the user variable
+const user = JSON.parse(localStorage.getItem('user'));
+// initialise the state to equal user data from localStorage
 const initialState = user
   ? { isLoggedIn: true, user }
   : { isLoggedIn: false, user: null };
 
+// Functions that takes credentials as params and uses authService to call the API
 export const login = createAsyncThunk(
   '/login',
   async ({ regNumber, password }, thunkAPI) => {
@@ -21,11 +24,13 @@ export const login = createAsyncThunk(
   }
 );
 
+// Calls function that removes user data
 export const logout = createAsyncThunk('/logout', async () => {
   await authService.logout();
   toast.success('Déconnecté');
 });
 
+// Info that will be given to the store
 export const userAuthSlice = createSlice({
   name: 'auth',
   initialState,

@@ -1,12 +1,13 @@
+// import dependencies
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import Btn from '../Btn/Btn';
 
 // import style
 import './login.scss';
-
-// import elements
 import { TextField, Paper } from '@mui/material';
+
+// import components
+import Btn from '../Btn/Btn';
 
 const defaultValues = {
   regNumber: '',
