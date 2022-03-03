@@ -1,6 +1,6 @@
 const client = require('../config/db');
 const {
-  getPlanning
+  getPlanning,
 } = require('../controllers');
 const {
   ApiError,
@@ -121,7 +121,7 @@ module.exports = {
         date,
         statusId,
         teamId,
-        comment
+        comment,
       ],
     );
     return newStatus.rows[0];
@@ -209,7 +209,8 @@ module.exports = {
    * @returns {Status} - Status found
    */
   async getOneStatus(id) {
-    const result = await client.query('SELECT * FROM "status" WHERE "id" = $1',
+    const result = await client.query(
+      'SELECT * FROM "status" WHERE "id" = $1',
       [id],
     );
     return result.rows[0];
@@ -233,6 +234,21 @@ module.exports = {
       order by "team"."noun"`,
     );
 
+    return result.rows;
+  },
+
+  async getAllShift() {
+    const result = await client.query(
+      `SELECT
+        "id",
+        "label",
+        "date" :: TEXT,
+        "team_id"
+      FROM
+        "shift"
+      `,
+    );
+    console.log('jeai renvoyé tous les shifts');
     return result.rows;
   },
 };
