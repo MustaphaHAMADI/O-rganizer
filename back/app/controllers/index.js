@@ -104,6 +104,18 @@ module.exports = {
   },
 
   /**
+   * Controller used to send back one status
+   * @param {*} req Express request object
+   * @param {*} res Express response object
+   * @returns {object} JSON of all the status
+   */
+  async getOneStatusByID(req,res) {
+    const { id } = req.params;
+    const status = await models.getOneStatus(id);
+    return res.json(status);
+  },
+
+  /**
    * Creation of the JSON web Token, the sign include the user role.
    * ExpressMiddleware signature :
    * @param {*} req Express request object
