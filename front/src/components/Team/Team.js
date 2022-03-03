@@ -34,22 +34,33 @@ const Team = ({
                 <Accordion 
                     expanded={expanded === 'panel'}
                     onChange={handleChange('panel')} 
-                    elevation={0} 
-                    sx={{backgroundColor:'transparent'}}>
+                    elevation={0}
+                    disableGutters
+                    sx={{
+                        backgroundColor:'transparent',
+                    }}>
                     <AccordionSummary
                       aria-controls="panel1bh-content"
                       id="panel1bh-header"
                       expandIcon={<ExpandMoreIcon />}
+                      
+                      sx={{
+                          display: 'inline-block',
+                          marginTop: '-2rem',
+                      }}
                     >
                     </AccordionSummary>
                     <AccordionDetails>
-                      <Typography>
-                        {teamMembers.map((member) => (
-                            <li className='team__member' key={member.id}>
-                                {member.firstName} {member.lastName}
-                            </li>
-                        ))}
-                      </Typography>
+                        <Typography 
+                            noWrap={true}
+                            component={'div'}
+                        >
+                            {teamMembers.map((member) => (
+                                <p className='team__member' key={member.id}>
+                                    {member.firstName} {member.lastName}
+                                </p>
+                            ))}
+                        </Typography>
                     </AccordionDetails>
                 </Accordion>
             </div>
