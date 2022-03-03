@@ -1,18 +1,24 @@
 .planning {
-    padding: 1rem;
+    padding: 4rem;
     
     &__container {
         width: 100%;
-        max-width: 1200px;
         margin: 0 auto;
-        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+        background-color: rgb(255, 255, 255);
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.164);
         border-radius: 2rem;
-        padding: 2rem;
+        padding: 1rem;
     }
 
     &__header {
         display: flex;
         justify-content: center;
         column-gap: 3rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .planning {
+        padding: 2rem;
     }
 }
