@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { getAllTeam, getAllStatus } = require('../models');
+const { getAllTeam, getAllStatus, getAllShift } = require('../models');
 const models = require('../models');
 
 module.exports = {
@@ -170,7 +170,7 @@ module.exports = {
    * @param {*} res Express response object
    * @returns {object} JSON of all the status
    */
-  async getAllStatus(_,res) {
+  async getAllStatus(_, res) {
     const status = await models.getAllStatus();
     return res.json(status);
   },
@@ -212,11 +212,14 @@ module.exports = {
     // console.log('goodPassword',goodPassword);
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
-      const token = jwt.sign({
+      const token = jwt.sign(
+        {
           user_id: user.regNumber,
           role: user.role,
         },
-        process.env.TOKEN_KEY, {
+        process.env.TOKEN_KEY,
+
+        {
           expiresIn: process.env.TOKEN_VALIDITY,
         },
       );
@@ -237,5 +240,30 @@ module.exports = {
     const teams = await models.getAllTeam();
 
     return res.status(200).json(teams);
+  },
+
+  async getPlanning(_, res) {
+    const shifts = await getAllShift();
+
+    const planning = [];
+    shifts.forEach((shift) => {
+      if (!planning.find((date) => date === shift.date)) {
+        planning.push({ date: shift.date });
+      }
+    });
+    planning.forEach((element) => {
+      const results = shifts.filter((shift) => element.date === shift.date);
+      if (!element.teams) {
+        element.teams = [];
+      }
+      results.forEach((resultElement) => {
+        element.teams.push({
+          team: resultElement.team_id,
+          shift: resultElement.label,
+        });
+      });
+    });
+    console.log(planning);
+    return res.status(200).json(planning);
   },
 };
