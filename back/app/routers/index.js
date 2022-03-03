@@ -6,7 +6,7 @@ const employeeRouter = require('./employeeRouter');
 const statusRouter = require('./statusRouter');
 const { errorHandler } = require('../helpers/errorHandler');
 // const adminAuth = require('../helpers/adminAuth');
-// const auth = require('../helpers/auth');
+const auth = require('../helpers/auth');
 
 const router = express.Router();
 
@@ -47,7 +47,7 @@ router.post('/login', controllerHandler(controller.login));
  * @return {object} 200 - sucess response - application/json
  */
 
-router.get('/planning', controllerHandler(controller.getPlanning));
+router.get('/planning', auth, controllerHandler(controller.getPlanning));
 
 /**
  * Using the errorHanlder to manage the specific error messages
