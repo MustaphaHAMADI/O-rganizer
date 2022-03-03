@@ -1,5 +1,7 @@
 const client = require('../config/db');
-const { getPlanning } = require('../controllers');
+const {
+  getPlanning
+} = require('../controllers');
 const {
   ApiError,
 } = require('../errors/apiErrors');
@@ -17,8 +19,16 @@ const {
  */
 
 /**
+ * @typedef {object} Status
+ * @property {number} id - ID of the satus
+ * @property {string} label - Label of the status
+ * @property {string} created_at - Creation date of the status
+ * @property {string} upated_at - Update date of the status
+ */
+
+/**
  * @typedef {object} Affected_status
- * @property {number} employee_id - ID of the affected Status
+ * @property {number} id - ID of the affected Status
  * @property {string} date - Date of the affectation
  * @property {number} employee_id - ID of the employee
  * @property {number} status_id - ID of the status
@@ -111,9 +121,47 @@ module.exports = {
         date,
         statusId,
         teamId,
-        comment],
+        comment
+      ],
     );
     return newStatus.rows[0];
+  },
+
+  async findOneAffectedStatusById(id) {
+    const result = await client.query(
+      `select 
+        "affected_status"."id" as "id",
+        "affected_status"."date" as "date",
+        array_agg
+              (
+              json_build_object(
+                'id', "employee"."id",
+                'firstName', "employee"."name",
+                'lastName', "employee"."lastname")
+              ) as employee,
+        array_agg
+              (
+              json_build_object(
+                'id', "status"."id",
+                'label', "status"."label")
+              ) as status,
+        array_agg
+              (
+              json_build_object(
+                'id', "team"."id",
+                'noun', "team"."noun")
+              ) as team,
+        "affected_status"."comment" as "comment"
+      from "affected_status" 
+      left join "employee" on "employee"."id" = "affected_status"."employee_id"
+      left join "status" on "status"."id" = "affected_status"."status_id"
+      left join "team" on "team"."id" = "affected_status"."team_id"
+      where "affected_status"."id" = $1
+      group by "affected_status"."id"
+      order by "affected_status" ASC`,
+      [id],
+    );
+    return result.rows[0];
   },
 
   async updateEmployee(employee) {
@@ -142,6 +190,27 @@ module.exports = {
         employee.team_id,
         employee.id,
       ],
+    );
+    return result.rows[0];
+  },
+
+  /**
+   * Returning all the status
+   * @returns {Status} - List of the status
+   */
+  async getAllStatus() {
+    const result = await client.query('SELECT * FROM "status"');
+    return result.rows;
+  },
+
+  /**
+   * Returning one status
+   * @param {number} id - ID of the searched status
+   * @returns {Status} - Status found
+   */
+  async getOneStatus(id) {
+    const result = await client.query('SELECT * FROM "status" WHERE "id" = $1',
+      [id],
     );
     return result.rows[0];
   },
