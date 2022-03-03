@@ -174,7 +174,7 @@ module.exports = {
       }
       results.forEach((resultElement) => {
         element.teams.push({
-          team: resultElement.team_id,
+          team: resultElement.team_name,
           shift: resultElement.label,
         });
       });
