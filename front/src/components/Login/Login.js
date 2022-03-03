@@ -81,7 +81,17 @@ const Login = ({ getLogin }) => {
             />
           </div>
           <div className='login__form-textfield'>
-            <Btn text='Se connecter' fullWidth={true} clicked={handleLogin} />
+            <Btn
+              text='Se connecter'
+              fullWidth={true}
+              disabled={
+                !(
+                  formValues.regNumber.length > 4 &&
+                  formValues.password.length > 4
+                )
+              }
+              clicked={handleLogin}
+            />
           </div>
         </form>
       </Paper>
