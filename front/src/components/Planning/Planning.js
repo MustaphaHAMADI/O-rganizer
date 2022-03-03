@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import planningService from '../../app/features/planningHandling/PlanningService';
-<<<<<<< HEAD
 import Team from '../Team/Team';
 import './planning.scss';
-=======
->>>>>>> develop
 
 const Planning = () => {
   const [membersData, setMembersData] = useState([]);
