@@ -291,15 +291,15 @@ module.exports = {
   async getAllShift() {
     const result = await client.query(
       `SELECT
-        "id",
-        "label",
-        "date" :: TEXT,
-        "team_id"
-      FROM
-        "shift"
+      "shift"."label",
+      "shift"."date"::text,
+      "shift"."team_id",
+      "team"."noun" as team_name
+    FROM
+      "shift"
+    JOIN "team" ON "shift"."team_id" = "team"."id"
       `,
     );
-    console.log('jeai renvoyé tous les shifts');
     return result.rows;
   },
 };
