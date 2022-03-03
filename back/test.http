@@ -15,10 +15,10 @@ GET {{ endpoint }}/employee
 x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlhdCI6MTY0NjIzMzUyNSwiZXhwIjoxNjQ2MjQwNzI1fQ.Xnr88cArJRu4mkZVuxYjf5xv8VQovLX7ZU25dL39MVk
 
 ### Ajoute un statut sur un employé pour un jour donné
-POST {{ endpoint }}/employee/07/date/2022-07-25
+POST {{ endpoint }}/employee/03/date/2022-07-25
 x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYyOTUwMDcsImV4cCI6MTY0NjMwMjIwN30.jEgsInT7Lxp5fr4vsdrVwAikH3R3ruhirSsODr8bL4M
 content-type: application/json
 
 {
-  "statusId": 1
+  "statusId": 30
 }

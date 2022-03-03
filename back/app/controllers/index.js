@@ -79,6 +79,12 @@ module.exports = {
       return res.status(400).send('A status is already affected to this user for this date');
     }
 
+    const verifiedStatus = await models.getOneStatus(statusId);
+    console.log('verifiedStatus',verifiedStatus);
+    if (!verifiedStatus) {
+      return res.status(400).send(`The status code ${statusId} does not exist`);
+    }
+
     const post = await models.addStatusToEmployee(id, date, statusId, teamId, comment);
     delete post.created_at;
     delete post.updated_at;
