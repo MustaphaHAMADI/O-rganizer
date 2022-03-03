@@ -70,13 +70,13 @@ module.exports = {
     const user = await models.findOneEmployeeByID(id);
 
     if (!user) {
-      return res.status(400).send('This user ID does not exist');
+      return res.status(400).send('This employee ID does not exist');
     }
 
     const isThereAStatus = await models.findStatusForAnEmployeeForADate(id, date);
 
     if (isThereAStatus.length !== 0) {
-      return res.status(400).send('A status is already affected to this user for this date');
+      return res.status(400).send('A status is already affected to this employee for this date');
     }
 
     const verifiedStatus = await models.getOneStatus(statusId);
@@ -90,6 +90,49 @@ module.exports = {
     const result = await models.findOneAffectedStatusById(post.id);
 
     return res.status(200).json(result);
+  },
+
+  /**
+   * Controller used to update an affected_status,
+   * before the insertion in the database, we verify if an affected_status already exist
+   * for the employee on the dedicated date.
+   *@param {*} req Express request object (not used)
+   * @param {*} res Express response object
+   * @returns {object} JSON the new affected_status created
+   */
+  async updateStatusOfAnEmployee(req, res) {
+    const {
+      id,
+      date,
+    } = req.params;
+
+    const {
+      statusId,
+      teamId,
+      comment,
+    } = req.body;
+
+    const user = await models.findOneEmployeeByID(id);
+
+    if (!user) {
+      return res.status(400).send('This employee ID does not exist');
+    }
+
+    const isThereAStatus = await models.findStatusForAnEmployeeForADate(id, date);
+
+    if (isThereAStatus.length === 0) {
+      return res.status(400).send('no status exists for this employee on this date');
+    }
+
+    const verifiedStatus = await models.getOneStatus(statusId);
+
+    if (!verifiedStatus) {
+      return res.status(400).send(`The status code ${statusId} does not exist`);
+    }
+
+    const patch = await models.updateStatusToEmployee(id, date, statusId, teamId, comment);
+
+    return res.status(200).send('update is done');
   },
 
   /**

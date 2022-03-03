@@ -127,6 +127,42 @@ module.exports = {
     return newStatus.rows[0];
   },
 
+  /**
+   * Update the affected_status of an employee for a date
+   * @param {number} id - ID of the employee
+   * @param {string} date - Date of the assignement
+   * @param {number} statusId - ID of the status to be assigned
+   * @param {number} teamId - ID of the replacement team
+   * @param {number} comment - Comment of the affected status
+   * @returns {Affected_status} - The updated affected status in the database
+   */
+  async updateStatusToEmployee(id, date, statusId, teamId = null, comment = '') {
+    const updatedStatus = await client.query(
+      `UPDATE "affected_status" SET
+        "employee_id" = $1,
+        "date" = $2,
+        "status_id" = $3,
+        "team_id" = $4,
+        "comment" = $5
+      WHERE "employee_id" = $6 AND "date" = $7`,
+      [
+        id,
+        date,
+        statusId,
+        teamId,
+        comment,
+        id,
+        date,
+      ],
+    );
+    return updatedStatus.rows[0];
+  },
+
+  /**
+   * Find one affected status by his id
+   * @param {number} id - Id of the affected status searched
+   * @returns {object} The affected status searched
+   */
   async findOneAffectedStatusById(id) {
     const result = await client.query(
       `select 

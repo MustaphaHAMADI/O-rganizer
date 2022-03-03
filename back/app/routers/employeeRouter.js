@@ -14,18 +14,28 @@ const router = express.Router();
  */
 
 router.route('/:id/date/:date')
-/**
- * POST /employee/{id}/date/{date}
- * @summary Assign a new status on an employee for a dedicated date
- *  -- NOTE : Only admins are alloowed to use this route
- * @tags Employee
- * @param {number}  id.path.required - id of the user
- * @param {string}  date.path.required - date for the affectation eq: 2022-01-01
- * @param {string}  x-access-token.request.header
- * @param {AffectedStatusBody} request.body.required - JSON
- * @return {Affected_status} 200 - Affected status created
- */
-  .post(adminAuth, controllerHandler(controller.addStatusOnAnEmployee));
+  /**
+   * POST /employee/{id}/date/{date}
+   * @summary Assign a new status on an employee for a dedicated date
+   *  -- NOTE : Only admins are alloowed to use this route
+   * @tags Employee
+   * @param {number}  id.path.required - id of the user
+   * @param {string}  date.path.required - date for the affectation eq: 2022-01-01
+   * @param {AffectedStatusBody} request.body.required - JSON
+   * @return {Affected_status} 200 - Affected status created
+   */
+  .post(adminAuth, controllerHandler(controller.addStatusOnAnEmployee))
+  /**
+   * PATCH /employee/{id}/date/{date}
+   * @summary Update the status of an employee for a dedicated date
+   *  -- NOTE : Only admins are alloowed to use this route
+   * @tags Employee
+   * @param {number}  id.path.required - id of the user
+   * @param {string}  date.path.required - date for the affectation eq: 2022-01-01
+   * @param {AffectedStatusBody} request.body.required - JSON
+   * @return {string} 200 - Update is done
+   */
+  .patch(adminAuth, controllerHandler(controller.updateStatusOfAnEmployee));
 
 /**
 * GET /employee
