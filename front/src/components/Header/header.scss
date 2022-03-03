@@ -37,10 +37,21 @@
             font-size: 2rem;
         }
     }
+
+    &__btns--mobile {
+        display: none;
+    }
 }
 
 @media (max-width: 768px) {
-    .header__btns {
-        display: none;
+    .header {
+
+        &__btns--desktop {
+            display: none;
+        }
+
+        &__btns--mobile {
+            display: block;
+        }
     }
 }
