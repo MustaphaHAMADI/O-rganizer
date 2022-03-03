@@ -12,13 +12,17 @@ content-type: application/json
 
 ### Liste des employés
 GET {{ endpoint }}/employee
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlhdCI6MTY0NjIzMzUyNSwiZXhwIjoxNjQ2MjQwNzI1fQ.Xnr88cArJRu4mkZVuxYjf5xv8VQovLX7ZU25dL39MVk
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMDQ3MTQsImV4cCI6MTY0NjMxMTkxNH0.fU6bFpuH1Q-OuD8KpG0deafnWfIUitFK9dCv0srGYME
 
 ### Ajoute un statut sur un employé pour un jour donné
-POST {{ endpoint }}/employee/07/date/2022-06-25
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYyMzk5ODQsImV4cCI6MTY0NjI0NzE4NH0.TI59I7nDU12ORHc7Mk9odbX7QadGWDB9_b_nGweZ4iw
+POST {{ endpoint }}/employee/05/date/2022-07-25
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMDQ3MTQsImV4cCI6MTY0NjMxMTkxNH0.fU6bFpuH1Q-OuD8KpG0deafnWfIUitFK9dCv0srGYME
 content-type: application/json
 
 {
-  "statusId": 1
+  "statusId": 4
 }
+
+### Liste des status
+GET {{ endpoint }}/status
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMDQ3MTQsImV4cCI6MTY0NjMxMTkxNH0.fU6bFpuH1Q-OuD8KpG0deafnWfIUitFK9dCv0srGYME

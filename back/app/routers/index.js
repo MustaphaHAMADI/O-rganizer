@@ -3,6 +3,7 @@ const express = require('express');
 const controller = require('../controllers');
 const controllerHandler = require('../helpers/apiControllerHandler');
 const employeeRouter = require('./employeeRouter');
+const statusRouter = require('./statusRouter');
 const { errorHandler } = require('../helpers/errorHandler');
 // const adminAuth = require('../helpers/adminAuth');
 // const auth = require('../helpers/auth');
@@ -24,6 +25,11 @@ router.all('/', controller.home);
  * Redirection to the employeeRouter all the routes start with /employee
  */
 router.use('/employee', employeeRouter);
+
+/**
+ * Redirection to the employeeRouter all the routes start with /employee
+ */
+ router.use('/status', statusRouter);
 
 /**
  * POST /login
