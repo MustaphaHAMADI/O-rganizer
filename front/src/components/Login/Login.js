@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import Btn from '../Btn/Btn';
 
 // import style
@@ -24,11 +25,19 @@ const Login = ({ getLogin }) => {
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
+      if (formValues.regNumber === '' || formValues.password === '') {
+        toast.error('Tous les champs sont requis');
+        return;
+      }
       handleLogin();
     }
   };
 
   const handleLogin = async () => {
+    if (formValues.regNumber === '' || formValues.password === '') {
+      toast.error('Tous les champs sont requis');
+      return;
+    }
     try {
       getLogin(formValues);
     } catch (err) {
@@ -51,7 +60,7 @@ const Login = ({ getLogin }) => {
           <div className='login__form-textfield'>
             <TextField
               id='regNumber'
-              label='regNumber'
+              label='Matricule'
               name='regNumber'
               type='text'
               value={formValues.regNumber}
@@ -62,7 +71,7 @@ const Login = ({ getLogin }) => {
           <div className='login__form-textfield'>
             <TextField
               id='password'
-              label='password'
+              label='Mot de passe'
               name='password'
               type='password'
               value={formValues.password}

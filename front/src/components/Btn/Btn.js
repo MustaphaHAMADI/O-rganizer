@@ -9,6 +9,7 @@ const Btn = ({ text, icon, clicked, disabled, fullWidth }) => {
     setLoading(true);
     // remove the setTimeout onece we have the API call
     await clicked();
+    setLoading(false);
     return () => setLoading(false);
   };
   return (
