@@ -47,11 +47,7 @@ router.post('/login', controllerHandler(controller.login));
  * @return {object} 200 - sucess response - application/json
  */
 
-<<<<<<< HEAD
 router.get('/planning', auth, controllerHandler(controller.getPlanning));
-=======
-router.get('/planning', controllerHandler(controller.getPlanning));
->>>>>>> 72f7b4891b241adfcc54519c643b327083301197
 
 /**
  * Using the errorHanlder to manage the specific error messages

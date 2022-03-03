@@ -1,8 +1,5 @@
 const client = require('../config/db');
 const {
-  getPlanning,
-} = require('../controllers');
-const {
   ApiError,
 } = require('../errors/apiErrors');
 
