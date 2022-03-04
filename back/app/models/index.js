@@ -79,8 +79,20 @@ module.exports = {
    * @returns { Employee } - The finded employee
    */
   async findOneEmployeeByID(id) {
-    const result = await client.query(
-      'SELECT * FROM "employee" WHERE "id"= $1',
+    const result = await client.query( |
+      `SELECT 
+        "employee"."id",
+        "employee"."reg_number",
+        "employee"."name",
+        "employee"."lastname",
+        "employee"."role",
+        "employee"."function",
+        "employee"."profile_picture",
+        "team"."id",
+        "team"."noun"
+      FROM "employee" 
+      LEFT JOIN "team" on "team"."id" = "employee"."team_id"
+      WHERE "employee"."id"= $1`,
       [id],
     );
 
