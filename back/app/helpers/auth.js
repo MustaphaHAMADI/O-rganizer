@@ -4,7 +4,7 @@ const config = process.env;
 
 const verifyToken = (req, res, next) => {
   const token = req.body.token || req.query.token || req.headers['x-access-token'];
-  if (req.rawHeaders.includes('localhost:3000')) {
+  if (req.rawHeaders.includes((`localhost:${process.env.PORT}`))) {
     return next();
   }
   if (!token) {
