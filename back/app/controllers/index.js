@@ -38,6 +38,12 @@ module.exports = {
     return res.json('done');
   },
 
+  /**
+   * Controller used to add an employee in the database
+   * @param {object} req Express request object
+   * @param {object} res Express response object
+   * @returns {object} Employee recently aded
+   */
   async addEmployee(req, res) {
     const {
       regNumber,
@@ -59,7 +65,7 @@ module.exports = {
     }
 
     if (!regNumber || !role || !password) {
-      return res.status(400).send('The mandatory informations are missing : REG NUMBER, PASSWORD and ROLE');
+      return res.status(400).send('The mandatory informations are missing : REG NUMBER, PASSWORD and/or ROLE');
     }
 
     if (role !== 'user' && funct !== 'admin') {
