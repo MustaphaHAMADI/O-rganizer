@@ -1,13 +1,19 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import './NotFound.scss';
+import Btn from '../Btn/Btn'
+
+
+
 
 const NotFound = () => {
     return ( 
     <div className="not-found">
         <h1>404</h1>
-        
-        <Link to="/"> Retourner à l'accueil </Link>
+        <Link to="/"><button type="button" className="Btn">Retourner à l'accueil</button>
+        </Link>
+    
+
 
     </div>
     )
@@ -17,3 +23,4 @@ const NotFound = () => {
 
 
 export default React.memo(NotFound);
+
