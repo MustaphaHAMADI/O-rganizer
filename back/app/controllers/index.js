@@ -85,7 +85,7 @@ module.exports = {
       comment,
     } = req.body;
 
-    const user = await models.findOneEmployeeByID(id);
+    const user = await models.getOneEmployeeById(id);
 
     if (!user) {
       return res.status(400).send('This employee ID does not exist');
@@ -130,7 +130,7 @@ module.exports = {
       comment,
     } = req.body;
 
-    const user = await models.findOneEmployeeByID(id);
+    const user = await models.getOneEmployeeById(id);
 
     if (!user) {
       return res.status(400).send('This employee ID does not exist');
@@ -163,7 +163,7 @@ module.exports = {
     const id = Number(req.params.id);
     const { date } = req.params;
 
-    const user = await models.findOneEmployeeByID(id);
+    const user = await models.getOneEmployeeById(id);
 
     if (!user) {
       return res.status(400).send('This employee ID does not exist');
