@@ -17,17 +17,6 @@ const router = express.Router();
  * @property {number} teamId - ID of the employee team
  */
 
-router.route('/:id')
-  /**
-  * GET /employee/{id}
-  * @summary Get an employee data from the database based in his ID.
-  * -- NOTE : This route require a valid JSON web token into the HTTP request header.
-  * @tags Employee
-  * @param {number} id.path.required - id of the employee
-  * @return {Employee} 200 - success response - application/json
-   */
-  .get(auth, controllerHandler(controller.getOneEmployeeById));
-
 router.route('/')
   /**
   * GET /employee
@@ -47,5 +36,16 @@ router.route('/')
   .post(adminAuth, controllerHandler(controller.addEmployee));
 
 router.get('/hashAllEmployeePassword', controllerHandler(controller.hashAllEmployeePassword));
+
+router.route('/:id')
+  /**
+  * GET /employee/{id}
+  * @summary Get an employee data from the database based in his ID.
+  * -- NOTE : This route require a valid JSON web token into the HTTP request header.
+  * @tags Employee
+  * @param {number} id.path.required - id of the employee
+  * @return {Employee} 200 - success response - application/json
+   */
+  .get(auth, controllerHandler(controller.getOneEmployeeById));
 
 module.exports = router;
