@@ -42,7 +42,7 @@ router.route('/')
    * @summary Add an employee in the database
    * @tags Employee
    * @param {addEmployeeBody} request.body.required - JSON
-   * @return {object} - Employee created
+   * @return {object} - 200 - JSON : created employee
    */
   .post(adminAuth, controllerHandler(controller.addEmployee));
 
