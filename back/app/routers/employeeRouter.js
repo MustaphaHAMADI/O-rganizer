@@ -3,9 +3,19 @@ const controller = require('../controllers');
 const controllerHandler = require('../helpers/apiControllerHandler');
 const adminAuth = require('../helpers/adminAuth');
 const auth = require('../helpers/auth');
-const { addEmployee } = require('../models');
 
 const router = express.Router();
+
+/**
+ * @typedef {object} addEmployeeBody
+ * @property {string} regNumber.required - Reg Number of the employee
+ * @property {string} password.required - Password
+ * @property {string} role.required - Role : user / admin
+ * @property {string} name - Name of the employee
+ * @property {string} lastname - Last name of the employee
+ * @property {string} profilePicture - Link of the profile picture of the employee
+ * @property {number} teamId - ID of the employee team
+ */
 
 router.route('/:id')
   /**
@@ -19,15 +29,21 @@ router.route('/:id')
   .get(auth, controllerHandler(controller.getOneEmployeeById));
 
 router.route('/')
-/**
-* GET /employee
-* @summary Get all employees data from the database.
-* -- NOTE : This route require a valid JSON web token into the HTTP request header.
-* @tags Employee
-* @param {string} request.body.required - JSON Web Token
-* @return {Employee} 200 - success response - application/json
-*/
+  /**
+  * GET /employee
+  * @summary Get all employees data from the database.
+  * -- NOTE : This route require a valid JSON web token into the HTTP request header.
+  * @tags Employee
+  * @return {Employee} 200 - success response - application/json
+  */
   .get(auth, controllerHandler(controller.getAllEmployee))
+  /**
+   * POST /employee
+   * @summary Add an employee in the database
+   * @tags Employee
+   * @param {addEmployeeBody} request.body.required - JSON
+   * @return {object} - Employee created
+   */
   .post(adminAuth, controllerHandler(controller.addEmployee));
 
 router.get('/hashAllEmployeePassword', controllerHandler(controller.hashAllEmployeePassword));
