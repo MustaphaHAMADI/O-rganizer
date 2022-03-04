@@ -99,6 +99,24 @@ module.exports = {
     return result.rows[0];
   },
 
+  async addEmployee(regNumber, password, role, name = '', lastname = '', funct = '', profilePicture = '', teamId = null) {
+    const newEmployee = await client.query(
+      `INSERT INTO "employee" ("reg_numer", "password", "role", "name", "lastname", "function", "profile_picture", "team_id") VALUES
+      ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
+      [
+        regNumber,
+        password,
+        role,
+        name,
+        lastname,
+        funct,
+        profilePicture,
+        teamId,
+      ],
+    );
+    return newEmployee.rows[0];
+  },
+
   /**
    * Returning the status of a dedicated employee on a specific date
    * @param {number} id - ID of the employee

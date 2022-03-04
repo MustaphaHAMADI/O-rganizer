@@ -17,6 +17,7 @@ router.route('/:id')
    */
   .get(auth, controllerHandler(controller.getOneEmployeeById));
 
+router.use('/')
 /**
 * GET /employee
 * @summary Get all employees data from the database.
@@ -25,7 +26,8 @@ router.route('/:id')
 * @param {string} request.body.required - JSON Web Token
 * @return {Employee} 200 - success response - application/json
 */
-router.get('/', auth, controllerHandler(controller.getAllEmployee));
+  .get(auth, controllerHandler(controller.getAllEmployee))
+  .post();
 
 router.get('/hashAllEmployeePassword', controllerHandler(controller.hashAllEmployeePassword));
 
