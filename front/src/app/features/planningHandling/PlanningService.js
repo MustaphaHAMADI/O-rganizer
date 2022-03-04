@@ -35,7 +35,7 @@ const getPlanning = async (startingDate, endingDate) => {
  */
 const getTeams = async () => {
   try {
-    const response = await axiosClient.get('/employee/team', {
+    const response = await axiosClient.get('/team', {
       headers: authHeader(),
     });
     return response;
