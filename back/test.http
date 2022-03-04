@@ -45,3 +45,10 @@ x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYX
 ### Liste des status
 GET {{ endpoint }}/status/1
 x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMTI0NzMsImV4cCI6MTY0NjMxOTY3M30.jsMLi-coWWHM8Htw4gBsDpVjDSwAhMZhqiqQRcHJoP8
+
+### Affichage du planning
+GET {{ endpoint }}/planning
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMTI0NzMsImV4cCI6MTY0NjMxOTY3M30.jsMLi-coWWHM8Htw4gBsDpVjDSwAhMZhqiqQRcHJoP8
+
+### Affichage des teams
+GET {{ endpoint }}/team

@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { getAllTeam, getAllStatus, getAllShift } = require('../models');
+const { getAllShift, getAllAffectedStatus } = require('../models');
 const models = require('../models');
 
 module.exports = {
@@ -141,7 +141,7 @@ module.exports = {
    * @param {*} res Express response object
    * @returns {object} JSON confirmation of the operation
    */
-  async deleteStatusOfAnEmployee(req,res) {
+  async deleteStatusOfAnEmployee(req, res) {
     const {
       id,
       date,
@@ -181,7 +181,7 @@ module.exports = {
    * @param {*} res Express response object
    * @returns {object} JSON of all the status
    */
-  async getOneStatusByID(req,res) {
+  async getOneStatusByID(req, res) {
     const { id } = req.params;
     const status = await models.getOneStatus(id);
     return res.json(status);
@@ -233,37 +233,99 @@ module.exports = {
       delete user.updated_at;
       return res.status(200).json(user);
     }
-    res.status(400).send('Invalid Credentials');
+    return res.status(400).send('Invalid Credentials');
   },
 
-  async getAllTeam(_, res) {
-    const teams = await models.getAllTeam();
+  async getAllTeamWithMembers(_, res) {
+    const teams = await models.getAllTeamWithMembers();
 
     return res.status(200).json(teams);
   },
 
   async getPlanning(_, res) {
     const shifts = await getAllShift();
-
+    const affectedStatus = await getAllAffectedStatus();
+    // initialize planning array with each date.
+    /*
+      [
+        {
+          date: date1,
+          teams: []
+        },
+        {
+          date: date2,
+          teams: []
+        }
+      ]
+    */
     const planning = [];
     shifts.forEach((shift) => {
       if (!planning.find((date) => date === shift.date)) {
-        planning.push({ date: shift.date });
+        planning.push({
+          date: shift.date,
+          teams: [],
+        });
       }
     });
-    planning.forEach((element) => {
-      const results = shifts.filter((shift) => element.date === shift.date);
-      if (!element.teams) {
-        element.teams = [];
-      }
-      results.forEach((resultElement) => {
-        element.teams.push({
+    planning.forEach((planningDate) => {
+      // assigns teams for each planning date.
+      /*
+      [
+        {
+          date: date1,
+          teams: [
+            {
+              "teamId": 1,
+              "team": "Equipe A",
+              "shift": "",
+              "status": []
+            },
+          ]
+        }
+      ]
+    */
+      const filteredShifts = shifts.filter((shift) => planningDate.date === shift.date);
+      filteredShifts.forEach((resultElement) => {
+        planningDate.teams.push({
+          teamId: resultElement.team_id,
           team: resultElement.team_name,
           shift: resultElement.label,
+          status: [],
         });
       });
+      const filteredStatus = affectedStatus.filter((affStatus) => planningDate.date === affStatus.date);
+      filteredStatus.forEach((resultElement) => {
+        // assings all status to their team for each date.
+        /*
+          {
+            "teamId": 1,
+            "team": "Equipe A",
+            "shift": "",
+            "status": [
+              {
+                "statusId": 1,
+                "firstName": "Esteban",
+                "lastName": "ROBERT",
+                "status": "Récup"
+              }
+            ]
+          },
+        */
+        const team = planningDate.teams.find((planningDateTeam) => planningDateTeam.teamId === resultElement.team_id);
+        team.status.push({
+          statusId: resultElement.id,
+          firstName: resultElement.first_name,
+          lastName: resultElement.last_name,
+          status: resultElement.status,
+          comment: resultElement.commentaire,
+        });
+      });
+      planningDate.teams.forEach((team) => {
+        if (team.status.length === 0) {
+          delete team.status;
+        }
+      });
     });
-    console.log(planning);
     return res.status(200).json(planning);
   },
 };
