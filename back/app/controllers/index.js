@@ -1,6 +1,9 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { getAllShift, getAllAffectedStatus } = require('../models');
+const {
+  getAllShift,
+  getAllAffectedStatus,
+} = require('../models');
 const models = require('../models');
 
 module.exports = {
@@ -45,6 +48,21 @@ module.exports = {
   async getAllEmployee(_, res) {
     const employees = await models.getAllEmployee();
     return res.json(employees);
+  },
+
+  /**
+   * Controller used to send back a user based on his ID
+    @param {*} req Express request object (not used)
+   * @param {*} res Express response object
+   * @returns {object} JSON of the employee found
+   */
+  async getOneEmployeeById(req, res) {
+    const id = Number(req.params.id);
+    const employee = await models.getOneEmployeeById(id);
+    if (!employee) {
+      return res.status(400).send('This employee ID does not exist');
+    }
+    return res.status(200).json(employee);
   },
 
   /**
@@ -142,10 +160,8 @@ module.exports = {
    * @returns {object} JSON confirmation of the operation
    */
   async deleteStatusOfAnEmployee(req, res) {
-    const {
-      id,
-      date,
-    } = req.params;
+    const id = Number(req.params.id);
+    const { date } = req.params;
 
     const user = await models.findOneEmployeeByID(id);
 
@@ -182,7 +198,7 @@ module.exports = {
    * @returns {object} JSON of all the status
    */
   async getOneStatusByID(req, res) {
-    const { id } = req.params;
+    const id = Number(req.params.id);
     const status = await models.getOneStatus(id);
     return res.json(status);
   },
@@ -218,7 +234,6 @@ module.exports = {
           role: user.role,
         },
         process.env.TOKEN_KEY,
-
         {
           expiresIn: process.env.TOKEN_VALIDITY,
         },

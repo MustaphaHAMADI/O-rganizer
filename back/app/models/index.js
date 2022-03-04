@@ -78,8 +78,8 @@ module.exports = {
    * @param {number} id - ID of the employee
    * @returns { Employee } - The finded employee
    */
-  async findOneEmployeeByID(id) {
-    const result = await client.query( |
+  async getOneEmployeeById(id) {
+    const result = await client.query(
       `SELECT 
         "employee"."id",
         "employee"."reg_number",
@@ -88,8 +88,8 @@ module.exports = {
         "employee"."role",
         "employee"."function",
         "employee"."profile_picture",
-        "team"."id",
-        "team"."noun"
+        "employee"."team_id",
+        "team"."noun" as "team"
       FROM "employee" 
       LEFT JOIN "team" on "team"."id" = "employee"."team_id"
       WHERE "employee"."id"= $1`,
