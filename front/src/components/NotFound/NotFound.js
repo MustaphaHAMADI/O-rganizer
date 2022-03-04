@@ -8,13 +8,16 @@ import NotFoundImage from './NotFoundImage.jpg';
 
 const NotFound = () => {
     return ( 
-    <div className="NotFound">
+    <div className="not-found">
+ 
+ <img src={NotFoundImage} height="500" width="500" alt="not-found"/>
         
-        <Link to="/"><button type="button" className> 
+        <Link to="/"><button type="btn__content" className='btn__content'> 
         <Btn text='Retourner à laccueil' />
         </button>
         </Link>
-        <img src={NotFoundImage} height="400" alt="NotFound"/>
+    
+       
 
 
     </div>
