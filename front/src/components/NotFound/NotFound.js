@@ -12,17 +12,15 @@ const NotFound = () => {
  
  <img src={NotFoundImage} height="500" width="500" alt="not-found"/>
         
-        <Link to="/"><button type="btn__content" className='btn__content'> 
-        <Btn text='Retourner à laccueil' />
-        </button>
+        <Link to="/"> 
+        <Btn text='Retourner à laccueil'/>
         </Link>
     
        
-
-
     </div>
     )
     
+  
 }
 
 
