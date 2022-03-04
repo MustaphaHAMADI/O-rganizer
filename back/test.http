@@ -1,5 +1,5 @@
 
-@endpoint = http://localhost:3000
+@endpoint = http://localhost:3001
 
 ### Login
 POST {{ endpoint }}/login
@@ -12,11 +12,26 @@ content-type: application/json
 
 ### Liste des employés
 GET {{ endpoint }}/employee
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMDQ3MTQsImV4cCI6MTY0NjMxMTkxNH0.fU6bFpuH1Q-OuD8KpG0deafnWfIUitFK9dCv0srGYME
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
+
+### Ajout d'un employé
+POST {{ endpoint }}/employee
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
+content-type: application/json
+
+{
+  "regNumber": "U000101",
+  "password": "U000101",
+  "role": "user"
+}
+
+### Un employé selon son ID
+GET {{ endpoint }}/employee/4
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
 
 ### Ajoute un statut sur un employé pour un jour donné
-POST {{ endpoint }}/employee/5/date/2022-07-26
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMTc0MzgsImV4cCI6MTY0NjMyNDYzOH0.PkmPaa3UBCOcqGjkP9zO2RqLfOkX8jHwIPaoWBGgs1o
+POST {{ endpoint }}/affectedStatus/employee/5/date/2022-07-26
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
 content-type: application/json
 
 {
@@ -24,8 +39,8 @@ content-type: application/json
 }
 
 ### Modifie un statut sur un employé pour un jour donné
-PATCH {{ endpoint }}/employee/5/date/2022-07-26
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMTc0MzgsImV4cCI6MTY0NjMyNDYzOH0.PkmPaa3UBCOcqGjkP9zO2RqLfOkX8jHwIPaoWBGgs1o
+PATCH {{ endpoint }}/affectedStatus/employee/5/date/2022-07-26
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
 content-type: application/json
 
 {
@@ -34,21 +49,21 @@ content-type: application/json
 }
 
 ### Supprime un statut sur un employé pour un jour donné
-DELETE {{ endpoint }}/employee/5/date/2022-07-26
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMTc0MzgsImV4cCI6MTY0NjMyNDYzOH0.PkmPaa3UBCOcqGjkP9zO2RqLfOkX8jHwIPaoWBGgs1o
+DELETE {{ endpoint }}/affectedStatus/employee/5/date/2022-07-26
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
 
 
 ### Liste des status
 GET {{ endpoint }}/status
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMDQ3MTQsImV4cCI6MTY0NjMxMTkxNH0.fU6bFpuH1Q-OuD8KpG0deafnWfIUitFK9dCv0srGYME
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
 
 ### Liste des status
 GET {{ endpoint }}/status/1
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMTI0NzMsImV4cCI6MTY0NjMxOTY3M30.jsMLi-coWWHM8Htw4gBsDpVjDSwAhMZhqiqQRcHJoP8
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
 
 ### Affichage du planning
 GET {{ endpoint }}/planning
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDYzMTI0NzMsImV4cCI6MTY0NjMxOTY3M30.jsMLi-coWWHM8Htw4gBsDpVjDSwAhMZhqiqQRcHJoP8
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
 
 ### Affichage des teams
 GET {{ endpoint }}/team

@@ -1,6 +1,9 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { getAllShift, getAllAffectedStatus } = require('../models');
+const {
+  getAllShift,
+  getAllAffectedStatus,
+} = require('../models');
 const models = require('../models');
 
 module.exports = {
@@ -36,6 +39,47 @@ module.exports = {
   },
 
   /**
+   * Controller used to add an employee in the database
+   * @param {object} req Express request object
+   * @param {object} res Express response object
+   * @returns {object} Employee recently aded
+   */
+  async addEmployee(req, res) {
+    const {
+      regNumber,
+      role,
+      name,
+      lastname,
+      funct,
+      profilePicture,
+      teamId,
+    } = req.body;
+
+    let {
+      password,
+    } = req.body;
+
+    const verifiedEmployee = await models.findOneEmployeeByReg_number(regNumber);
+    if (verifiedEmployee) {
+      return res.status(400).send('This employee already exist in the database');
+    }
+
+    if (!regNumber || !role || !password) {
+      return res.status(400).send('The mandatory informations are missing : REG NUMBER, PASSWORD and/or ROLE');
+    }
+
+    if (role !== 'user' && funct !== 'admin') {
+      return res.status(400).send('The role must be "user" or "admin"');
+    }
+
+    const encryptedPassword = await bcrypt.hash(password, 10);
+    password = encryptedPassword;
+
+    const answer = await models.addEmployee(regNumber, password, role, name, lastname, funct, profilePicture, teamId);
+    return res.json(answer);
+  },
+
+  /**
    * Controller used to show all the employee data
    * ExpressMiddleware signature :
    * @param {*} req Express request object (not used)
@@ -45,6 +89,21 @@ module.exports = {
   async getAllEmployee(_, res) {
     const employees = await models.getAllEmployee();
     return res.json(employees);
+  },
+
+  /**
+   * Controller used to send back a user based on his ID
+    @param {*} req Express request object (not used)
+   * @param {*} res Express response object
+   * @returns {object} JSON of the employee found
+   */
+  async getOneEmployeeById(req, res) {
+    const id = Number(req.params.id);
+    const employee = await models.getOneEmployeeById(id);
+    if (!employee) {
+      return res.status(400).send('This employee ID does not exist');
+    }
+    return res.status(200).json(employee);
   },
 
   /**
@@ -67,7 +126,7 @@ module.exports = {
       comment,
     } = req.body;
 
-    const user = await models.findOneEmployeeByID(id);
+    const user = await models.getOneEmployeeById(id);
 
     if (!user) {
       return res.status(400).send('This employee ID does not exist');
@@ -112,7 +171,7 @@ module.exports = {
       comment,
     } = req.body;
 
-    const user = await models.findOneEmployeeByID(id);
+    const user = await models.getOneEmployeeById(id);
 
     if (!user) {
       return res.status(400).send('This employee ID does not exist');
@@ -142,12 +201,12 @@ module.exports = {
    * @returns {object} JSON confirmation of the operation
    */
   async deleteStatusOfAnEmployee(req, res) {
+    const id = Number(req.params.id);
     const {
-      id,
       date,
     } = req.params;
 
-    const user = await models.findOneEmployeeByID(id);
+    const user = await models.getOneEmployeeById(id);
 
     if (!user) {
       return res.status(400).send('This employee ID does not exist');
@@ -182,7 +241,7 @@ module.exports = {
    * @returns {object} JSON of all the status
    */
   async getOneStatusByID(req, res) {
-    const { id } = req.params;
+    const id = Number(req.params.id);
     const status = await models.getOneStatus(id);
     return res.json(status);
   },
@@ -218,7 +277,6 @@ module.exports = {
           role: user.role,
         },
         process.env.TOKEN_KEY,
-
         {
           expiresIn: process.env.TOKEN_VALIDITY,
         },

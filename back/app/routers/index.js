@@ -3,6 +3,7 @@ const express = require('express');
 const controller = require('../controllers');
 const controllerHandler = require('../helpers/apiControllerHandler');
 const employeeRouter = require('./employeeRouter');
+const affectedStatus = require('./affectedStatusRouter');
 const statusRouter = require('./statusRouter');
 const teamRouter = require('./teamRouter');
 const { errorHandler } = require('../helpers/errorHandler');
@@ -21,6 +22,11 @@ const router = express.Router();
  * Redirect the main route on the api-docs route
  */
 router.all('/', controller.home);
+
+/**
+ * Redirection to the employeeRouter all the routes start with /employee
+ */
+router.use('/affectedStatus', affectedStatus);
 
 /**
  * Redirection to the employeeRouter all the routes start with /employee

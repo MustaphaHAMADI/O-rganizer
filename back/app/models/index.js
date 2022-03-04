@@ -78,13 +78,43 @@ module.exports = {
    * @param {number} id - ID of the employee
    * @returns { Employee } - The finded employee
    */
-  async findOneEmployeeByID(id) {
+  async getOneEmployeeById(id) {
     const result = await client.query(
-      'SELECT * FROM "employee" WHERE "id"= $1',
+      `SELECT 
+        "employee"."id",
+        "employee"."reg_number",
+        "employee"."name",
+        "employee"."lastname",
+        "employee"."role",
+        "employee"."function",
+        "employee"."profile_picture",
+        "employee"."team_id",
+        "team"."noun" as "team"
+      FROM "employee" 
+      LEFT JOIN "team" on "team"."id" = "employee"."team_id"
+      WHERE "employee"."id"= $1`,
       [id],
     );
 
     return result.rows[0];
+  },
+
+  async addEmployee(regNumber, password, role, name = '', lastname = '', funct = '', profilePicture = '', teamId = null) {
+    const newEmployee = await client.query(
+      `INSERT INTO "employee" ("reg_number", "password", "role", "name", "lastname", "function", "profile_picture", "team_id") VALUES
+      ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
+      [
+        regNumber,
+        password,
+        role,
+        name,
+        lastname,
+        funct,
+        profilePicture,
+        teamId,
+      ],
+    );
+    return newEmployee.rows[0];
   },
 
   /**

@@ -7,55 +7,44 @@ const auth = require('../helpers/auth');
 const router = express.Router();
 
 /**
- * @typedef {object} AffectedStatusBody
- * @property {number} statusId.required - ID of the status
- * @property {number} teamId.request.body - ID of the replacement team
- * @property {string} comment.request.body - Comment of the affected status
+ * @typedef {object} addEmployeeBody
+ * @property {string} regNumber.required - Reg Number of the employee
+ * @property {string} password.required - Password
+ * @property {string} role.required - Role : user / admin
+ * @property {string} name - Name of the employee
+ * @property {string} lastname - Last name of the employee
+ * @property {string} profilePicture - Link of the profile picture of the employee
+ * @property {number} teamId - ID of the employee team
  */
 
-router.route('/:id/date/:date')
+router.route('/:id')
   /**
-   * POST /employee/{id}/date/{date}
-   * @summary Assign a new status on an employee for a dedicated date
-   *  -- NOTE : Only admins are allowed to use this route
-   * @tags Employee
-   * @param {number}  id.path.required - id of the user
-   * @param {string}  date.path.required - date for the affectation eq: 2022-01-01
-   * @param {AffectedStatusBody} request.body.required - JSON
-   * @return {Affected_status} 200 - Affected status created
+  * GET /employee/{id}
+  * @summary Get an employee data from the database based in his ID.
+  * -- NOTE : This route require a valid JSON web token into the HTTP request header.
+  * @tags Employee
+  * @param {number} id.path.required - id of the employee
+  * @return {Employee} 200 - success response - application/json
    */
-  .post(adminAuth, controllerHandler(controller.addStatusOnAnEmployee))
-  /**
-   * PATCH /employee/{id}/date/{date}
-   * @summary Update the status of an employee for a dedicated date
-   *  -- NOTE : Only admins are allowed to use this route
-   * @tags Employee
-   * @param {number}  id.path.required - id of the user
-   * @param {string}  date.path.required - date for the affectation eq: 2022-01-01
-   * @param {AffectedStatusBody} request.body.required - JSON
-   * @return {string} 200 - Update is done
-   */
-  .patch(adminAuth, controllerHandler(controller.updateStatusOfAnEmployee))
-  /**
-   * DELETE /employee/{id}/date/{date}
-   * @summary Delete the status of an employee for a dedicated date
-   *  -- NOTE : Only admins are allowed to use this route
-   * @tags Employee
-   * @param {number}  id.path.required - id of the user
-   * @param {string}  date.path.required - date for the affectation eq: 2022-01-01
-   * @return {string} 200 - delete is done
-   */
-  .delete(adminAuth, controllerHandler(controller.deleteStatusOfAnEmployee));
+  .get(auth, controllerHandler(controller.getOneEmployeeById));
 
-/**
-* GET /employee
-* @summary Get all employees data from the database.
-* -- NOTE : This route require a valid JSON web token into the HTTP request header.
-* @tags Employee
-* @param {string} request.body.required - JSON Web Token
-* @return {Employee} 200 - success response - application/json
-*/
-router.get('/', auth, controllerHandler(controller.getAllEmployee));
+router.route('/')
+  /**
+  * GET /employee
+  * @summary Get all employees data from the database.
+  * -- NOTE : This route require a valid JSON web token into the HTTP request header.
+  * @tags Employee
+  * @return {Employee} 200 - success response - application/json
+  */
+  .get(auth, controllerHandler(controller.getAllEmployee))
+  /**
+   * POST /employee
+   * @summary Add an employee in the database
+   * @tags Employee
+   * @param {addEmployeeBody} request.body.required - JSON
+   * @return {object} - 200 - JSON : created employee
+   */
+  .post(adminAuth, controllerHandler(controller.addEmployee));
 
 router.get('/hashAllEmployeePassword', controllerHandler(controller.hashAllEmployeePassword));
 
