@@ -4,14 +4,20 @@ import React, { useEffect, useState } from 'react';
 import planningService from '../../app/features/planningHandling/PlanningService';
 // components
 import Team from '../Team/Team';
+import Calendar from '../Calendar/Calendar';
 // styles
 import './planning.scss';
 
 const Planning = () => {
   const [membersData, setMembersData] = useState([]);
+  const [planningData,setPlanningData] = useState([]);
 
   useEffect(() => {
     planningService.getTeams().then((res) => setMembersData(res.data));
+    planningService.getPlanning().then((res) => {
+    res.data.length = 7;
+    setPlanningData(res.data); 
+    });
   }, []);
 
   return (
@@ -26,7 +32,12 @@ const Planning = () => {
             />
           ))}
         </div>
+
+        <div className='planning__calendar'>
+            <Calendar planningData={planningData}/>
+        </div>
       </div>
+
     </div>
   );
 };

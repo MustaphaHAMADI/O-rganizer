@@ -19,10 +19,9 @@ const authHeader = () => {
  * @param {Date} endingDate the ending date required
  * @returns JSON of shifts
  */
-const getPlanning = async (startingDate, endingDate) => {
+const getPlanning = async () => {
   try {
     return await axiosClient.get('/planning', {
-      body: { startingDate, endingDate },
       headers: authHeader(),
     });
   } catch (error) {

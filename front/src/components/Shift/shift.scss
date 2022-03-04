@@ -1,0 +1,13 @@
+.shift {
+    display: flex;
+    justify-content: flex-end;
+    text-align: center;
+
+    &__date {
+        width: 10%;
+    }
+
+    &__team {
+        width: 18%;
+    }
+}
