@@ -13,12 +13,12 @@
         content:'';
         position: absolute;
         background-color: transparent;
-        bottom: -40vh;
-        left: 2rem;
-        height: 40vh;
-        width: 6rem;
+        bottom: -4rem;
+        left: 0;
+        height: 4rem;
+        width: 2rem;
         border-top-left-radius: 2rem;
-        box-shadow: -3rem -1rem 0 0 vars.$dark-purple;
+        box-shadow: 0 -2rem 0 0 vars.$dark-purple;
     }
 
     &__banner {
@@ -28,7 +28,7 @@
 
         &-logo {
             width: 60px;
-            //filter: drop-shadow(0.5px 0.5px 1px #fafafa);
+            filter: drop-shadow(0.5px 0.5px 1px #fafafa);
         }
 
         &-title {

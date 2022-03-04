@@ -14,11 +14,11 @@
         position: absolute;
         background-color: transparent;
         bottom: 3.6rem;
-        right: 2rem;
-        height: 40vh;
-        width: 6rem;
+        right: 0;
+        height: 4rem;
+        width: 2rem;
         border-bottom-right-radius: 2rem;
-        box-shadow: 3rem 3rem 0 3rem vars.$dark-purple;
+        box-shadow: 0 2rem 0 0 vars.$dark-purple;
     }
 
     &__navlink:hover {

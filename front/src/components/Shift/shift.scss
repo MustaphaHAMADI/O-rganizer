@@ -2,6 +2,7 @@
     display: flex;
     justify-content: flex-end;
     text-align: center;
+    height: 3rem;
 
     &__date {
         width: 10%;
@@ -9,5 +10,6 @@
 
     &__team {
         width: 18%;
+        border-left: 1px solid rgba(0, 0, 0, 0.3);
     }
 }
