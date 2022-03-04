@@ -38,6 +38,41 @@ module.exports = {
     return res.json('done');
   },
 
+  async addEmployee(req, res) {
+    const {
+      regNumber,
+      role,
+      name,
+      lastname,
+      funct,
+      profilePicture,
+      teamId,
+    } = req.body;
+
+    let {
+      password,
+    } = req.body;
+
+    const verifiedEmployee = await models.findOneEmployeeByReg_number(regNumber);
+    if (verifiedEmployee) {
+      return res.status(400).send('This employee already exist in the database');
+    }
+
+    if (!regNumber || !role || !password) {
+      return res.status(400).send('The mandatory informations are missing : REG NUMBER, PASSWORD and ROLE');
+    }
+
+    if (role !== 'user' && funct !== 'admin') {
+      return res.status(400).send('The role must be "user" or "admin"');
+    }
+
+    const encryptedPassword = await bcrypt.hash(password, 10);
+    password = encryptedPassword;
+
+    const answer = await models.addEmployee(regNumber, password, role, name, lastname, funct, profilePicture, teamId);
+    return res.json(answer);
+  },
+
   /**
    * Controller used to show all the employee data
    * ExpressMiddleware signature :
@@ -161,7 +196,9 @@ module.exports = {
    */
   async deleteStatusOfAnEmployee(req, res) {
     const id = Number(req.params.id);
-    const { date } = req.params;
+    const {
+      date,
+    } = req.params;
 
     const user = await models.getOneEmployeeById(id);
 

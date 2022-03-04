@@ -101,7 +101,7 @@ module.exports = {
 
   async addEmployee(regNumber, password, role, name = '', lastname = '', funct = '', profilePicture = '', teamId = null) {
     const newEmployee = await client.query(
-      `INSERT INTO "employee" ("reg_numer", "password", "role", "name", "lastname", "function", "profile_picture", "team_id") VALUES
+      `INSERT INTO "employee" ("reg_number", "password", "role", "name", "lastname", "function", "profile_picture", "team_id") VALUES
       ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
       [
         regNumber,

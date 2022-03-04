@@ -1,8 +1,9 @@
 const express = require('express');
 const controller = require('../controllers');
 const controllerHandler = require('../helpers/apiControllerHandler');
-// const adminAuth = require('../helpers/adminAuth');
+const adminAuth = require('../helpers/adminAuth');
 const auth = require('../helpers/auth');
+const { addEmployee } = require('../models');
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.route('/:id')
    */
   .get(auth, controllerHandler(controller.getOneEmployeeById));
 
-router.use('/')
+router.route('/')
 /**
 * GET /employee
 * @summary Get all employees data from the database.
@@ -27,7 +28,7 @@ router.use('/')
 * @return {Employee} 200 - success response - application/json
 */
   .get(auth, controllerHandler(controller.getAllEmployee))
-  .post();
+  .post(adminAuth, controllerHandler(controller.addEmployee));
 
 router.get('/hashAllEmployeePassword', controllerHandler(controller.hashAllEmployeePassword));
 
