@@ -27,7 +27,7 @@ module.exports = {
    * @returns {string} Positive response of the hash
    */
   async hashAllEmployeePassword(req, res) {
-    const employees = await models.getAllEmployee();
+    const employees = await models.getAllEmployeeToBeHashed();
 
     employees.forEach(async (employee) => {
       const encryptedPassword = await bcrypt.hash(employee.password, 10);

@@ -59,6 +59,16 @@ module.exports = {
     return result.rows;
   },
 
+  async getAllEmployeeToBeHashed() {
+    const result = await client.query(`
+    SELECT 
+      *
+    FROM 
+      employee`);
+
+    return result.rows;
+  },
+
   /**
    * Returing one employee selected based on his reg_number
    * @param {string} regNumber - reg_number of the employee
