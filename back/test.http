@@ -12,7 +12,7 @@ content-type: application/json
 
 ### Liste des employés
 GET {{ endpoint }}/employee
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY2NDU5MzIsImV4cCI6MTY0NjY1MzEzMn0.62KSiFVWjGqkYtsap79WSu6plvfAFaVF7TsB84ICXAw
 
 ### Ajout d'un employé
 POST {{ endpoint }}/employee
@@ -63,7 +63,7 @@ x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYX
 
 ### Affichage du planning
 GET {{ endpoint }}/planning
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY2NDU5MzIsImV4cCI6MTY0NjY1MzEzMn0.62KSiFVWjGqkYtsap79WSu6plvfAFaVF7TsB84ICXAw
 
 ### Affichage des teams
 GET {{ endpoint }}/team
