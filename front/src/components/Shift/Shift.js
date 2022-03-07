@@ -15,7 +15,7 @@ const Shift = ({
             {
             teams.map((team) => 
                 <div className='shift__team' key={team.teamId}>
-                    <p className={`shift__period shift__period${team.shift}`}>{team.shift}</p>
+                    <div className={`shift__period shift__period${team.shift}`}>{team.shift} {team.status && <div className={`shift__event shift__event${team.shift}`}></div>}</div>
                 </div>
             )}
         </div>
@@ -29,12 +29,21 @@ Shift.propTypes = {
             teamId: PropTypes.number.isRequired,
             team: PropTypes.string.isRequired,
             shift: PropTypes.string,
+            status: PropTypes.arrayOf(
+                PropTypes.shape({
+                    statusId: PropTypes.number.isRequired,
+                    firstName: PropTypes.string.isRequired,
+                    lastName: PropTypes.string.isRequired,
+                    status: PropTypes.string.isRequired,
+                }).isRequired,
+            )
         }).isRequired,
     ).isRequired,
 }
 
 Shift.defaultProps = {
     shift: '',
+    status: null,
 }
 
 export default Shift
