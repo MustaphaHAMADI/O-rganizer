@@ -24,6 +24,6 @@ const router = express.Router();
 * @tags Team
 * @return {array<Team>} 200 - success response - application/json
 */
-router.get('/', auth, controllerHandler(controller.getAllTeamWithMembers));
+router.get('/', auth, controllerHandler(controller.teamController.getAllTeamWithMembers));
 
 module.exports = router;

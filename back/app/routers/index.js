@@ -7,7 +7,6 @@ const affectedStatus = require('./affectedStatusRouter');
 const statusRouter = require('./statusRouter');
 const teamRouter = require('./teamRouter');
 const { errorHandler } = require('../helpers/errorHandler');
-// const adminAuth = require('../helpers/adminAuth');
 const auth = require('../helpers/auth');
 
 const router = express.Router();
@@ -21,7 +20,7 @@ const router = express.Router();
 /**
  * Redirect the main route on the api-docs route
  */
-router.all('/', controller.home);
+router.all('/', controller.mainController.home);
 
 /**
  * Redirection to the employeeRouter all the routes start with /employee
@@ -50,7 +49,7 @@ router.use('/team', teamRouter);
  * @param {loginBody} request.body.required - JSON include reg_number and password of the employee
  * @return {Employee} 200 - sucess response - application/json
  */
-router.post('/login', controllerHandler(controller.login));
+router.post('/login', controllerHandler(controller.mainController.login));
 
 /**
  * @typedef {object} day - created for every day in the database
@@ -81,7 +80,7 @@ router.post('/login', controllerHandler(controller.login));
  * @return {array<day>} 200 - sucess response - application/json
  */
 
-router.get('/planning', auth, controllerHandler(controller.getPlanning));
+router.get('/planning', auth, controllerHandler(controller.mainController.getPlanning));
 
 /**
  * Using the errorHanlder to manage the specific error messages
