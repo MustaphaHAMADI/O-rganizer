@@ -1,12 +1,13 @@
 import React from 'react';
-import Login from '../Login/Login';
+import LoginContainer from '../../Containers/LoginContainer/loginContainer';
 import './home.scss';
 
-const Home = props => {
-return (
+const Home = () => {
+  return (
     <div className='home'>
-        <Login />
-    </div>)
-}
+      <LoginContainer />
+    </div>
+  );
+};
 
-export default Home
+export default Home;

@@ -26,3 +26,9 @@
         transition-duration: 500ms;
     }
 }
+
+@media (max-width: 1200px) {
+    .footer::before {
+        display: none;
+    }
+}

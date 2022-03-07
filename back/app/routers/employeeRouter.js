@@ -7,15 +7,64 @@ const auth = require('../helpers/auth');
 const router = express.Router();
 
 /**
-* GET /employee
-* @summary Get all employees data from the database.
-* -- NOTE : This route require a valid JSON web token into the HTTP request header.
-* @tags Employee
-* @param {string} request.body.required - JSON Web Token
-* @return {Employee} 200 - success response - application/json
-*/
-router.get('/', auth, controllerHandler(controller.getAllEmployee));
+ * @typedef {object} addEmployeeBody
+ * @property {string} regNumber.required - Reg Number of the employee
+ * @property {string} password.required - Password
+ * @property {string} role.required - Role : user / admin
+ * @property {string} name - Name of the employee
+ * @property {string} lastname - Last name of the employee
+ * @property {string} profilePicture - Link of the profile picture of the employee
+ * @property {number} teamId - ID of the employee team
+ */
+
+router.route('/')
+  /**
+  * GET /employee
+  * @summary Get all employees data from the database.
+  * -- NOTE : This route require a valid JSON web token into the HTTP request header.
+  * @tags Employee
+  * @return {Employee} 200 - success response - application/json
+  */
+  .get(auth, controllerHandler(controller.getAllEmployee))
+  /**
+   * POST /employee
+   * @summary Add an employee in the database
+   * @tags Employee
+   * @param {addEmployeeBody} request.body.required - JSON
+   * @return {object} - 200 - JSON : created employee
+   */
+  .post(adminAuth, controllerHandler(controller.addEmployee));
 
 router.get('/hashAllEmployeePassword', controllerHandler(controller.hashAllEmployeePassword));
+
+router.route('/:id')
+  /**
+  * GET /employee/{id}
+  * @summary Get an employee data from the database based in his ID.
+  * -- NOTE : This route require a valid JSON web token into the HTTP request header.
+  * @tags Employee
+  * @param {number} id.path.required - id of the employee
+  * @return {Employee} 200 - success response - application/json
+   */
+  .get(auth, controllerHandler(controller.getOneEmployeeById))
+  /**
+   * DELETE /employee/{id}
+   * @summary Delete an employee from the database based in his ID.
+   * -- NOTE : This route require a valid JSON web token into the HTTP request header.
+   * @tags Employee
+   * @param {number} id.path.required - id of the employee
+   * @return {Employee} 200 - success response - delete iis done
+   */
+  .delete(auth, controllerHandler(controller.deleteEmployee))
+  /**
+   * PATCH /employee/{id}
+   * @summary Update an employee from the database based in his ID.
+   * -- NOTE : This route require a valid JSON web token into the HTTP request header.
+   * @tags Employee
+   * @param {number} id.path.required - id of the employee
+   * @param {EmployeeWithPassword} request.body - JSON of the dataset to be uptaded for the employee
+   * @return {Employee} 200 - success response - update is done
+   */
+  .patch(auth, controllerHandler(controller.updateEmployee));
 
 module.exports = router;

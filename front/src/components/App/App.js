@@ -1,11 +1,12 @@
+// import dependencies
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // import components
-import Header from '../Header/Header';
+import HeaderContainer from '../../Containers/HeaderContainer/HeaderContainer';
 import Home from '../Home/Home';
 import Footer from '../Footer/Footer';
-import Planning from '../Planning/Planning';
+import PlanningContainer from '../../Containers/PlanningContainer/planningContainer';
 import RequireAuth from '../RequireAuth/RequireAuth';
 import NoAuthRequired from '../NoAuthRequired/NoAuthRequired';
 import NotFound from '../NotFound/NotFound';
@@ -29,13 +30,13 @@ const App = () => {
   return (
     <div className='app'>
       <ThemeProvider theme={theme}>
-        <Header />
+        <HeaderContainer />
         <Routes>
           <Route element={<NoAuthRequired />}>
             <Route path='/' element={<Home />} />
           </Route>
           <Route element={<RequireAuth />}>
-            <Route path='/planning' element={<Planning />} />
+            <Route path='/planning' element={<PlanningContainer />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

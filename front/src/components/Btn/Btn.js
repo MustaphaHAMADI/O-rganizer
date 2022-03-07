@@ -1,17 +1,18 @@
-import LoadingButton from '@mui/lab/LoadingButton';
+// import dependencies
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+
+// import style
 import './btn.scss';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const Btn = ({ text, icon, clicked, disabled, fullWidth }) => {
   const [loading, setLoading] = useState(false);
   const handleClick = async (e) => {
     setLoading(true);
-    // remove the setTimeout onece we have the API call
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-    clicked();
+    await clicked();
+    setLoading(false);
+    return () => setLoading(false);
   };
   return (
     <LoadingButton

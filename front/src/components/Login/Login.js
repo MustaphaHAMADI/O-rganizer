@@ -1,20 +1,20 @@
+// import dependencies
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { login } from '../../app/features/userAuth/userAuthSlice';
-import Btn from '../Btn/Btn';
+import { toast } from 'react-toastify';
 
 // import style
 import './login.scss';
-
-// import elements
 import { TextField, Paper } from '@mui/material';
+
+// import components
+import Btn from '../Btn/Btn';
 
 const defaultValues = {
   regNumber: '',
   password: '',
 };
 
-const Login = () => {
+const Login = ({ getLogin }) => {
   const [formValues, setFormValues] = useState(defaultValues);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,10 +23,24 @@ const Login = () => {
       [name]: value,
     });
   };
-  const dispatch = useDispatch();
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      if (formValues.regNumber === '' || formValues.password === '') {
+        toast.error('Tous les champs sont requis');
+        return;
+      }
+      handleLogin();
+    }
+  };
+
   const handleLogin = async () => {
+    if (formValues.regNumber === '' || formValues.password === '') {
+      toast.error('Tous les champs sont requis');
+      return;
+    }
     try {
-      await dispatch(login(formValues));
+      getLogin(formValues);
     } catch (err) {
       console.log(err);
     }
@@ -38,11 +52,16 @@ const Login = () => {
         <h2 className='login__title'>
           Connectez-vous pour accéder à votre planning
         </h2>
-        <form className='login__form' action='submit' onSubmit={handleLogin}>
+        <form
+          className='login__form'
+          action='submit'
+          onSubmit={handleLogin}
+          onKeyPress={handleKeyPress}
+        >
           <div className='login__form-textfield'>
             <TextField
               id='regNumber'
-              label='regNumber'
+              label='Matricule'
               name='regNumber'
               type='text'
               value={formValues.regNumber}
@@ -53,7 +72,7 @@ const Login = () => {
           <div className='login__form-textfield'>
             <TextField
               id='password'
-              label='password'
+              label='Mot de passe'
               name='password'
               type='password'
               value={formValues.password}
@@ -62,7 +81,17 @@ const Login = () => {
             />
           </div>
           <div className='login__form-textfield'>
-            <Btn text='Se connecter' fullWidth={true} clicked={handleLogin} />
+            <Btn
+              text='Se connecter'
+              fullWidth={true}
+              disabled={
+                !(
+                  formValues.regNumber.length > 4 &&
+                  formValues.password.length > 4
+                )
+              }
+              clicked={handleLogin}
+            />
           </div>
         </form>
       </Paper>

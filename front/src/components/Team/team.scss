@@ -1,0 +1,38 @@
+@use 'src/styles/vars';
+
+.team {
+    text-align: center;
+    width: 18%;
+    padding-bottom: 1rem;
+    border-left: 1px solid rgba(0, 0, 0, 0.3);
+
+    &__title {
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        color: vars.$dark-purple;
+    }
+
+    &__members--mobile {
+        display: none;
+    }
+
+    &__member {
+        font-size: 0.8rem;
+        line-height: 1.3;
+    }
+}
+
+@media (max-width: 768px) {
+    .team {
+
+        &__members--desktop {
+            display: none;
+        }
+
+        &__members--mobile {
+            display: block;
+        }
+    }
+}

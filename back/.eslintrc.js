@@ -19,5 +19,8 @@ module.exports = {
     'react',
   ],
   rules: {
+    'no-param-reassign': [2, { props: false }],
+    'max-len': ['error', { code: 150 }],
+    'linebreak-style': 0,
   },
 };

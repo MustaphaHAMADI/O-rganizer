@@ -50,4 +50,15 @@ CREATE TABLE "shift" (
     "updated_at" TIMESTAMPTZ
 );
 
+--
+-- Postgres avec le fait d'ajouter IDENTITY BY DEFAULT au lieu de ALWAYS ne met pas à jour le curseur de l'incrément de la séquence de façon implicite !
+-- Il faut donc mettre à jour la valeur courante de chacune des séquences en séléctionnant l'id maximum de chaque table
+--
+
+SELECT setval('level_id_seq', (SELECT MAX(id) from "team"));
+SELECT setval('answer_id_seq', (SELECT MAX(id) from "employee"));
+SELECT setval('user_id_seq', (SELECT MAX(id) from "status"));
+SELECT setval('question_id_seq', (SELECT MAX(id) from "affected_status"));
+SELECT setval('quiz_id_seq', (SELECT MAX(id) from "shift"));
+
 COMMIT;
