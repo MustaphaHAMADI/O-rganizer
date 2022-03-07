@@ -6,8 +6,8 @@ POST {{ endpoint }}/login
 content-type: application/json
 
 {
-  "regNumber": "U000001",
-  "password": "ADMIN"
+  "regNumber": "U000101",
+  "password": "U000101"
 }
 
 ### Liste des employés
@@ -26,12 +26,21 @@ content-type: application/json
 }
 
 ### Affiche un employé selon son ID
-GET {{ endpoint }}/employee/35
+GET {{ endpoint }}/employee/36
 x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY2NDg1NzksImV4cCI6MTY0NjY1NTc3OX0.MFAmbu1pwlZXAY9_Nsqd3esNdPxOfoXClpv26AXWk3U
 
 ### Supprime un employé selon son ID
-DELETE {{ endpoint }}/employee/35
+DELETE {{ endpoint }}/employee/36
 x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
+
+### Supprime un employé selon son ID
+PATCH {{ endpoint }}/employee/36
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
+content-type: application/json
+
+{
+"password": "U000101"
+}
 
 
 ### Ajoute un statut sur un employé pour un jour donné
