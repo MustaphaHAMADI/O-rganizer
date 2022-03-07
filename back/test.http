@@ -16,7 +16,7 @@ x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYX
 
 ### Ajout d'un employé
 POST {{ endpoint }}/employee
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY2NDg1NzksImV4cCI6MTY0NjY1NTc3OX0.MFAmbu1pwlZXAY9_Nsqd3esNdPxOfoXClpv26AXWk3U
 content-type: application/json
 
 {
@@ -25,9 +25,14 @@ content-type: application/json
   "role": "user"
 }
 
-### Un employé selon son ID
-GET {{ endpoint }}/employee/4
+### Affiche un employé selon son ID
+GET {{ endpoint }}/employee/35
+x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY2NDg1NzksImV4cCI6MTY0NjY1NTc3OX0.MFAmbu1pwlZXAY9_Nsqd3esNdPxOfoXClpv26AXWk3U
+
+### Supprime un employé selon son ID
+DELETE {{ endpoint }}/employee/35
 x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
+
 
 ### Ajoute un statut sur un employé pour un jour donné
 POST {{ endpoint }}/affectedStatus/employee/5/date/2022-07-26

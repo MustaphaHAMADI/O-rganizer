@@ -144,6 +144,19 @@ module.exports = {
   },
 
   /**
+   * Dele an employee based on his ID
+   * @param {number} id
+   * @returns {boolean} - 200 Return true if done
+   */
+  async deleteEmployee(id) {
+    const result = await client.query(
+      'DELETE FROM "employee" WHERE "id"=$1',
+      [id],
+    );
+    return !!result.rowCount;
+  },
+
+  /**
    * Returning the status of a dedicated employee on a specific date
    * @param {number} id - ID of the employee
    * @param {string} date - Date of the affected status

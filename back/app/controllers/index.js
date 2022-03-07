@@ -79,6 +79,19 @@ module.exports = {
     return res.json(answer);
   },
 
+  async deleteEmployee(req, res) {
+    const { id } = req.params;
+
+    const user = await models.getOneEmployeeById(id);
+
+    if (!user) {
+      return res.status(400).send('This employee does not exist in the database');
+    }
+    await models.deleteEmployee(id);
+
+    return res.status(200).send('delete is done');
+  },
+
   /**
    * Controller used to show all the employee data
    * ExpressMiddleware signature :

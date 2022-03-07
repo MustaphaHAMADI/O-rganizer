@@ -46,6 +46,15 @@ router.route('/:id')
   * @param {number} id.path.required - id of the employee
   * @return {Employee} 200 - success response - application/json
    */
-  .get(auth, controllerHandler(controller.getOneEmployeeById));
+  .get(auth, controllerHandler(controller.getOneEmployeeById))
+  /**
+   * DELETE /employee/{id}
+   * @summary Delete an employee from the database based in his ID.
+   * -- NOTE : This route require a valid JSON web token into the HTTP request header.
+   * @tags Employee
+   * @param {number} id.path.required - id of the employee
+   * @return {Employee} 200 - success response - delete iis done
+   */
+  .delete(auth, controllerHandler(controller.deleteEmployee));
 
 module.exports = router;
