@@ -1,3 +1,5 @@
+@use 'src/styles/vars';
+
 .planning {
     padding: 4rem;
     
@@ -7,13 +9,27 @@
         background-color: rgb(255, 255, 255);
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.103);
         border-radius: 2rem;
-        padding: 1rem;
+        padding: 0 1rem 1rem 1rem;
+        height: calc(100vh - 157px - 8rem);
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            width: 0.5rem;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: vars.$dark-purple;
+            border-radius: 10px;
+        }
     }
 
     &__header {
+        position: sticky;
+        top: 0;
         display: flex;
         justify-content: flex-end;
-
+        background-color: white;
+        padding: 1rem 0 0 0;
     }
 }
 
