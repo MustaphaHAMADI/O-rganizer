@@ -15,7 +15,7 @@ const Planning = () => {
   useEffect(() => {
     planningService.getTeams().then((res) => setMembersData(res.data));
     planningService.getPlanning().then((res) => {
-    res.data.length = 7;
+    res.data.length = 31;
     setPlanningData(res.data); 
     });
   }, []);
