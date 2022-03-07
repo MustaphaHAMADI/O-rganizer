@@ -46,6 +46,25 @@ router.route('/:id')
   * @param {number} id.path.required - id of the employee
   * @return {Employee} 200 - success response - application/json
    */
-  .get(auth, controllerHandler(controller.getOneEmployeeById));
+  .get(auth, controllerHandler(controller.getOneEmployeeById))
+  /**
+   * DELETE /employee/{id}
+   * @summary Delete an employee from the database based in his ID.
+   * -- NOTE : This route require a valid JSON web token into the HTTP request header.
+   * @tags Employee
+   * @param {number} id.path.required - id of the employee
+   * @return {Employee} 200 - success response - delete iis done
+   */
+  .delete(auth, controllerHandler(controller.deleteEmployee))
+  /**
+   * PATCH /employee/{id}
+   * @summary Update an employee from the database based in his ID.
+   * -- NOTE : This route require a valid JSON web token into the HTTP request header.
+   * @tags Employee
+   * @param {number} id.path.required - id of the employee
+   * @param {EmployeeWithPassword} request.body - JSON of the dataset to be uptaded for the employee
+   * @return {Employee} 200 - success response - update is done
+   */
+  .patch(auth, controllerHandler(controller.updateEmployee));
 
 module.exports = router;

@@ -11,6 +11,7 @@ import { logout } from '../../app/features/userAuth/userAuthSlice';
 const HeaderContainer = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   const handleLogout = () => {
     try {
       dispatch(logout());

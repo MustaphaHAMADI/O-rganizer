@@ -18,6 +18,19 @@ const {
  */
 
 /**
+ * @typedef {object} EmployeeWithPassword
+ * @property {number} id - ID of the user
+ * @property {string} reg_number - User code
+ * @property {string} password - Password of the user
+ * @property {string} name - Employee firstname
+ * @property {string} lastname - Employee lastname
+ * @property {number} team_noun - Noun of the employee team
+ * @property {string} role - role of the user : user/admin
+ * @property {string} function - Employee function
+ * @property {string} profile_picture - URL of the profile picture
+ */
+
+/**
  * @typedef {object} Status
  * @property {number} id - ID of the satus
  * @property {string} label - Label of the status
@@ -59,6 +72,10 @@ module.exports = {
     return result.rows;
   },
 
+  /**
+   * Model used to get all the employee (only used in the hashAllEmployeePassword method)
+   * @returns The list of all the employees
+   */
   async getAllEmployeeToBeHashed() {
     const result = await client.query(`
     SELECT 
@@ -95,6 +112,7 @@ module.exports = {
         "employee"."reg_number",
         "employee"."name",
         "employee"."lastname",
+        "employee"."password",
         "employee"."role",
         "employee"."function",
         "employee"."profile_picture",
@@ -109,6 +127,18 @@ module.exports = {
     return result.rows[0];
   },
 
+  /**
+   * Adding a new employee in the database
+   * @param {string} regNumber - Reg number of the employee
+   * @param {string} password - Password of the employee
+   * @param {string} role - role of the employee : user/admin
+   * @param {string} name - Name of the employee
+   * @param {string} lastname - Lastname of the employee
+   * @param {string} funct - Function of the employee
+   * @param {string} profilePicture - Link to the picture/Avatar of the employee
+   * @param {number} teamId - ID of the mployee team
+   * @returns {object} - New created employee
+   */
   async addEmployee(regNumber, password, role, name = '', lastname = '', funct = '', profilePicture = '', teamId = null) {
     const newEmployee = await client.query(
       `INSERT INTO "employee" ("reg_number", "password", "role", "name", "lastname", "function", "profile_picture", "team_id") VALUES
@@ -125,6 +155,19 @@ module.exports = {
       ],
     );
     return newEmployee.rows[0];
+  },
+
+  /**
+   * Dele an employee based on his ID
+   * @param {number} id
+   * @returns {boolean} - 200 Return true if done
+   */
+  async deleteEmployee(id) {
+    const result = await client.query(
+      'DELETE FROM "employee" WHERE "id"=$1',
+      [id],
+    );
+    return !!result.rowCount;
   },
 
   /**
@@ -254,6 +297,11 @@ module.exports = {
     return !!result.rowCount;
   },
 
+  /**
+   * Update an employee data
+   * @param {object} employee - Employee object
+   * @returns - Employee upadted with new data
+   */
   async updateEmployee(employee) {
     // console.log('employee', employee);
     const result = await client.query(
@@ -330,6 +378,10 @@ module.exports = {
     return result.rows;
   },
 
+  /**
+   * Returning all the shifts (used in planning controller)
+   * @returns - The list of all the shift present in the database
+   */
   async getAllShift() {
     const result = await client.query(
       `SELECT
@@ -346,6 +398,10 @@ module.exports = {
     return result.rows;
   },
 
+  /**
+   * Returning all the affected status (used in planning controller)
+   * @returns - The list of all the affected status in the database
+   */
   async getAllAffectedStatus() {
     const result = await client.query(
       `SELECT 

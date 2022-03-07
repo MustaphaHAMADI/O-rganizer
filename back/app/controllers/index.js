@@ -80,6 +80,61 @@ module.exports = {
   },
 
   /**
+   * Controller used to delete an employee in the database
+   * @param {object} req Express request object
+   * @param {object} res Express response object
+   * @returns {object} Employee recently aded
+   */
+  async deleteEmployee(req, res) {
+    const { id } = req.params;
+
+    const employee = await models.getOneEmployeeById(id);
+
+    if (!employee) {
+      return res.status(400).send('This employee does not exist in the database');
+    }
+    await models.deleteEmployee(id);
+
+    return res.status(200).send('delete is done');
+  },
+
+  /**
+ * Controller used to update an employee in the database
+   * @param {object} req Express request object
+   * @param {object} res Express response object
+   * @returns {object} Employee recently aded
+   */
+  async updateEmployee(req, res) {
+    const { id } = req.params;
+
+    let employee = await models.getOneEmployeeById(id);
+
+    if (!employee) {
+      return res.status(400).send('This employee does not exist in the database');
+    }
+
+    if (req.body.password || req.body.password === '') {
+      if (req.body.password.length === 0) {
+        return res.status(400).send('The password must be at least 1 caracter');
+      }
+    }
+
+    const hash = employee.password;
+
+    employee = { ...employee, ...req.body };
+
+    if (hash === employee.password) {
+      await models.updateEmployee(employee);
+      return res.status(200).send('update is done');
+    }
+
+    const encryptedPassword = await bcrypt.hash(employee.password, 10);
+    employee.password = encryptedPassword;
+    await models.updateEmployee(employee);
+    return res.status(200).send('update is done');
+  },
+
+  /**
    * Controller used to show all the employee data
    * ExpressMiddleware signature :
    * @param {*} req Express request object (not used)
@@ -103,6 +158,7 @@ module.exports = {
     if (!employee) {
       return res.status(400).send('This employee ID does not exist');
     }
+    delete employee.password;
     return res.status(200).json(employee);
   },
 
@@ -318,7 +374,7 @@ module.exports = {
     */
     const planning = [];
     shifts.forEach((shift) => {
-      if (!planning.find((date) => date === shift.date)) {
+      if (!planning.find((date) => date.date === shift.date)) {
         planning.push({
           date: shift.date,
           teams: [],
