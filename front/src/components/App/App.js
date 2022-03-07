@@ -6,7 +6,7 @@ import { Routes, Route } from 'react-router-dom';
 import HeaderContainer from '../../Containers/HeaderContainer/HeaderContainer';
 import Home from '../Home/Home';
 import Footer from '../Footer/Footer';
-import Planning from '../Planning/Planning';
+import PlanningContainer from '../../Containers/PlanningContainer/planningContainer';
 import RequireAuth from '../RequireAuth/RequireAuth';
 import NoAuthRequired from '../NoAuthRequired/NoAuthRequired';
 
@@ -35,7 +35,7 @@ const App = () => {
             <Route path='/' element={<Home />} />
           </Route>
           <Route element={<RequireAuth />}>
-            <Route path='/planning' element={<Planning />} />
+            <Route path='/planning' element={<PlanningContainer />} />
           </Route>
         </Routes>
         <Footer />

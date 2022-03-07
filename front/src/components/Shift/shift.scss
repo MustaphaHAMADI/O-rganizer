@@ -35,5 +35,16 @@
             color: vars.$light-color;
         }
     }
+}
 
+@media (max-width: 1000px) {
+    .shift {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .shift {
+        font-size: 0.8rem;
+    }
 }
