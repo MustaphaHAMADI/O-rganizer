@@ -66,7 +66,7 @@ module.exports = {
       employee.function,
       employee.profile_picture 
     FROM 
-      employee JOIN team 
+      employee LEFT JOIN team 
       ON employee.team_id = team.id`);
 
     return result.rows;
@@ -91,7 +91,7 @@ module.exports = {
    * @param {string} regNumber - reg_number of the employee
    * @returns { Employee } - The finded employee
    */
-  async findOneEmployeeByReg_number(regNumber) {
+  async getOneEmployeeByReg_number(regNumber) {
     const result = await client.query(
       'SELECT * FROM "employee" WHERE "reg_number"= $1',
       [regNumber],
@@ -141,8 +141,20 @@ module.exports = {
    */
   async addEmployee(regNumber, password, role, name = '', lastname = '', funct = '', profilePicture = '', teamId = null) {
     const newEmployee = await client.query(
-      `INSERT INTO "employee" ("reg_number", "password", "role", "name", "lastname", "function", "profile_picture", "team_id") VALUES
-      ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
+      `INSERT INTO
+        "employee" (
+          "reg_number", 
+          "password",
+          "role", 
+          "name", 
+          "lastname", 
+          "function", 
+          "profile_picture", 
+          "team_id"
+        ) 
+        VALUES
+      ($1,$2,$3,$4,$5,$6,$7,$8) 
+      RETURNING *`,
       [
         regNumber,
         password,
@@ -176,7 +188,7 @@ module.exports = {
    * @param {string} date - Date of the affected status
    * @returns {Affected_status} - The list of the affected status of the employee for the date
    */
-  async findStatusForAnEmployeeForADate(id, date) {
+  async getStatusForAnEmployeeForADate(id, date) {
     const result = await client.query(
       'SELECT * FROM "affected_status" WHERE "employee_id"=$1 AND "date" = $2',
       [id, date],
@@ -190,11 +202,11 @@ module.exports = {
    * @param {number} id - Id of the affected status searched
    * @returns {object} The affected status searched
    */
-  async findOneAffectedStatusById(id) {
+  async getOneAffectedStatusById(id) {
     const result = await client.query(
       `select 
         "affected_status"."id" as "id",
-        "affected_status"."date" as "date",
+        "affected_status"."date"::date as "date",
         array_agg
               (
               json_build_object(

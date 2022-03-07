@@ -13,9 +13,9 @@ const router = express.Router();
 * @tags Status
 * @return {Status} 200 - success response - application/json
  */
-router.get('/', auth, controllerHandler(controller.getAllStatus));
+router.get('/', auth, controllerHandler(controller.statusController.getAllStatus));
 
-router.route('/:id')
+router.route('/:id(\\d+)')
 /**
 * GET /status/{id}
 * @summary Get one status.
@@ -24,6 +24,6 @@ router.route('/:id')
 * @param {number}  id.path.required - id of the status
 * @return {Status} 200 - success response - application/json
  */
-  .get(auth, controllerHandler(controller.getOneStatusByID));
+  .get(auth, controllerHandler(controller.statusController.getOneStatusByID));
 
 module.exports = router;

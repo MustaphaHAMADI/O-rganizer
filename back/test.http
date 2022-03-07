@@ -1,22 +1,22 @@
 
 @endpoint = http://localhost:3001
-
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY2NjUxMDIsImV4cCI6MTY0NjY3MjMwMn0.rOl0yeZ1PgOGNh2Y7Y29PsI2Ae18KVCGWIV3o9XVKOI
 ### Login
 POST {{ endpoint }}/login
 content-type: application/json
 
 {
-  "regNumber": "U000101",
-  "password": "U000101"
+  "regNumber": "U000001",
+  "password": "ADMIN"
 }
 
 ### Liste des employés
 GET {{ endpoint }}/employee
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY2NDU5MzIsImV4cCI6MTY0NjY1MzEzMn0.62KSiFVWjGqkYtsap79WSu6plvfAFaVF7TsB84ICXAw
+x-access-token : {{token}}
 
 ### Ajout d'un employé
 POST {{ endpoint }}/employee
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY2NDg1NzksImV4cCI6MTY0NjY1NTc3OX0.MFAmbu1pwlZXAY9_Nsqd3esNdPxOfoXClpv26AXWk3U
+x-access-token : {{token}}
 content-type: application/json
 
 {
@@ -26,16 +26,16 @@ content-type: application/json
 }
 
 ### Affiche un employé selon son ID
-GET {{ endpoint }}/employee/36
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY2NDg1NzksImV4cCI6MTY0NjY1NTc3OX0.MFAmbu1pwlZXAY9_Nsqd3esNdPxOfoXClpv26AXWk3U
+GET {{ endpoint }}/employee/3
+x-access-token : {{token}}
 
 ### Supprime un employé selon son ID
-DELETE {{ endpoint }}/employee/36
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
+DELETE {{ endpoint }}/employee/30
+x-access-token : {{token}}
 
-### Supprime un employé selon son ID
-PATCH {{ endpoint }}/employee/36
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
+### Modifier les données d'un employé selon son ID
+PATCH {{ endpoint }}/employee/29
+x-access-token : {{token}}
 content-type: application/json
 
 {
@@ -44,8 +44,8 @@ content-type: application/json
 
 
 ### Ajoute un statut sur un employé pour un jour donné
-POST {{ endpoint }}/affectedStatus/employee/5/date/2022-07-26
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
+POST {{ endpoint }}/affectedStatus/employee/5/date/2022-07-30
+x-access-token : {{token}}
 content-type: application/json
 
 {
@@ -54,7 +54,7 @@ content-type: application/json
 
 ### Modifie un statut sur un employé pour un jour donné
 PATCH {{ endpoint }}/affectedStatus/employee/5/date/2022-07-26
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
+x-access-token : {{token}}
 content-type: application/json
 
 {
@@ -64,20 +64,20 @@ content-type: application/json
 
 ### Supprime un statut sur un employé pour un jour donné
 DELETE {{ endpoint }}/affectedStatus/employee/5/date/2022-07-26
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
+x-access-token : {{token}}
 
 
 ### Liste des status
 GET {{ endpoint }}/status
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
+x-access-token : {{token}}
 
-### Liste des status
-GET {{ endpoint }}/status/1
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY0MDExNTIsImV4cCI6MTY0NjQwODM1Mn0.YEMzrDm54n6gdsnyzZnAqAi7gI0TtDkmcWYRJk675og
+### Un statut par son ID
+GET {{ endpoint }}/status/50
+x-access-token : {{token}}
 
 ### Affichage du planning
 GET {{ endpoint }}/planning
-x-access-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY2NDU5MzIsImV4cCI6MTY0NjY1MzEzMn0.62KSiFVWjGqkYtsap79WSu6plvfAFaVF7TsB84ICXAw
-
+x-access-token : {{token}}
 ### Affichage des teams
 GET {{ endpoint }}/team
+x-access-token : {{token}}
