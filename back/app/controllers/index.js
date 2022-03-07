@@ -374,7 +374,7 @@ module.exports = {
     */
     const planning = [];
     shifts.forEach((shift) => {
-      if (!planning.find((date) => date === shift.date)) {
+      if (!planning.find((date) => date.date === shift.date)) {
         planning.push({
           date: shift.date,
           teams: [],
