@@ -18,6 +18,19 @@ const {
  */
 
 /**
+ * @typedef {object} EmployeeWithPassword
+ * @property {number} id - ID of the user
+ * @property {string} reg_number - User code
+ * @property {string} password - Password of the user
+ * @property {string} name - Employee firstname
+ * @property {string} lastname - Employee lastname
+ * @property {number} team_noun - Noun of the employee team
+ * @property {string} role - role of the user : user/admin
+ * @property {string} function - Employee function
+ * @property {string} profile_picture - URL of the profile picture
+ */
+
+/**
  * @typedef {object} Status
  * @property {number} id - ID of the satus
  * @property {string} label - Label of the status
@@ -99,6 +112,7 @@ module.exports = {
         "employee"."reg_number",
         "employee"."name",
         "employee"."lastname",
+        "employee"."password",
         "employee"."role",
         "employee"."function",
         "employee"."profile_picture",
