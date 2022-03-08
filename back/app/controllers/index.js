@@ -149,7 +149,7 @@ const mainController = {
           firstName: resultElement.first_name,
           lastName: resultElement.last_name,
           status: resultElement.status,
-          comment: resultElement.commentaire,
+          comment: resultElement.comment,
         });
       });
       planningDate.teams.forEach((team) => {
