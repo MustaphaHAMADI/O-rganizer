@@ -37,7 +37,7 @@ export const PlanningSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(loadPlanning.fulfilled, (state, action) => {
-      state.planning = action.payload.planning.slice(state.range);
+      state.planning = action.payload.planning
     });
   },
 });

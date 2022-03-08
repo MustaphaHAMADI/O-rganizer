@@ -3,14 +3,22 @@ import PropTypes from 'prop-types';
 import './calendar.scss';
 import Shift from '../Shift/Shift';
 
-const Calendar = ({planningData}) => {
+const Calendar = ({ planningData, handleModal }) => {
   return (
     <div className='calendar'>
-    {planningData && planningData.map(({date,teams}) => <Shift key={date} date={date} teams={teams} />)}
+      {planningData &&
+        planningData.map(({ date, teams }) => (
+          <Shift
+            handleModal={handleModal}
+            key={date}
+            date={date}
+            teams={teams}
+          />
+        ))}
     </div>
-  )
+  );
 };
 
-Calendar.propTypes = {}
+Calendar.propTypes = {};
 
-export default Calendar
+export default Calendar;

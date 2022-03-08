@@ -43,10 +43,22 @@ const getTeams = async () => {
   }
 };
 
+const getStatus = async () => {
+  try {
+    const response = await axiosClient.get('/status', {
+      headers: authHeader(),
+    });
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 const planningService = {
   authHeader,
   getPlanning,
   getTeams,
+  getStatus,
 };
 
 export default planningService;
