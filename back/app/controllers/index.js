@@ -150,6 +150,7 @@ const mainController = {
           lastName: resultElement.last_name,
           status: resultElement.status,
           comment: resultElement.comment,
+          replacementTeam: resultElement.replacement_team,
         });
       });
       planningDate.teams.forEach((team) => {
