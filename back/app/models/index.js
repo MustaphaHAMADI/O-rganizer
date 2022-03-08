@@ -423,7 +423,7 @@ module.exports = {
         "employee"."name" as first_name,
         "employee"."lastname" as last_name,
         "employee"."team_id" as team_id,
-        "affected_status"."comment" as commentraire,
+        "affected_status"."comment" as comment,
         "status"."label" as status
       FROM 
         "affected_status"
