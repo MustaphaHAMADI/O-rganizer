@@ -419,7 +419,7 @@ module.exports = {
       `SELECT 
         "affected_status"."id",
         "affected_status"."date"::text, 
-        "team"."noun" as repalcement_team,
+        "team"."noun" as replacement_team,
         "employee"."name" as first_name,
         "employee"."lastname" as last_name,
         "employee"."team_id" as team_id,
