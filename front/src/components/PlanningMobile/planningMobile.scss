@@ -10,7 +10,6 @@
         height: calc(100vh - 157px - 4rem);
         min-width: 100%;
         overflow-X: auto;
-        //white-space: nowrap;
     }
 
     &__team {
@@ -18,20 +17,31 @@
         align-items: center;
         justify-content: space-between;
         border: 1px solid vars.$light-purple;
-        border-radius: 30px;
+        border-radius: 50px;
         padding: 1rem;
         margin: 0.5rem;
+        position: relative;
+        min-height: 66px;
+
+        &-name {
+            text-align: center;
+            min-width: 70px;
+        }
 
         &-details {
             display: flex;
             justify-content: space-between;
-            column-gap: 1rem;
         }
 
         &-shift {
             border-left: 1px solid vars.$light-purple;
-            padding: 1rem;
-            margin: -1rem;
+            padding-left: 1rem;
+            width: 50px;
+            position: absolute;
+            right: 0.5rem;
+            top: 1rem;
+            font-weight: bold;
+            color: vars.$dark-purple;
         }
     }
 
@@ -40,14 +50,13 @@
         justify-content: space-between;
         margin-top: 2.2rem;
         text-align: center;
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     &__icon {
         display: block;
-        background-color: #f0f;
-        height: 80px;
-        width: 80px;
+        height: 40px;
+        width: 40px;
         margin: 0 auto 0.6rem auto;
     }
 
@@ -60,6 +69,52 @@
         height: 7px;
         background-color: vars.$dark-purple;
         border-radius: 5px;
-        //border-bottom: 5px solid vars.$dark-purple;
+    }
+
+    &__previous-date, &__next-date {
+        cursor: pointer;
+    }
+
+    &__event {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background-color: vars.$light-purple;
+    }
+
+    &__accordion {
+        font-size: 0.8rem;
+        line-height: 1.3;
+        margin-bottom: 0.5rem;
+    }
+
+    &__accordion--members {
+        width: 130px;
+    }
+
+    &__accordion--status {
+        text-align: right;
+
+        &-strong {
+            font-weight: bold;
+            color: vars.$dark-purple;
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .planning-mobile {
+
+        &__team {
+            font-size: 0.8rem;
+        }
+
+        &__name {
+            min-width: 55px;
+        }
+
+        &__accordion--members {
+            width: 50px;
+        }
     }
 }

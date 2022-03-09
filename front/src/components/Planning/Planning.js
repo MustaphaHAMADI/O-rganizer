@@ -50,7 +50,7 @@ const Planning = ({ planningData }) => {
       </Desktop>
 
       <Mobile>
-        <PlanningMobile />
+        <PlanningMobile planningData={planningData} teamData={membersData}/>
       </Mobile>
 
     </div>
