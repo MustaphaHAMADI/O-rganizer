@@ -10,9 +10,9 @@ const Hover = ({
         <div className='hover__container'>
             {
                 status.map((element) => 
-                <div className='hover__status' key={element.statusId}>
-                    <p className='hover__status-content'>{element.firstName} {element.lastName}</p>
-                    <span>{element.status}</span>
+                <div className='hover__details' key={element.statusId}>
+                    <p className='hover__name'>{element.firstName} {element.lastName}</p>
+                    <span className='hover__status'>{element.status}</span>
                 </div>)
             }
         </div>

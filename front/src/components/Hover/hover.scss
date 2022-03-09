@@ -1,0 +1,24 @@
+@use 'src/styles/vars';
+
+.hover {
+    
+    &__container {
+        width: 200px;
+        background-color: vars.$light-color;
+        border-radius: 5px;
+        border: 1px solid vars.$dark-purple;
+        padding: 1rem;
+        text-align: left;
+        font-size: 0.8rem;
+    }
+
+    &__details {
+        margin-bottom: 0.5rem;
+    }
+
+    &__status {
+        font-weight: bold;
+        color: vars.$dark-purple;
+        padding-left: 1rem;
+    }
+}
