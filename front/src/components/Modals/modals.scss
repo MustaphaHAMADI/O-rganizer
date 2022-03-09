@@ -1,11 +1,47 @@
+@use 'src/styles/vars';
+
 .modal__team--title {
-  color: white;
+  color: vars.$dark-purple;
+  text-align: center;
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin-bottom: 15px;
 }
 .modal___team--date {
-  color: white;
+  color: vars.$dark-purple;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  text-align: center;
+}
+.modal__team--member {
+  display: block;
+}
+.modal__member--container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 20%;
+  margin-left: 20%;
 }
 
 .modal__form {
   display: flex;
-  background-color: lightgray;
+
+  flex-direction: column;
+  justify-content: center;
+}
+.modal__team--member {
+}
+.modal__container {
+  background-color: vars.$light-color;
+  border-radius: 25px;
+  margin: 120px;
+  padding: 40px;
+}
+.modal__select {
+  margin: 10px 30px;
+}
+.modal__input {
+  display: block;
+  margin: 10px 30px;
 }
