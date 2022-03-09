@@ -6,6 +6,7 @@ import planningService from '../../app/features/planningHandling/PlanningService
 // components
 import Team from '../Team/Team';
 import Calendar from '../Calendar/Calendar';
+
 import PlanningMobile from '../PlanningMobile/PlanningMobile';
 import Modals from '../Modals/Modals';
 // styles

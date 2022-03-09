@@ -45,14 +45,27 @@ const Modals = ({
 
     for (let key in data) {
       if (defaultValues[key]) {
-        if (defaultValues[key].id !== Number(data[key])) {
+        if (
+          defaultValues[key].id !== Number(data[key]) &&
+          Number(data[key]) !== 11
+        ) {
+          defaultValues[key].id = data[key];
           console.log('route patch pour employye id ' + key);
           console.log('la valeur a change il faut patch ');
+        }
+
+        if (Number(data[key]) === 11) {
+          delete defaultValues[key];
+          console.log('delete');
         }
       } else {
         if (Number(data[key]) !== 11) {
           if (!key.includes('comment')) {
             let commentKey = `comment-${key}`;
+            if (!defaultValues[key]) {
+              defaultValues[key] = {};
+            }
+            defaultValues[key].id = data[key];
             console.log('appel api POST');
             console.log('id', data[key]);
             console.log('comment', data[commentKey]);
@@ -155,5 +168,4 @@ const Modals = ({
     </Modal>
   );
 };
-
 export default Modals;
