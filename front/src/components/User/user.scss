@@ -1,0 +1,99 @@
+@use 'src/styles/vars';
+
+.user {
+    padding: 2rem;
+
+    &__container {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    &__avatar {
+        width: 200px;
+        margin-bottom: 1rem;
+    }
+
+    &__form--mobile {
+        display: none;
+    }
+
+    &__details {
+        display: flex;
+        justify-content: center;
+        column-gap: 4rem;
+        align-content: center;
+        margin-bottom: 1rem;
+    }
+
+    &__titles {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        text-align: right;
+        width: 15%;
+    }
+
+    &__contents {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        text-align: left;
+        width: 15%;
+    }
+
+    &__title {
+        line-height: 56px;
+        color: vars.$dark-purple;
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    &__content {
+        line-height: 56px;
+    }
+
+    &__btns {
+        display: flex;
+        justify-content: center;
+        column-gap: 1rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .user {
+
+        &__contents, &__titles {
+            width: 30%;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .user {
+
+        &__form--desktop {
+            display: none;
+        }
+
+        &__form--mobile {
+            display: block;
+        }
+
+        &__contents, &__titles {
+            width: 30%;
+        }
+
+        &__content, &__title {
+            line-height: 1.7;
+        }
+
+        &__content {
+            margin-bottom: 1rem;
+        }
+
+        &__title {
+            margin-top: 0.5rem;
+        }
+    }
+}
