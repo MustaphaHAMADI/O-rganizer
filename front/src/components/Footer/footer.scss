@@ -8,6 +8,7 @@
     display: flex;
     justify-content: center;
     column-gap: 3rem;
+    height: 57.6px;
 
     &::before {
         content:'';
@@ -24,6 +25,22 @@
     &__navlink:hover {
         transform: scale(1.3);
         transition-duration: 500ms;
+    }
+
+    &__banner {
+        display: flex;
+        align-items: center;
+        column-gap: 0.5rem;
+
+        &-logo {
+            width: 40px;
+            filter: drop-shadow(0.5px 0.5px 1px #fafafa);
+        }
+
+        &-title {
+            font-family: vars.$special-font;
+            font-size: 1.5rem;
+        }
     }
 }
 

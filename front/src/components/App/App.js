@@ -4,8 +4,8 @@ import { Routes, Route } from 'react-router-dom';
 
 // import components
 import HeaderContainer from '../../Containers/HeaderContainer/HeaderContainer';
+import FooterContainer from '../../Containers/FooterContainer/FooterContainer';
 import Home from '../Home/Home';
-import Footer from '../Footer/Footer';
 import PlanningContainer from '../../Containers/PlanningContainer/planningContainer';
 import RequireAuth from '../RequireAuth/RequireAuth';
 import NoAuthRequired from '../NoAuthRequired/NoAuthRequired';
@@ -42,7 +42,7 @@ const App = () => {
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Footer />
+        <FooterContainer />
       </ThemeProvider>
     </div>
   );
