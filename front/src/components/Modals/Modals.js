@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect, useRef } from 'react';
 import { format } from 'date-fns';
+import planningService from '../../app/features/planningHandling/PlanningService';
 import { Modal, Select, MenuItem, TextField, Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import Btn from '../Btn/Btn';
@@ -14,6 +15,7 @@ const Modals = ({
   membersData,
   statusData,
   planningData,
+  handleReload,
 }) => {
   const { handleSubmit, register, reset } = useForm();
   const [defaultStatus, setDefaultStatus] = useState({});
@@ -40,9 +42,6 @@ const Modals = ({
   };
 
   const handleSubmitForm = (data) => {
-    console.log(data);
-    console.log(defaultValues);
-
     for (let key in data) {
       if (defaultValues[key]) {
         if (
@@ -50,13 +49,14 @@ const Modals = ({
           Number(data[key]) !== 11
         ) {
           defaultValues[key].id = data[key];
-          console.log('route patch pour employye id ' + key);
-          console.log('la valeur a change il faut patch ');
+          let commentKey = `comment-${key}`;
+          console.log(date, key, data[key], data[commentKey]);
+          planningService.patchStatus(date, key, data[key], data[commentKey]);
         }
 
         if (Number(data[key]) === 11) {
+          planningService.deleteStatus(date, key);
           delete defaultValues[key];
-          console.log('delete');
         }
       } else {
         if (Number(data[key]) !== 11) {
@@ -66,13 +66,15 @@ const Modals = ({
               defaultValues[key] = {};
             }
             defaultValues[key].id = data[key];
-            console.log('appel api POST');
-            console.log('id', data[key]);
-            console.log('comment', data[commentKey]);
+            console.log(key);
+            planningService.postStatus(date, key, data[key], data[commentKey]);
           }
         }
       }
     }
+
+    handleModalClose();
+    handleReload();
   };
   const defaultValues = {};
 
@@ -120,45 +122,55 @@ const Modals = ({
           <p className='modal___team--date'>
             {format(new Date(date), 'dd/MM/yyyy')}
           </p>
-
-          {members[0].employees &&
-            members[0].employees.map((e) => (
-              <form
-                key={e.id}
-                className='modal__form'
-                onSubmit={handleSubmit(handleSubmitForm)}
-              >
-                <div className='modal__member--container'>
-                  <p className='modal__team--member'>{e.firstName}</p>
-                  <Select
-                    {...register(`${e.id}`)}
-                    className='modal__select'
-                    labelId='demo-simple-select-label'
-                    id='demo-simple-select'
-                    defaultValue={findStatusId(dayStatus, e)}
-                    value={selectedItems[e.id]}
-                    label='status'
-                  >
-                    <MenuItem value='11'>Aucun status</MenuItem>
-                    {statusData &&
-                      statusData.map((e) => (
-                        <MenuItem key={e.id} value={e.id}>
-                          {e.label}
-                        </MenuItem>
-                      ))}
-                  </Select>
-                  <TextField
-                    {...register(`comment-${e.id}`)}
-                    className='modal__input'
-                    id='outlined-basic'
-                    label='Commentaire'
-                    variant='outlined'
-                    defaultValue={findComment(dayStatus, e)}
-                  />
-                </div>
-              </form>
-            ))}
-          <Button onClick={handleSubmit(handleSubmitForm)} type='submit'>
+          <div className='modal__info-container'>
+            {members[0].employees &&
+              members[0].employees.map((e) => (
+                <form
+                  key={e.id}
+                  className='modal__form'
+                  onSubmit={handleSubmit(handleSubmitForm)}
+                >
+                  <div className='modal__member--container'>
+                    <p className='modal__team--member'>
+                      {e.firstName} {e.lastName}
+                    </p>
+                    <Select
+                      {...register(`${e.id}`)}
+                      sx={{ width: 200 }}
+                      className='modal__select'
+                      labelId='demo-simple-select-label'
+                      id='demo-simple-select'
+                      defaultValue={findStatusId(dayStatus, e)}
+                      value={selectedItems[e.id]}
+                      label='status'
+                    >
+                      <MenuItem value='11'>Aucun status</MenuItem>
+                      {statusData &&
+                        statusData.map((e) => (
+                          <MenuItem key={e.id} value={e.id}>
+                            {e.label}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                    <TextField
+                      {...register(`comment-${e.id}`)}
+                      sx={{ width: 200 }}
+                      className='modal__input'
+                      id='outlined-basic'
+                      label='Commentaire'
+                      variant='outlined'
+                      defaultValue={findComment(dayStatus, e)}
+                    />
+                  </div>
+                </form>
+              ))}
+          </div>
+          <Button
+            sx={{ marginLeft: '45%', marginTop: 5 }}
+            variant='contained'
+            onClick={handleSubmit(handleSubmitForm)}
+            type='submit'
+          >
             Valider
           </Button>
         </div>

@@ -12,7 +12,7 @@ import Modals from '../Modals/Modals';
 // styles
 import './planning.scss';
 
-const Planning = ({ planningData }) => {
+const Planning = ({ planningData, handleReload }) => {
   const [membersData, setMembersData] = useState([]);
   const [statusData, setStatusData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -45,6 +45,7 @@ const Planning = ({ planningData }) => {
     <div className='planning'>
       <Desktop>
         <Modals
+          handleReload={handleReload}
           planningData={planningData}
           statusData={statusData}
           membersData={membersData}
