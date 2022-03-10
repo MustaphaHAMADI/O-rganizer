@@ -1,6 +1,8 @@
 @use 'src/styles/vars';
 
 .hover {
+    position: absolute;
+    z-index: 100;
     
     &__container {
         width: 200px;
@@ -16,9 +18,12 @@
         margin-bottom: 0.5rem;
     }
 
-    &__status {
-        font-weight: bold;
+    &__status, &__replacement, &__comment {
         color: vars.$dark-purple;
         padding-left: 1rem;
+    }
+
+    &__status {
+        font-weight: bold;
     }
 }
