@@ -2,54 +2,122 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './user.scss';
 import avatar from '../../assets/user.png';
-import planningService from '../../app/features/planningHandling/PlanningService';
+import userService from '../../app/features/userHandling/UserService';
+import Btn from '../Btn/Btn';
+import { useParams } from 'react-router-dom';
+import { TextField } from '@mui/material';
+import { useMediaQuery } from 'react-responsive';
 
 
 const User = props => {
+    const defaultValues = {
+        password: '',
+    };
+
     const [user, setUser] = useState([]);
+    const [formValues, setFormValues] = useState(defaultValues);
+
+    const params = useParams();
     const userId = JSON.parse(localStorage.user).id;
 
-    const onSubmit = (event) => {
-        event.preventDefault();
-        console.log('test')
+    const handleSubmit = (event) => {
+        userService.patchUser(userId, formValues);
+        console.log('mot de passe modifié')
+    }
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            handleSubmit();
+        }
+    }
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormValues({
+          ...formValues,
+          [name]: value,
+        });
+    }
+
+    const Desktop = ({ children }) => {
+        const isDesktop = useMediaQuery({ minWidth: 768 })
+        return isDesktop ? children : null
+    }
+    
+    const Mobile = ({ children }) => {
+        const isMobile = useMediaQuery({ maxWidth: 767 })
+        return isMobile ? children : null
     }
 
     useEffect(() => {
-        planningService.getUser(userId).then((res) => setUser(res.data));
-      }, [userId]);
+        userService.getUser(params.id).then((res) => setUser(res.data));
+      }, [params.id]);
 
     return (
         <div className='user'>
             <div className='user__container'>
                 <img className='user__avatar' src={avatar} alt='Avatar'/>
-                <form className='user__form' onSubmit={onSubmit}>
-                    <div className='user__details'>
-                        <div className='user__regnumber'>
-                            <p>Matricule</p>
-                            <p>{user.reg_number}</p>
+                <form className='user__form' onSubmit={handleSubmit} onKeyPress={handleKeyPress}>
+                    <Desktop>
+
+                        <div className='user__details'>
+                            <div className='user__titles'>
+                                <p className='user__title'>Matricule</p>
+                                <p className='user__title'>Prénom</p>
+                                <p className='user__title'>NOM</p>
+                                <p className='user__title'>Mot de passe</p>
+                                <p className='user__title'>Fonction</p>
+                                <p className='user__title'>Equipe</p>
+                            </div>
+
+                            <div className='user__contents'>
+                                <p className='user__content'>{user.reg_number}</p>
+                                <p className='user__content'>{user.name}</p>
+                                <p className='user__content'>{user.lastname}</p>
+                                <TextField
+                                    id='password'
+                                    label='Modifier votre mot de passe'
+                                    name='password' 
+                                    type='password'
+                                    value={formValues.password}
+                                    onChange={handleInputChange}
+                                />
+                                <p className='user__content'>{user.function}</p>
+                                <p className='user__content'>{user.team}</p>
+                            </div>
                         </div>
-                        <div className='user__name'>
-                            <p>Prénom</p>
-                            <p>{user.name}</p>
-                        </div>
-                        <div className='user__lastname'>
-                            <p>NOM</p>
-                            <p>{user.lastname}</p>
-                        </div>
-                        <div className='user__password'>
-                            <p>Mot de passe</p>
-                            <input name='password' type='text' placeholder='Modifier votre mot de passe'></input>
-                        </div>
-                        <div className='user__function'>
-                            <p>Fonction</p>
-                            <p>{user.function}</p>
-                        </div>
-                        <div className='user__team'>
-                            <p>Equipe</p>
-                            <p>{user.team}</p>
-                        </div>
-                    </div>
-                    <button type='submit'>Valider</button>
+
+                    </Desktop>
+                    <Mobile>
+
+                        <p className='user__title'>Matricule</p>
+                        <p className='user__content'>{user.reg_number}</p>
+
+                        <p className='user__title'>Prénom</p>
+                        <p className='user__content'>{user.name}</p>
+
+                        <p className='user__title'>NOM</p>
+                        <p className='user__content'>{user.lastname}</p>
+
+                        <p className='user__title'>Mot de passe</p>
+                        <TextField
+                            id='password'
+                            label='Modifier votre mot de passe'
+                            name='password' 
+                            type='password'
+                            value={formValues.password}
+                            onChange={handleInputChange}
+                        />
+
+                        <p className='user__title'>Fonction</p>
+                        <p className='user__content'>{user.function}</p>
+
+                        <p className='user__title'>Equipe</p>
+                        <p className='user__content'>{user.team}</p>
+                    </Mobile>
+
+                    <Btn text='Valider' clicked={handleSubmit} />
                 </form>
             </div>
         </div>
