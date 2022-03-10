@@ -1,4 +1,5 @@
 import axiosClient from '../../../utils/axios/axiosClient';
+import { toast } from 'react-toastify';
 
 /**
  * Function that adds a token from the localStorage to the request headers
@@ -31,9 +32,11 @@ const patchUser = async (userId, userData) => {
             userData,
             {headers: authHeader()} 
         );
+        toast.success(`Mot de passe modifié`);
         return response
 
     } catch (e) {
+        toast.error('Erreur lors de la modification du mot de passe');
         return e.response
     }
 }

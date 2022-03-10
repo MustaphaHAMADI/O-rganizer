@@ -21,23 +21,38 @@ const Header = ({ logout, isLoggedIn }) => {
           <h1 className='header__banner-title'>O'rganizer</h1>
         </div>
       )}
-      {isLoggedIn && (
-        <div className='header__logged'>
-          <div className='header__user-info'>
-            <NavLink to={`/user/${JSON.parse(localStorage.user).id}`}>
-              <img className='header__avatar' src={user} alt='User avatar' />
-            </NavLink>
-            <div className='header__user-info-details'>
-              <p className='header__user-info-number'>{JSON.parse(localStorage.user).reg_number}</p>
-              <p className='header__user-info-name'>{JSON.parse(localStorage.user).name} {JSON.parse(localStorage.user).lastname}</p>
+      <div className='header__btns--desktop'>
+        {isLoggedIn && (
+          <div className='header__logged'>
+            <div className='header__user-info'>
+              <NavLink to={`/user/${JSON.parse(localStorage.user).id}`}>
+                <img className='header__avatar' src={user} alt='User avatar' />
+              </NavLink>
+              <div className='header__user-info-details'>
+                <p className='header__user-info-number'>{JSON.parse(localStorage.user).reg_number}</p>
+                <p className='header__user-info-name'>{JSON.parse(localStorage.user).name} {JSON.parse(localStorage.user).lastname}</p>
+              </div>
             </div>
+            <Btn text='Se déconnecter' icon={<LogoutIcon />} clicked={logout} />
           </div>
-          <Btn text='Se déconnecter' icon={<LogoutIcon />} clicked={logout} />
-        </div>
-      )}
+        )}
+      </div>
 
       <div className='header__btns--mobile'>
-        {isLoggedIn && <Btn text='' icon={<LogoutIcon />} clicked={logout} />}
+        {isLoggedIn && (
+          <div className='header__logged'>
+            <div className='header__user-info'>
+              <NavLink to={`/user/${JSON.parse(localStorage.user).id}`}>
+                <img className='header__avatar' src={user} alt='User avatar' />
+              </NavLink>
+              <div className='header__user-info-details'>
+                <p className='header__user-info-number'>{JSON.parse(localStorage.user).reg_number}</p>
+                <p className='header__user-info-name'>{JSON.parse(localStorage.user).name} {JSON.parse(localStorage.user).lastname}</p>
+              </div>
+          </div>
+          <Btn text='' icon={<LogoutIcon />} clicked={logout} />
+          </div>
+        )}
       </div>
     </div>
   );
