@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { format } from 'date-fns';
+import { format, getISOWeek } from 'date-fns';
 import PropTypes from 'prop-types';
 import './shift.scss';
 import Hover from '../Hover/Hover';
@@ -30,6 +30,7 @@ const Shift = ({
                 left: position + 'px'
             }}/>}
             <div className='shift__date'>
+                <span className='shift__week'>S {getISOWeek(new Date(date))} - </span>
                 {format(new Date(date),'dd/MM/yyyy')}
             </div>
             {
