@@ -3,7 +3,6 @@
 .shift {
     display: flex;
     justify-content: flex-end;
-    text-align: center;
 
     &__date {
         width: 10%;
@@ -26,6 +25,7 @@
         margin: 0.5rem auto;
         padding: 0.5rem 0;
         position: relative;
+        text-align: center;
 
         &M {
             background-color: vars.$light-color;
@@ -58,6 +58,12 @@
     }
 
 
+}
+
+@media (max-width: 1400px) {
+    .shift {
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 1200px) {
