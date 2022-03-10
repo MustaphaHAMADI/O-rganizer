@@ -2,11 +2,22 @@ import React, { useState } from 'react'
 import { format } from 'date-fns';
 import PropTypes from 'prop-types';
 import './shift.scss';
+import Hover from '../Hover/Hover';
 
 const Shift = ({
     date,
     teams,
 }) => {
+    const [isShown, setIsShown] = useState(false);
+
+    const onHover = () => {
+        setIsShown(true);
+    }
+
+    const offHover = () => {
+        setIsShown(false);
+    }
+
     return (
         <div className='shift'>
             <div className='shift__date'>
@@ -15,7 +26,14 @@ const Shift = ({
             {
             teams.map((team) => 
                 <div className='shift__team' key={team.teamId}>
-                    <div className={`shift__period shift__period${team.shift}`}>{team.shift} {team.status && <div className={`shift__event shift__event${team.shift}`}></div>}</div>
+                    <div className={`shift__period shift__period${team.shift}`}>
+                        {team.shift}
+                        {team.status &&
+                            <div className={`shift__event shift__event${team.shift}`} onMouseEnter={onHover} onMouseLeave={offHover}> 
+                                {isShown && <Hover status={team.status}/>}
+                            </div>
+                        }
+                    </div>
                 </div>
             )}
         </div>

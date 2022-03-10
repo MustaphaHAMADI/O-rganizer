@@ -45,11 +45,14 @@
         position: absolute;
         right: 0.5rem;
         top: 0.5rem;
+        z-index: 1000;
 
         &AM, &N{
             background-color: vars.$light-color;
         }
     }
+
+
 }
 
 @media (max-width: 1000px) {
