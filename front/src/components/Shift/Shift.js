@@ -31,7 +31,6 @@ const Shift = ({ date, teams, handleModal }) => {
 
   const offHover = () => {
     setIsShown(false);
-    console.log(position);
   };
 
   return (

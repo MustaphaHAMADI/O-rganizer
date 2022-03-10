@@ -50,7 +50,7 @@ const Modals = ({
         ) {
           defaultValues[key].id = data[key];
           let commentKey = `comment-${key}`;
-          console.log(date, key, data[key], data[commentKey]);
+
           planningService.patchStatus(date, key, data[key], data[commentKey]);
         }
 
@@ -66,7 +66,7 @@ const Modals = ({
               defaultValues[key] = {};
             }
             defaultValues[key].id = data[key];
-            console.log(key);
+
             planningService.postStatus(date, key, data[key], data[commentKey]);
           }
         }
