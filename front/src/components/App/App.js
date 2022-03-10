@@ -10,6 +10,7 @@ import PlanningContainer from '../../Containers/PlanningContainer/planningContai
 import RequireAuth from '../RequireAuth/RequireAuth';
 import NoAuthRequired from '../NoAuthRequired/NoAuthRequired';
 import NotFound from '../NotFound/NotFound';
+import User from '../User/User';
 
 // import style
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -37,6 +38,7 @@ const App = () => {
           </Route>
           <Route element={<RequireAuth />}>
             <Route path='/planning' element={<PlanningContainer />} />
+            <Route path="/user/:id" element={<User />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

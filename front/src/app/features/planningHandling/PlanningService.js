@@ -43,10 +43,22 @@ const getTeams = async () => {
   }
 };
 
+const getUser = async (userId) => {
+  try {
+    const user = await axiosClient.get(`/employee/${userId}`, {
+        headers: authHeader()
+    });
+    return user;
+  } catch (e) {
+      return e.response
+  }
+}
+
 const planningService = {
   authHeader,
   getPlanning,
   getTeams,
+  getUser,
 };
 
 export default planningService;
