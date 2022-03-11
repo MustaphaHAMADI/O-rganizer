@@ -1,79 +1,82 @@
 @use 'src/styles/vars';
 
 .shift {
-    display: flex;
-    justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 
-    &__date {
-        width: 10%;
-        margin: 1rem 0;
-        text-align: left;
+  &:hover {
+    background-color: #d1d1d1;
+  }
+
+  &__date {
+    width: 10%;
+    margin: 1rem 0;
+    text-align: left;
+  }
+
+  &__week {
+    color: vars.$dark-purple;
+  }
+
+  &__team {
+    width: 17%;
+    border-left: 1px solid rgba(0, 0, 0, 0.3);
+  }
+
+  &__period {
+    width: 70%;
+    border-radius: 30px;
+    margin: 0.5rem auto;
+    padding: 0.5rem 0;
+    position: relative;
+    text-align: center;
+
+    &M {
+      background-color: vars.$light-color;
+      border: 1px solid vars.$light-purple;
     }
 
-    &__week {
-        color: vars.$dark-purple;
+    &AM {
+      background-color: vars.$light-purple;
     }
 
-    &__team {
-        width: 17%;
-        border-left: 1px solid rgba(0, 0, 0, 0.3);
+    &N {
+      background-color: vars.$dark-purple;
+      color: vars.$light-color;
     }
+  }
 
-    &__period {
-        width: 70%;
-        border-radius: 30px;
-        margin: 0.5rem auto;
-        padding: 0.5rem 0;
-        position: relative;
-        text-align: center;
+  &__event {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: vars.$dark-purple;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    z-index: 1;
 
-        &M {
-            background-color: vars.$light-color;
-            border: 1px solid vars.$light-purple;
-        }
-
-        &AM {
-            background-color: vars.$light-purple;
-        }
-
-        &N {
-            background-color: vars.$dark-purple;
-            color: vars.$light-color;
-        }
+    &AM,
+    &N {
+      background-color: vars.$light-color;
     }
-
-    &__event {
-        width: 1rem;
-        height: 1rem;
-        border-radius: 50%;
-        background-color: vars.$dark-purple;
-        position: absolute;
-        right: 0.5rem;
-        top: 0.5rem;
-        z-index: 1;
-
-        &AM, &N{
-            background-color: vars.$light-color;
-        }
-    }
-
-
+  }
 }
 
 @media (max-width: 1400px) {
-    .shift {
-        font-size: 0.9rem;
-    }
+  .shift {
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 1200px) {
-    .shift {
-        font-size: 0.8rem;
-    }
+  .shift {
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 768px) {
-    .shift {
-        font-size: 0.8rem;
-    }
+  .shift {
+    font-size: 0.8rem;
+  }
 }

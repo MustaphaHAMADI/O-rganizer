@@ -1,4 +1,4 @@
-import { format, getISOWeek } from 'date-fns';
+import { format, getISOWeek, addDays } from 'date-fns';
 
 import React, { useRef, useEffect, useState } from 'react';
 
@@ -14,10 +14,11 @@ const Shift = ({ date, teams, handleModal }) => {
 
   const shiftRef = useRef();
   const today = format(new Date(), 'yyyy-MM-dd');
+  const displayDay = format(addDays(new Date(today), -3), 'yyyy-MM-dd');
 
   useEffect(() => {
-    if (date === today) {
-      shiftRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (date === displayDay) {
+      shiftRef.current.scrollIntoView();
     }
   }, []);
 
