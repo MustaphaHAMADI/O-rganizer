@@ -20,6 +20,7 @@ const Shift = ({ date, teams, handleModal }) => {
     if (date === displayDay) {
       shiftRef.current.scrollIntoView();
     }
+    // eslint-disable-next-line
   }, []);
 
   const onHover = (event, status) => {

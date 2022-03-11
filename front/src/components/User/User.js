@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import './user.scss';
 import avatar from '../../assets/user.png';
 import userService from '../../app/features/userHandling/UserService';
 import Btn from '../Btn/Btn';
 import { useParams } from 'react-router-dom';
 import { TextField, Button } from '@mui/material';
-import { useMediaQuery } from 'react-responsive';
+
 import { NavLink } from 'react-router-dom';
 
-const User = (props) => {
+const User = () => {
   const defaultValues = {
     password: '',
   };
@@ -21,7 +20,7 @@ const User = (props) => {
   const params = useParams();
   const userId = JSON.parse(localStorage.user).id;
 
-  const handleSubmit = (event) => {
+  const handleSubmit = () => {
     userService.patchUser(userId, formValues);
     console.log('mot de passe modifié');
   };
@@ -42,11 +41,6 @@ const User = (props) => {
   };
 
   console.log(formValues);
-
-  const Mobile = ({ children }) => {
-    const isMobile = useMediaQuery({ maxWidth: 767 });
-    return isMobile ? children : null;
-  };
 
   useEffect(() => {
     userService.getUser(params.id).then((res) => setUser(res.data));

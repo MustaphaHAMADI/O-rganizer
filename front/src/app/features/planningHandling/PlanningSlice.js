@@ -1,9 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import PlanningService from './PlanningService';
-import { startOfToday } from 'date-fns';
-import { toast } from 'react-toastify';
-
-const date = startOfToday().getTime();
 
 const initialState = {
   planning: [],
@@ -37,7 +33,7 @@ export const PlanningSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(loadPlanning.fulfilled, (state, action) => {
-      state.planning = action.payload.planning
+      state.planning = action.payload.planning;
     });
   },
 });
