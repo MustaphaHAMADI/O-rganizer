@@ -12,13 +12,16 @@ import Modals from '../Modals/Modals';
 // styles
 import './planning.scss';
 
-const Planning = ({ planningData, handleReload }) => {
+const Planning = ({ planningData, handleReload, role }) => {
   const [membersData, setMembersData] = useState([]);
   const [statusData, setStatusData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [modalInfo, setmodalInfo] = useState({ date: '', team: '' });
 
   const handleModal = (date, team) => {
+    if (role === 'user') {
+      return;
+    }
     setIsOpen(true);
     setmodalInfo({ date, team });
   };
