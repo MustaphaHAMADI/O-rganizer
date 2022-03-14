@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import './user.scss';
 import avatar from '../../assets/user.png';
 import userService from '../../app/features/userHandling/UserService';
 import Btn from '../Btn/Btn';
 import { useParams } from 'react-router-dom';
 import { TextField, Button } from '@mui/material';
-import { useMediaQuery } from 'react-responsive';
+import { toast } from 'react-toastify';
 import { NavLink } from 'react-router-dom';
 
-const User = (props) => {
+const User = () => {
   const defaultValues = {
     password: '',
   };
@@ -21,9 +20,13 @@ const User = (props) => {
   const params = useParams();
   const userId = JSON.parse(localStorage.user).id;
 
-  const handleSubmit = (event) => {
-    userService.patchUser(userId, formValues);
-    console.log('mot de passe modifié');
+  const handleSubmit = () => {
+    if (formValues.password === formValues.confirmPassword) {
+      userService.patchUser(userId, formValues);
+      setModif(false);
+    } else {
+      toast.error('La confirmation du mot de passe est incorrecte');
+    }
   };
 
   const handleKeyPress = (event) => {
@@ -41,13 +44,6 @@ const User = (props) => {
     });
   };
 
-  console.log(formValues);
-
-  const Mobile = ({ children }) => {
-    const isMobile = useMediaQuery({ maxWidth: 767 });
-    return isMobile ? children : null;
-  };
-
   useEffect(() => {
     userService.getUser(params.id).then((res) => setUser(res.data));
   }, [params.id]);
@@ -57,108 +53,74 @@ const User = (props) => {
       <div className='user__container'>
         <img className='user__avatar' src={avatar} alt='Avatar' />
 
-        <div className='user__form--desktop'>
-          <form
+        <form
             className='user__form'
             onSubmit={handleSubmit}
             onKeyPress={handleKeyPress}
-          >
-            <div className='user__details'>
-              <div className='user__titles'>
-                <p className='user__title'>Matricule</p>
-                <p className='user__title'>Prénom</p>
-                <p className='user__title'>NOM</p>
-                <p className='user__title'>Mot de passe</p>
-                <p className='user__title'>Fonction</p>
-                <p className='user__title'>Equipe</p>
-              </div>
-
-              <div className='user__contents'>
-                <p className='user__content'>{user.reg_number}</p>
-                <p className='user__content'>{user.name}</p>
-                <p className='user__content'>{user.lastname}</p>
-                {modif ? (
-                  <TextField
-                    sx={{ width: 200 }}
-                    id='password'
-                    label='Modifier votre mot de passe'
-                    name='password'
-                    type='password'
-                    value={formValues.password}
-                    onChange={handleInputChange}
-                  />
-                ) : (
-                  <Button
-                    onClick={() => setModif(true)}
-                    variant='contained'
-                    sx={{ width: 200, marginTop: 1.5, marginBottom: 1.5 }}
-                  >
-                    Modifier
-                  </Button>
-                )}
-
-                <p className='user__content'>{user.function}</p>
-                <p className='user__content'>{user.team}</p>
-              </div>
-            </div>
-            <div className='user__btns'>
-              {modif && <Btn text='Valider' clicked={handleSubmit} />}
-              <NavLink to='/planning'>
-                <Btn text='Retour' />
-              </NavLink>
-            </div>
-          </form>
-        </div>
-
-        <div className='user__form--mobile'>
-          <form
-            className='user__form'
-            onSubmit={handleSubmit}
-            onKeyPress={handleKeyPress}
-          >
+        >
+          <div className='user__info-container'>
             <p className='user__title'>Matricule</p>
             <p className='user__content'>{user.reg_number}</p>
-
+          </div>
+          <div className='user__info-container'>
             <p className='user__title'>Prénom</p>
             <p className='user__content'>{user.name}</p>
-
+          </div>
+          <div className='user__info-container'>
             <p className='user__title'>NOM</p>
             <p className='user__content'>{user.lastname}</p>
-
+          </div>
+          <div className='user__info-container'>
             <p className='user__title'>Mot de passe</p>
             {modif ? (
-              <TextField
-                sx={{ width: 200 }}
-                id='password'
-                label='Modifier votre mot de passe'
-                name='password'
-                type='password'
-                value={formValues.password}
-                onChange={handleInputChange}
-              />
-            ) : (
-              <Button
-                onClick={() => setModif(true)}
-                variant='contained'
-                sx={{ width: 200, marginTop: 1.5, marginBottom: 1.5 }}
-              >
-                Modifier
-              </Button>
+              <div className='user__content user__password-container'>
+                <TextField
+                  sx={{ width: 200}}
+                  id='password'
+                  label='Modifier votre mot de passe'
+                  name='password'
+                  type='password'
+                  value={formValues.password}
+                  onChange={handleInputChange}
+                />
+                <TextField
+                  sx={{ width: 200 }}
+                  id='confirmPassword'
+                  label='Confirmer votre mot de passe'
+                  name='confirmPassword'
+                  type='password'
+                  value={formValues.confirmPassword}
+                  onChange={handleInputChange}
+                />
+              </div>
+                ) : (
+              <div className='user__content'>
+                <Button
+                  onClick={() => setModif(true)}
+                  variant='contained'
+                  sx={{ width: 200, marginTop: 1.5, marginBottom: 1.5 }}
+                >
+                  Modifier
+                </Button>
+              </div>
             )}
-
+          </div>
+          <div className='user__info-container'>
             <p className='user__title'>Fonction</p>
             <p className='user__content'>{user.function}</p>
-
+          </div>
+          <div className='user__info-container'>
             <p className='user__title'>Equipe</p>
             <p className='user__content'>{user.team}</p>
-            <div className='user__btns'>
-              {modif && <Btn text='Valider' clicked={handleSubmit} />}
-              <NavLink to='/planning'>
-                <Btn text='Retour' />
-              </NavLink>
-            </div>
-          </form>
-        </div>
+          </div>
+          
+          <div className='user__btns'>
+            {modif && <Btn text='Valider' clicked={handleSubmit} />}
+            <NavLink to='/planning'>
+              <Btn text='Retour' />
+            </NavLink>
+          </div>
+        </form>
       </div>
     </div>
   );

@@ -14,12 +14,13 @@ const Shift = ({ date, teams, handleModal }) => {
 
   const shiftRef = useRef();
   const today = format(new Date(), 'yyyy-MM-dd');
-  const displayDay = format(addDays(new Date(today), -3), 'yyyy-MM-dd');
+  const displayDay = format(new Date(today), 'yyyy-MM-dd');
 
   useEffect(() => {
     if (date === displayDay) {
       shiftRef.current.scrollIntoView();
     }
+    // eslint-disable-next-line
   }, []);
 
   const onHover = (event, status) => {
@@ -27,7 +28,7 @@ const Shift = ({ date, teams, handleModal }) => {
     setIsShown(true);
     const leftPosition =
       event.target.offsetLeft + event.target.offsetParent.offsetLeft - 210;
-    setPosition(leftPosition);
+      setPosition(leftPosition);
   };
 
   const offHover = () => {
