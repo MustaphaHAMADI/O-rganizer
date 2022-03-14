@@ -1,0 +1,13 @@
+@use 'src/styles/vars';
+.usersPage {
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    column-gap: 1rem;
+  }
+}

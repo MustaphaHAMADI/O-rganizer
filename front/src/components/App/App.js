@@ -8,8 +8,10 @@ import FooterContainer from '../../Containers/FooterContainer/FooterContainer';
 import Home from '../Home/Home';
 import PlanningContainer from '../../Containers/PlanningContainer/planningContainer';
 import RequireAuth from '../RequireAuth/RequireAuth';
+import RequireAdmin from '../RequireAdmin/RequireAdmin';
 import NoAuthRequired from '../NoAuthRequired/NoAuthRequired';
 import NotFound from '../NotFound/NotFound';
+import UsersPage from '../UsersPage/UsersPage';
 import User from '../User/User';
 
 // import style
@@ -38,9 +40,12 @@ const App = () => {
           </Route>
           <Route element={<RequireAuth />}>
             <Route path='/planning' element={<PlanningContainer />} />
-            <Route path="/user/:id" element={<User />} />
+            <Route element={<RequireAdmin />}>
+              <Route path='/users' element={<UsersPage />} />
+            </Route>
+            <Route path='/user/:id' element={<User />} />
           </Route>
-          <Route path="*" element={<NotFound />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
         <FooterContainer />
       </ThemeProvider>
