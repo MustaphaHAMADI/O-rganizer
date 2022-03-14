@@ -44,8 +44,6 @@ const User = () => {
     });
   };
 
-  console.log(formValues);
-
   useEffect(() => {
     userService.getUser(params.id).then((res) => setUser(res.data));
   }, [params.id]);
