@@ -23,7 +23,7 @@ const User = () => {
   const handleSubmit = () => {
     if (formValues.password === formValues.confirmPassword) {
       userService.patchUser(userId, formValues);
-      toast.success('Mot de passe modifié');
+      setModif(false);
     } else {
       toast.error('La confirmation du mot de passe est incorrecte');
     }
