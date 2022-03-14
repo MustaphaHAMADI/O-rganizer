@@ -1,0 +1,51 @@
+@use 'src/styles/vars';
+
+.usercard {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  align-items: center;
+  margin: 20px auto;
+  column-gap: 1rem;
+  padding: 20px;
+  border-radius: 25px;
+  background-color: rgba(206, 204, 204, 0.582);
+
+  &__avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  &__person {
+    display: flex;
+    align-items: center;
+    column-gap: 2rem;
+  }
+  &__name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    width: 250px;
+    color: vars.$dark-purple;
+  }
+  &__regNumber,
+  &__fonction,
+  &__role,
+  &__teamNoun {
+    font-size: 1.5rem;
+  }
+  &__fonction {
+    width: 400px;
+  }
+  &__role {
+    width: 150px;
+  }
+
+  &__buttons {
+    display: flex;
+    column-gap: 1rem;
+  }
+
+  &__button {
+    color: vars.$dark-purple;
+  }
+}

@@ -1,19 +1,19 @@
 // import dependencies
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 // import styles
 import './header.scss';
-import { Button } from 'material-ui';
+import { Button } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 // import elements
 import Btn from '../Btn/Btn';
 import logo from '../../assets/logo.png';
-import user from '../../assets/user.png';
+import userAvatar from '../../assets/user.png';
 
-const Header = ({ logout, isLoggedIn }) => {
+const Header = ({ logout, isLoggedIn, user }) => {
   return (
     <div className='header'>
       {!isLoggedIn && (
@@ -27,7 +27,11 @@ const Header = ({ logout, isLoggedIn }) => {
           <div className='header__logged'>
             <div className='header__user-info'>
               <NavLink to={`/user/${JSON.parse(localStorage.user).id}`}>
-                <img className='header__avatar' src={user} alt='User avatar' />
+                <img
+                  className='header__avatar'
+                  src={userAvatar}
+                  alt='User avatar'
+                />
               </NavLink>
               <div className='header__user-info-details'>
                 <p className='header__user-info-number'>
@@ -39,8 +43,18 @@ const Header = ({ logout, isLoggedIn }) => {
                 </p>
               </div>
             </div>
-            <Button></Button>
-            <Btn text='Se déconnecter' icon={<LogoutIcon />} clicked={logout} />
+            <div className='header__buttton--container'>
+              {user.role === 'admin' ? (
+                <Button variant='contained'>
+                  <Link to='users'>Gestion des utilisateurs</Link>
+                </Button>
+              ) : null}
+              <Btn
+                text='Se déconnecter'
+                icon={<LogoutIcon />}
+                clicked={logout}
+              />
+            </div>
           </div>
         )}
       </div>
