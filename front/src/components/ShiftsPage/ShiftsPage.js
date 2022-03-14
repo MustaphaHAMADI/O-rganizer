@@ -22,13 +22,13 @@ const ShiftsPage = ({
 
     const handleChange = (newValue) => {
       setDayValue(newValue);
+      findDayShift(newValue);
       handleReload();
     };
 
     
 
     const findDayShift = (day) => {
-        console.log('fonction lancée');
         if(planning){
             const searchedDay = planning.find((foundDay) => foundDay.date === format(new Date(day), 'yyyy-MM-dd'));
             if (searchedDay) {
@@ -45,14 +45,15 @@ const ShiftsPage = ({
                         selectedShift[team.teamId]= '4';
                     }
                 }
+            } else {
+                handleReset()
             }
             selectedShift.name = 'test';
         }
     }
+
     const handleSelectChange = (event) => {
-        console.log(event.target);
         selectedShift[event.target.name] = event.target.value;
-        console.log('selectedShift >',selectedShift);
         handleReload();
     }
     
@@ -61,6 +62,32 @@ const ShiftsPage = ({
             selectedShift[key] = '4';
         }
         handleReload();
+    }
+
+    const handleSubmit = () => {
+        console.log('j\'envoi les données');
+        const body = {};
+        body.date = format(new Date(dayValue), 'yyyy-MM-dd');
+        for (const key in selectedShift){
+            if(selectedShift[key] === '1'){
+                body[key] = 'M';
+            }
+            else if(selectedShift[key] === '2'){
+                body[key] = 'AM';
+            }
+            else if(selectedShift[key] === '3'){
+                body[key] = 'N';
+            } else {
+                body[key] = '';
+            }
+        }
+        console.log(body);
+        const foundDay = planning.find((day) => day.date === body.date)
+        if (foundDay){
+            console.log('il faut faire un patch')
+        } else {
+            console.log('il faut faire un insert Into');
+        }
     }
 
     return (
@@ -105,7 +132,7 @@ const ShiftsPage = ({
                     </div> 
                     <div className='shifts-page__btns'>
                         <Btn text='Vider la faction' clicked={handleReset} />
-                        <Btn text='Valider' />
+                        <Btn text='Valider' clicked={handleSubmit}/>
                         <NavLink to='/planning'>
                             <Btn text='Retour'/>
                         </NavLink>
