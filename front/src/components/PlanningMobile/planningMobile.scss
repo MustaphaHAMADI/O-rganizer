@@ -86,7 +86,10 @@
 
     &__accordion-container {
         display: flex;
-        
+    }
+
+    &__members-container {
+        margin-right: 2rem;
     }
 
     &__accordion {
