@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 // import styles
 import './header.scss';
+import { Button } from 'material-ui';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 // import elements
@@ -29,10 +30,16 @@ const Header = ({ logout, isLoggedIn }) => {
                 <img className='header__avatar' src={user} alt='User avatar' />
               </NavLink>
               <div className='header__user-info-details'>
-                <p className='header__user-info-number'>{JSON.parse(localStorage.user).reg_number}</p>
-                <p className='header__user-info-name'>{JSON.parse(localStorage.user).name} {JSON.parse(localStorage.user).lastname}</p>
+                <p className='header__user-info-number'>
+                  {JSON.parse(localStorage.user).reg_number}
+                </p>
+                <p className='header__user-info-name'>
+                  {JSON.parse(localStorage.user).name}{' '}
+                  {JSON.parse(localStorage.user).lastname}
+                </p>
               </div>
             </div>
+            <Button></Button>
             <Btn text='Se déconnecter' icon={<LogoutIcon />} clicked={logout} />
           </div>
         )}
@@ -46,11 +53,16 @@ const Header = ({ logout, isLoggedIn }) => {
                 <img className='header__avatar' src={user} alt='User avatar' />
               </NavLink>
               <div className='header__user-info-details'>
-                <p className='header__user-info-number'>{JSON.parse(localStorage.user).reg_number}</p>
-                <p className='header__user-info-name'>{JSON.parse(localStorage.user).name} {JSON.parse(localStorage.user).lastname}</p>
+                <p className='header__user-info-number'>
+                  {JSON.parse(localStorage.user).reg_number}
+                </p>
+                <p className='header__user-info-name'>
+                  {JSON.parse(localStorage.user).name}{' '}
+                  {JSON.parse(localStorage.user).lastname}
+                </p>
               </div>
-          </div>
-          <Btn text='' icon={<LogoutIcon />} clicked={logout} />
+            </div>
+            <Btn text='' icon={<LogoutIcon />} clicked={logout} />
           </div>
         )}
       </div>

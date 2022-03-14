@@ -11,6 +11,7 @@ import { logout } from '../../app/features/userAuth/userAuthSlice';
 const HeaderContainer = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isAdmin = useSelector((state) => state.auth.user.isAdmin);
 
   const handleLogout = () => {
     try {
@@ -19,7 +20,9 @@ const HeaderContainer = () => {
       console.log(err);
     }
   };
-  return <Header logout={handleLogout} isLoggedIn={isLoggedIn} />;
+  return (
+    <Header logout={handleLogout} isAdmin={isAdmin} isLoggedIn={isLoggedIn} />
+  );
 };
 
 export default HeaderContainer;
