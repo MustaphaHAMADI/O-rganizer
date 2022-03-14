@@ -9,6 +9,7 @@ const PlanningContainer = () => {
 
   useEffect(() => {
     dispatch(loadPlanning());
+    // eslint-disable-next-line
   }, [counter]);
 
   const handleReload = () => {
@@ -16,8 +17,6 @@ const PlanningContainer = () => {
   };
 
   const planning = useSelector((state) => state.planning.planning);
-  const teams = useSelector((state) => state.planning.teams);
-  const status = useSelector((state) => state.planning.status);
   const role = useSelector((state) => state.auth.user.role);
   return (
     <Planning handleReload={handleReload} planningData={planning} role={role} />

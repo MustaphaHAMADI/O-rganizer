@@ -1,10 +1,8 @@
-import PropTypes from 'prop-types';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { format } from 'date-fns';
 import planningService from '../../app/features/planningHandling/PlanningService';
 import { Modal, Select, MenuItem, TextField, Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import Btn from '../Btn/Btn';
 import './modals.scss';
 
 const Modals = ({
@@ -18,8 +16,7 @@ const Modals = ({
   handleReload,
 }) => {
   const { handleSubmit, register, reset } = useForm();
-  const [defaultStatus, setDefaultStatus] = useState({});
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItems] = useState([]);
   let dayTeam = null;
   let dayStatus = null;
   const members = membersData.filter((e) => e.team === team);
