@@ -1,13 +1,13 @@
 
 @endpoint = http://localhost:3001
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY2NjUxMDIsImV4cCI6MTY0NjY3MjMwMn0.rOl0yeZ1PgOGNh2Y7Y29PsI2Ae18KVCGWIV3o9XVKOI
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZV9pZCI6MjksInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQ3Mjg5OTIzLCJleHAiOjE2NDcyOTcxMjN9.EHfGHbxSSIqzUscsOI3oZmZcHxksjHKhjqSvMPGCb9o
 ### Login
 POST {{ endpoint }}/login
 content-type: application/json
 
 {
-  "regNumber": "U000001",
-  "password": "ADMIN"
+  "regNumber": "U002388",
+  "password": "U002389"
 }
 
 ### Liste des employés
@@ -26,7 +26,7 @@ content-type: application/json
 }
 
 ### Affiche un employé selon son ID
-GET {{ endpoint }}/employee/3
+GET {{ endpoint }}/employee/28
 x-access-token : {{token}}
 
 ### Supprime un employé selon son ID
@@ -34,12 +34,12 @@ DELETE {{ endpoint }}/employee/30
 x-access-token : {{token}}
 
 ### Modifier les données d'un employé selon son ID
-PATCH {{ endpoint }}/employee/29
+PATCH {{ endpoint }}/employee/28
 x-access-token : {{token}}
 content-type: application/json
 
 {
-"password": "U000101"
+"password": "U002388"
 }
 
 
