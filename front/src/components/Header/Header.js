@@ -26,6 +26,11 @@ const Header = ({ logout, isLoggedIn, user }) => {
     setAnchorEl(null);
   };
 
+  const handleLogout = () => {
+    logout();
+    handleClose();
+  };
+
   return (
     <div className='header'>
       {!isLoggedIn && (
@@ -37,7 +42,7 @@ const Header = ({ logout, isLoggedIn, user }) => {
         {isLoggedIn && (
           <div className='header__logged'>
             <div className='header__user-info'>
-              <NavLink to={`/user/${JSON.parse(localStorage.user).id}`}>
+              <NavLink to={`/user/${user.id}`}>
                 <img
                   className='header__avatar'
                   src={userAvatar}
@@ -46,11 +51,11 @@ const Header = ({ logout, isLoggedIn, user }) => {
               </NavLink>
               <div className='header__user-info-details'>
                 <p className='header__user-info-number'>
-                  {JSON.parse(localStorage.user).reg_number}
+                  {user.reg_number}
                 </p>
                 <p className='header__user-info-name'>
-                  {JSON.parse(localStorage.user).name}{' '}
-                  {JSON.parse(localStorage.user).lastname}
+                  {user.name}{' '}
+                  {user.lastname}
                 </p>
               </div>
             </div>
@@ -101,11 +106,12 @@ const Header = ({ logout, isLoggedIn, user }) => {
                       <Link to='users'>Gestion des utilisateurs</Link>
                     </MenuItem>
                     <MenuItem onClick={handleClose}>Gestion des factions</MenuItem>
-                    <MenuItem onClick={logout}>Se déconnecter</MenuItem>
+                    <MenuItem onClick={handleLogout}>Se déconnecter</MenuItem>
                   </Menu>
                 </div>
               ) :
                 <Btn
+                  text=''
                   icon={<LogoutIcon />}
                   clicked={logout}
                 />
