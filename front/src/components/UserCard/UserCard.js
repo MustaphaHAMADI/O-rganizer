@@ -1,10 +1,16 @@
 import React from 'react';
+import UserService from '../../app/features/userHandling/UserService';
 import avatar from '../../assets/user.png';
 import { Button } from '@mui/material';
 import './usercard.scss';
 import { Create, Delete } from '@mui/icons-material/';
 
-const UserCard = ({ user, handleOpenModal, handleSetUser }) => {
+const UserCard = ({ user, handleOpenModal, handleSetUser, handleReload }) => {
+  const handleDelete = () => {
+    UserService.deleteEmployee(user.id);
+    handleReload();
+  };
+
   const handleUserModification = () => {
     handleSetUser(user);
     handleOpenModal();
@@ -23,7 +29,7 @@ const UserCard = ({ user, handleOpenModal, handleSetUser }) => {
         <Button onClick={handleUserModification}>
           <Create fontSize='large' className='usercard__button' />
         </Button>
-        <Button>
+        <Button onClick={handleDelete}>
           <Delete fontSize='large' className='usercard__button' />
         </Button>
       </div>

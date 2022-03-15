@@ -5,15 +5,17 @@ import UserService from '../../app/features/userHandling/UserService';
 import userAvatar from '../../assets/user.png';
 import './userModal.scss';
 
-const UserModal = ({ user, open, handleCloseModal }) => {
+const UserModal = ({ user, open, handleCloseModal, handleReload }) => {
   const { handleSubmit, register, reset } = useForm();
   const handleModalReset = () => {
     reset();
     handleCloseModal();
+    handleReload();
   };
 
   const handleCreate = (data) => {
     UserService.addEmployee(data);
+    handleModalReset();
   };
 
   const handleModify = (data) => {

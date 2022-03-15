@@ -12,14 +12,18 @@ const UsersPage = () => {
   const [users, setUsers] = useState();
   const [modalUser, setModalUser] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [reload, setReload] = useState(0);
 
   useEffect(() => {
     (async () => {
       const { data } = await UserService.getAllUsers();
       setUsers(data);
     })();
-  }, []);
+  }, [reload]);
 
+  const handleReload = () => {
+    setReload(reload + 1);
+  };
   const handleSetUser = (user) => {
     setModalUser(user);
   };
@@ -41,6 +45,7 @@ const UsersPage = () => {
         open={isModalOpen}
         handleCloseModal={handleCloseModal}
         user={modalUser}
+        handleReload={handleReload}
       />
       <div className='usersPage__header'>
         <Button variant='contained'>
@@ -58,6 +63,7 @@ const UsersPage = () => {
               handleSetUser={handleSetUser}
               key={user.id}
               user={user}
+              handleReload={handleReload}
             />
           ))}
       </div>

@@ -74,6 +74,18 @@ const changeEmployee = async (userId, userData) => {
     return e.response;
   }
 };
+const deleteEmployee = async (userId) => {
+  try {
+    const response = await axiosClient.delete(`/employee/${userId}`, {
+      headers: authHeader(),
+    });
+    toast.success(`Employé supprimé avec succes`);
+    return response;
+  } catch (e) {
+    toast.error("Erreur lors de la suppression de l'employé");
+    return e.response;
+  }
+};
 
 const userService = {
   getUser,
@@ -81,6 +93,7 @@ const userService = {
   getAllUsers,
   addEmployee,
   changeEmployee,
+  deleteEmployee,
 };
 
 export default userService;
