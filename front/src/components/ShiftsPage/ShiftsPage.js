@@ -66,7 +66,7 @@ const ShiftsPage = ({
     }
 
     const handleSubmit = () => {
-        // console.log('j\'envoi les données');
+        
         const body = {
             teams: []
         };
@@ -106,12 +106,14 @@ const ShiftsPage = ({
                 }
             }
         }
+        console.log(selectedShift);
         console.log(body);
         const foundDay = planning.find((day) => day.date === body.date)
         if (foundDay){
-            shiftService.patchShift(body);
+            
+            // shiftService.patchShift(body);
         } else {
-            shiftService.postShift(body);
+            // shiftService.postShift(body);
         }
     }
 
