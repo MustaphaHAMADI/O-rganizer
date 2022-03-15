@@ -3,7 +3,7 @@ import './user.scss';
 import avatar from '../../assets/user.png';
 import userService from '../../app/features/userHandling/UserService';
 import Btn from '../Btn/Btn';
-import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { TextField, Button } from '@mui/material';
 import { toast } from 'react-toastify';
 import { NavLink } from 'react-router-dom';
@@ -12,13 +12,11 @@ const User = () => {
   const defaultValues = {
     password: '',
   };
+  const userId = useSelector((state) => state.auth.user.id);
 
   const [user, setUser] = useState([]);
   const [modif, setModif] = useState(false);
   const [formValues, setFormValues] = useState(defaultValues);
-
-  const params = useParams();
-  const userId = JSON.parse(localStorage.user).id;
 
   const handleSubmit = () => {
     if (formValues.password === formValues.confirmPassword) {
@@ -45,8 +43,8 @@ const User = () => {
   };
 
   useEffect(() => {
-    userService.getUser(params.id).then((res) => setUser(res.data));
-  }, [params.id]);
+    userService.getUser(userId).then((res) => setUser(res.data));
+  }, []);
 
   return (
     <div className='user'>
@@ -54,9 +52,9 @@ const User = () => {
         <img className='user__avatar' src={avatar} alt='Avatar' />
 
         <form
-            className='user__form'
-            onSubmit={handleSubmit}
-            onKeyPress={handleKeyPress}
+          className='user__form'
+          onSubmit={handleSubmit}
+          onKeyPress={handleKeyPress}
         >
           <div className='user__info-container'>
             <p className='user__title'>Matricule</p>
@@ -75,7 +73,7 @@ const User = () => {
             {modif ? (
               <div className='user__content user__password-container'>
                 <TextField
-                  sx={{ width: 200}}
+                  sx={{ width: 200 }}
                   id='password'
                   label='Modifier votre mot de passe'
                   name='password'
@@ -93,7 +91,7 @@ const User = () => {
                   onChange={handleInputChange}
                 />
               </div>
-                ) : (
+            ) : (
               <div className='user__content'>
                 <Button
                   onClick={() => setModif(true)}
@@ -113,7 +111,7 @@ const User = () => {
             <p className='user__title'>Equipe</p>
             <p className='user__content'>{user.team}</p>
           </div>
-          
+
           <div className='user__btns'>
             {modif && <Btn text='Valider' clicked={handleSubmit} />}
             <NavLink to='/planning'>

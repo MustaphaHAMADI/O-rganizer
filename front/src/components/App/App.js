@@ -49,9 +49,9 @@ const App = () => {
             <Route element={<RequireAdmin />}>
               <Route path='/shifts' element={<ShiftsPageContainer />} />
             </Route>
-            <Route path='/user/:id' element={<User />} />
+            <Route path='/user' element={<User />} />
           </Route>
-          <Route >
+          <Route>
             <Route path='/contact' element={<ContactPage />} />
           </Route>
           <Route path='*' element={<NotFound />} />
