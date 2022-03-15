@@ -4,7 +4,11 @@ import { Button } from '@mui/material';
 import './usercard.scss';
 import { Create, Delete } from '@mui/icons-material/';
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, handleOpenModal, handleSetUser }) => {
+  const handleUserModification = () => {
+    handleSetUser(user);
+    handleOpenModal();
+  };
   return (
     <div className='usercard'>
       <div className='usercard__person'>
@@ -16,12 +20,10 @@ const UserCard = ({ user }) => {
         <p className='usercard__teamNoun'>{user.team_noun}</p>
       </div>
       <div className='usercard__buttons'>
-        <Button>
-          {' '}
+        <Button onClick={handleUserModification}>
           <Create fontSize='large' className='usercard__button' />
         </Button>
         <Button>
-          {' '}
           <Delete fontSize='large' className='usercard__button' />
         </Button>
       </div>

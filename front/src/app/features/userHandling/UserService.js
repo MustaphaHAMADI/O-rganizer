@@ -50,10 +50,37 @@ const patchUser = async (userId, userData) => {
   }
 };
 
+const addEmployee = async (userData) => {
+  try {
+    const response = await axiosClient.post(`/employee`, userData, {
+      headers: authHeader(),
+    });
+    toast.success(`Employé crée avec succes`);
+    return response;
+  } catch (e) {
+    toast.error("Erreur lors de la creation de l'employé");
+    return e.response;
+  }
+};
+const changeEmployee = async (userId, userData) => {
+  try {
+    const response = await axiosClient.patch(`/employee/${userId}`, userData, {
+      headers: authHeader(),
+    });
+    toast.success(`Employé modifié avec succes`);
+    return response;
+  } catch (e) {
+    toast.error("Erreur lors de la modification de l'employé");
+    return e.response;
+  }
+};
+
 const userService = {
   getUser,
   patchUser,
   getAllUsers,
+  addEmployee,
+  changeEmployee,
 };
 
 export default userService;
