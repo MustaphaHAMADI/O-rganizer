@@ -106,14 +106,11 @@ const ShiftsPage = ({
                 }
             }
         }
-        console.log(selectedShift);
-        console.log(body);
         const foundDay = planning.find((day) => day.date === body.date)
-        if (foundDay){
-            
-            // shiftService.patchShift(body);
+        if (foundDay){   
+            shiftService.patchShift(body);
         } else {
-            // shiftService.postShift(body);
+            shiftService.postShift(body);
         }
     }
 
