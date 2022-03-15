@@ -8,7 +8,12 @@ import './userModal.scss';
 const UserModal = ({ user, open, handleCloseModal, handleReload }) => {
   const { handleSubmit, register, reset } = useForm();
   const handleModalReset = () => {
-    reset();
+    reset(
+      {},
+      {
+        keepValues: false,
+      }
+    );
     handleCloseModal();
     handleReload();
   };
@@ -21,6 +26,11 @@ const UserModal = ({ user, open, handleCloseModal, handleReload }) => {
   const handleModify = (data) => {
     if (data.password === '') {
       delete data.password;
+
+      if (data.team_id === '0') {
+        data.team_id = null;
+      }
+
       UserService.changeEmployee(user.id, data);
     } else {
       UserService.changeEmployee(user.id, data);
@@ -50,6 +60,8 @@ const UserModal = ({ user, open, handleCloseModal, handleReload }) => {
     }
     if (user.team_noun === 'Equipe E') {
       return '5';
+    } else {
+      return '0';
     }
   };
 
@@ -115,7 +127,7 @@ const UserModal = ({ user, open, handleCloseModal, handleReload }) => {
                   defaultValue={user.function}
                 />
                 <Select
-                  {...register(`team_noun`)}
+                  {...register(`team_id`)}
                   sx={{ width: 200, marginTop: 2 }}
                   className='modal__select'
                   labelId='demo-simple-select-label'
@@ -123,6 +135,7 @@ const UserModal = ({ user, open, handleCloseModal, handleReload }) => {
                   defaultValue={getTeam(user)}
                   label='status'
                 >
+                  <MenuItem value='0'>Pas d'équipe</MenuItem>
                   <MenuItem value='1'>Equipe A</MenuItem>
                   <MenuItem value='2'>Equipe B</MenuItem>
                   <MenuItem value='3'>Equipe C</MenuItem>
@@ -195,7 +208,7 @@ const UserModal = ({ user, open, handleCloseModal, handleReload }) => {
                   variant='outlined'
                 />
                 <TextField
-                  {...register('fonction')}
+                  {...register('function')}
                   sx={{ width: 200, marginTop: 2 }}
                   className='modal__input'
                   id='outlined-basic'

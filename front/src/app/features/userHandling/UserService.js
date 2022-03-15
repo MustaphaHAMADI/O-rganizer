@@ -38,7 +38,6 @@ const getUser = async (userId) => {
 
 const patchUser = async (userId, userData) => {
   try {
-    console.log(userData);
     const response = await axiosClient.patch(`/employee/${userId}`, userData, {
       headers: authHeader(),
     });

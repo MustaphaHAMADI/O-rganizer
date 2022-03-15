@@ -15,10 +15,9 @@ const UsersPage = () => {
   const [reload, setReload] = useState(0);
 
   useEffect(() => {
-    (async () => {
-      const { data } = await UserService.getAllUsers();
-      setUsers(data);
-    })();
+    UserService.getAllUsers().then((res) => {
+      setUsers(res.data);
+    });
   }, [reload]);
 
   const handleReload = () => {
