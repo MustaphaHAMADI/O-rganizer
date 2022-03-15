@@ -1,10 +1,10 @@
 .userModal {
   background-color: #fff;
-  height: 50vh;
   width: 70%;
-  padding: 10px;
+  padding: 20px;
   border-radius: 25px;
-  margin: 400px auto;
+  margin: 0 auto;
+  margin-top: calc((100vh - 640px) / 2);
 
   &__main {
     display: flex;
