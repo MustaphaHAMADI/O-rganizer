@@ -9,22 +9,20 @@ module.exports = {
    */
   async addShift(req, res) {
     const { body } = req;
-    for (const key of body) {
-      if (Number(key) === 1 || Number(key) === 2 || Number(key) === 3 || Number(key) === 4 || Number(key) === 5) {
-        await models.addShift(body.date, key, body[key]);
-      }
-    }
+
+    body.teams.forEach(async (element) => {
+      await models.addShift(body.date, element.team_id, element.shift);
+    });
 
     return res.status(200).json('shifts ajoutés');
   },
 
   async updateShift(req, res) {
     const { body } = req;
-    for (const key of body) {
-      if (Number(key) === 1 || Number(key) === 2 || Number(key) === 3 || Number(key) === 4 || Number(key) === 5) {
-        await models.updateShift(body.date, key, body[key]);
-      }
-    }
+
+    body.teams.forEach(async (element) => {
+      await models.addShift(body.date, element.team_id, element.shift);
+    });
 
     return res.status(200).json('shifts modifiés');
   },
