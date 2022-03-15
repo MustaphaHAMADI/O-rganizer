@@ -13,6 +13,7 @@ import NoAuthRequired from '../NoAuthRequired/NoAuthRequired';
 import NotFound from '../NotFound/NotFound';
 import UsersPage from '../UsersPage/UsersPage';
 import User from '../User/User';
+import PageContact from '../PageContact/PageContact';
 import ShiftsPageContainer from '../../Containers/ShiftsPageContainer/ShiftsPageContainer';
 
 // import style
@@ -49,6 +50,11 @@ const App = () => {
             </Route>
             <Route path='/user/:id' element={<User />} />
           </Route>
+          <Route PageContact={<PageContact/>}>
+          <Route path='/PageContact' element={<PageContact />} />
+            </Route>
+
+        
           <Route path='*' element={<NotFound />} />
         </Routes>
         <FooterContainer />
