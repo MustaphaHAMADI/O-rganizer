@@ -48,6 +48,14 @@ const {
  * @property {string} comment - Comment of the affected status
  */
 
+/**
+ * @typedef {object} Shift
+ * @property {number} id - ID of the shift
+ * @property {string} label - Label of the shift
+ * @property {string} date - Date of the shift
+ * @property {number} team_id - ID of the team
+ */
+
 module.exports = {
 
   /**
@@ -434,6 +442,13 @@ module.exports = {
     return result.rows;
   },
 
+  /**
+   * Add a new shift (used in shift controller)
+   * @param {string} date - date of shift
+   * @param {number} teamId - Id of team
+   * @param {string} label - Label of shift
+   * @returns - The new created shift
+   */
   async addShift(date, teamId, label) {
     const result = await client.query(
       `INSERT INTO "shift" ("date","team_id","label")
@@ -448,6 +463,13 @@ module.exports = {
     return result.rows[0];
   },
 
+  /**
+   * Update a shift (used in shift controller)
+   * @param {string} date - date of shift
+   * @param {number} teamId - Id of team
+   * @param {string} label - Label of shift
+   * @returns - The updated shift
+   */
   async updateShift(date, teamId, label) {
     const result = await client.query(
       `UPDATE "shift" SET "label" = $3
@@ -461,6 +483,11 @@ module.exports = {
     return result.rows[0];
   },
 
+  /**
+   * Delete a shift (used in shift controller)
+   * @param {string} date - date of shift
+   * @returns - validation of the deletion
+   */
   async deleteShift(date) {
     const result = await client.query(
       'DELETE FROM "shift" WHERE "date" = $1',
