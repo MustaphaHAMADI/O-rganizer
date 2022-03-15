@@ -450,7 +450,7 @@ module.exports = {
 
   async updateShift(date, teamId, label) {
     const result = await client.query(
-      `INSERT INTO "shift" SET "label" = $3
+      `UPDATE "shift" SET "label" = $3
     WHERE "date" = $1 AND "team_id" = $2`,
       [
         date,

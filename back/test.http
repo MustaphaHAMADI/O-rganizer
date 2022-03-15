@@ -1,13 +1,13 @@
 
 @endpoint = http://localhost:3001
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZV9pZCI6MjksInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQ3Mjg5OTIzLCJleHAiOjE2NDcyOTcxMjN9.EHfGHbxSSIqzUscsOI3oZmZcHxksjHKhjqSvMPGCb9o
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZV9pZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjQ3MzMyODI0LCJleHAiOjE2NDczNDAwMjR9.nSh2SiQ5SJ9Uwui5ZrDJUkZvntCl5TH-vqjHUfisJ5M
 ### Login
 POST {{ endpoint }}/login
 content-type: application/json
 
 {
-  "regNumber": "U002388",
-  "password": "U002389"
+  "regNumber": "U000001",
+  "password": "ADMIN"
 }
 
 ### Liste des employés
@@ -81,3 +81,35 @@ x-access-token : {{token}}
 ### Affichage des teams
 GET {{ endpoint }}/team
 x-access-token : {{token}}
+
+### Ajout d'un nouveau shift
+POST {{ endpoint }}/shift
+x-access-token : {{token}}
+content-type: application/json
+
+{
+  "date": "2023-03-15",
+  "teams": [
+    {"team_id": 1, "shift": "AM"},
+    {"team_id": 2, "shift": ""},
+    {"team_id": 3, "shift": "M"},
+    {"team_id": 4, "shift": ""},
+    {"team_id": 5, "shift": "N"}
+  ]
+}
+
+### Modification des shifts
+PATCH {{ endpoint }}/shift
+x-access-token : {{token}}
+content-type: application/json
+
+{
+  "date": "2023-03-15",
+  "teams": [
+    {"team_id": 1, "shift": "N"},
+    {"team_id": 2, "shift": "N"},
+    {"team_id": 3, "shift": "N"},
+    {"team_id": 4, "shift": "N"},
+    {"team_id": 5, "shift": "N"}
+  ]
+}
