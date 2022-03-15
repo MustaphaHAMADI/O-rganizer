@@ -58,6 +58,9 @@ module.exports = {
     employee = { ...employee, ...req.body };
 
     const answer = await models.addEmployee(employee);
+    delete answer.password;
+    delete answer.created_at;
+    delete answer.updated_at;
     return res.json(answer);
   },
 
