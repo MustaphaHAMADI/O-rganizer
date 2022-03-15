@@ -6,8 +6,8 @@ POST {{ endpoint }}/login
 content-type: application/json
 
 {
-  "regNumber": "U000001",
-  "password": "ADMIN"
+  "regNumber": "U002363",
+  "password": "U002363"
 }
 
 ### Liste des employés
