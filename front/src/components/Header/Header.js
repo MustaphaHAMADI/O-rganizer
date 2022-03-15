@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, Link } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
 
 // import styles
 import './header.scss';
@@ -20,20 +19,11 @@ const Header = ({ logout, isLoggedIn, user }) => {
   const open = Boolean(anchorEl);
   
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorEl(event.target);
   };
+  
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  const Desktop = ({ children }) => {
-    const isDesktop = useMediaQuery({ minWidth: 1000 });
-    return isDesktop ? children : null;
-  };
-
-  const Mobile = ({ children }) => {
-    const isMobile = useMediaQuery({ maxWidth: 999 });
-    return isMobile ? children : null;
   };
 
   return (
@@ -65,27 +55,22 @@ const Header = ({ logout, isLoggedIn, user }) => {
               </div>
             </div>
 
-            <Desktop>
-            <div className='header__buttton--container'>
-              {user.role === 'admin' ? (
-                <React.Fragment>
+            <div className='header__buttons--desktop'>
+              <div className='header__button-container'>
+                {user.role === 'admin' ? (
                   <Button variant='contained'>
                     <Link to='users'>Gestion des utilisateurs</Link>
                   </Button>
-                  <Button variant='contained'>
-                    <Link to='shifts'>Gestion des factions</Link>
-                  </Button>
-                </React.Fragment>
-              ) : null}
-              <Btn
-                text='Se déconnecter'
-                icon={<LogoutIcon />}
-                clicked={logout}
-              />
+                ) : null}
+                <Btn
+                  text='Se déconnecter'
+                  icon={<LogoutIcon />}
+                  clicked={logout}
+                />
+              </div>
             </div>
-            </Desktop>
 
-            <Mobile>
+            <div className='header__buttons--mobile'>
               {user.role === 'admin' ? (
                 <div className='header__menu'>
                   <Button
@@ -95,7 +80,7 @@ const Header = ({ logout, isLoggedIn, user }) => {
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}
                   >
-                    <MenuIcon fontSize='large'/>
+                    <MenuIcon fontSize='large' sx={{ color: 'white' }} />
                   </Button>
                   <Menu
                     id="demo-positioned-menu"
@@ -104,11 +89,11 @@ const Header = ({ logout, isLoggedIn, user }) => {
                     open={open}
                     onClose={handleClose}
                     anchorOrigin={{
-                      vertical: 'center',
+                      vertical: 'top',
                       horizontal: 'left',
                     }}
                     transformOrigin={{
-                      vertical: 'center',
+                      vertical: 'top',
                       horizontal: 'left',
                     }}
                   >
@@ -125,8 +110,7 @@ const Header = ({ logout, isLoggedIn, user }) => {
                   clicked={logout}
                 />
               }
-
-            </Mobile>
+            </div>
           </div>
         )}
 
