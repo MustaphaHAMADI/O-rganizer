@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors(process.env.CORS_DOMAINS ?? '*'));
+app.use(cors('*'));
 
 app.use(router);
 
