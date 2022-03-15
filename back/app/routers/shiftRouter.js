@@ -41,7 +41,7 @@ router.route('/')
   * @summary delete a shift.
   * -- NOTE : This route require a valid JSON web token into the HTTP request header.
   * @tags Shift
-  * @param {number} id.body.required - Id of the shift to be deleted
+  * @param {number} body.id.required- Id of the shift to be deleted
   * @return {string} 200 - delete is done
  */
   .delete(adminAuth, controllerHandler(controller.shiftController.deleteShift));

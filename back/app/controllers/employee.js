@@ -47,6 +47,9 @@ module.exports = {
     if (!req.body.regNumber || !req.body.role || !req.body.password) {
       return res.status(400).send('The mandatory informations are missing : REG NUMBER, PASSWORD and/or ROLE');
     }
+    if (req.body.password.length < 5) {
+      return res.status(400).send('password must be 5 character minimum');
+    }
 
     if (req.body.role !== 'user' && req.body.role !== 'admin') {
       return res.status(400).send('The role must be "user" or "admin"');
@@ -94,13 +97,19 @@ module.exports = {
 
     let employee = await models.getOneEmployeeById(id);
 
+    const existingEmployee = await models.getOneEmployeeByReg_number(req.params.reg_number);
+
+    if (existingEmployee) {
+      return res.status(400).send('there is already an employee with this regNumber');
+    }
+
     if (!employee) {
       return res.status(400).send('This employee does not exist in the database');
     }
 
     if (req.body.password || req.body.password === '') {
-      if (req.body.password.length === 0) {
-        return res.status(400).send('The password must be at least 1 caracter');
+      if (req.body.password.length < 5) {
+        return res.status(400).send('The password must be at least 5 caracter');
       }
     }
 
