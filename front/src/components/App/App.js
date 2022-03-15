@@ -46,7 +46,10 @@ const App = () => {
             </Route>
             <Route path='/user/:id' element={<User />} />
           </Route>
-          <Route path='/PageContact' PageContact={<PageContact />} />
+          <Route PageContact={<PageContact/>}>
+          <Route path='/PageContact' element={<PageContact />} />
+            </Route>
+
         
           <Route path='*' element={<NotFound />} />
         </Routes>
