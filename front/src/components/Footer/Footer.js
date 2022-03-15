@@ -1,6 +1,7 @@
 import React from 'react';
 import './footer.scss';
 import logo from '../../assets/logo.png';
+import { Link } from 'react-router-dom';
 
 const Footer = ({isLoggedIn}) => (
     <div className='footer'>
@@ -10,7 +11,9 @@ const Footer = ({isLoggedIn}) => (
           <h1 className='footer__banner-title'>O'rganizer</h1>
         </div>
       ) :
-        <p>Présentation de l'équipe</p>
+        <Link to='/contact'>
+          <p>Présentation de l'équipe</p>
+        </Link>
       }
     </div>
   );
