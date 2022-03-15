@@ -38,16 +38,6 @@
     }
   }
 
-  &__btns--desktop {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  &__btns--mobile {
-    display: none;
-  }
-
   &__avatar {
     width: 50px;
   }
@@ -82,23 +72,5 @@
 @media (max-width: 1200px) {
   .header::before {
     display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .header {
-    &__btns--desktop {
-      display: none;
-    }
-
-    &__btns--mobile {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-    }
-
-    &::before {
-      display: none;
-    }
   }
 }
