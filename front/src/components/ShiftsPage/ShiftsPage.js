@@ -4,6 +4,7 @@ import './shiftsPage.scss';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import shiftService from '../../app/features/shiftHandling/shiftService';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import { format } from "date-fns";
@@ -65,7 +66,7 @@ const ShiftsPage = ({
     }
 
     const handleSubmit = () => {
-        console.log('j\'envoi les données');
+        // console.log('j\'envoi les données');
         const body = {
             teams: []
         };
@@ -108,9 +109,9 @@ const ShiftsPage = ({
         console.log(body);
         const foundDay = planning.find((day) => day.date === body.date)
         if (foundDay){
-            console.log('il faut faire un patch')
+            shiftService.patchService(body);
         } else {
-            console.log('il faut faire un insert Into');
+            shiftService.postService(body);
         }
     }
 
