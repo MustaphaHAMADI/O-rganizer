@@ -8,6 +8,7 @@ const employeeController = require('./employee');
 const statusController = require('./status');
 const affectedStatusController = require('./affectedStatus');
 const teamController = require('./team');
+const shiftController = require('./shift');
 const models = require('../models');
 
 const mainController = {
@@ -47,7 +48,8 @@ const mainController = {
       // Create token
       const token = jwt.sign(
         {
-          employee_id: employee.regNumber,
+          employee_id: employee.id,
+          employee_regNumber: employee.regNumber,
           role: employee.role,
         },
         process.env.TOKEN_KEY,
@@ -169,4 +171,5 @@ module.exports = {
   statusController,
   affectedStatusController,
   teamController,
+  shiftController,
 };

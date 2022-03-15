@@ -433,4 +433,41 @@ module.exports = {
     );
     return result.rows;
   },
+
+  async addShift(date, teamId, label) {
+    const result = await client.query(
+      `INSERT INTO "shift" ("date","team_id","label")
+    VALUES
+    ($1,$2,$3)`,
+      [
+        date,
+        teamId,
+        label,
+      ],
+    );
+    return result.rows[0];
+  },
+
+  async updateShift(date, teamId, label) {
+    const result = await client.query(
+      `UPDATE "shift" SET "label" = $3
+    WHERE "date" = $1 AND "team_id" = $2`,
+      [
+        date,
+        teamId,
+        label,
+      ],
+    );
+    return result.rows[0];
+  },
+
+  async deleteShift(date) {
+    const result = await client.query(
+      'DELETE FROM "shift" WHERE "date" = $1',
+      [
+        date,
+      ],
+    );
+    return !!result.rowCount;
+  },
 };
