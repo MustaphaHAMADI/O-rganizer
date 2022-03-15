@@ -142,12 +142,12 @@ module.exports = {
    * @param {string} role - role of the employee : user/admin
    * @param {string} name - Name of the employee
    * @param {string} lastname - Lastname of the employee
-   * @param {string} funct - Function of the employee
+   * @param {string} function - Function of the employee
    * @param {string} profilePicture - Link to the picture/Avatar of the employee
    * @param {number} teamId - ID of the mployee team
    * @returns {object} - New created employee
    */
-  async addEmployee(regNumber, password, role, name = '', lastname = '', funct = '', profilePicture = '', teamId = null) {
+  async addEmployee(employee) {
     const newEmployee = await client.query(
       `INSERT INTO
         "employee" (
@@ -164,14 +164,14 @@ module.exports = {
       ($1,$2,$3,$4,$5,$6,$7,$8) 
       RETURNING *`,
       [
-        regNumber,
-        password,
-        role,
-        name,
-        lastname,
-        funct,
-        profilePicture,
-        teamId,
+        employee.regNumber,
+        employee.password,
+        employee.role,
+        employee.name,
+        employee.lastname,
+        employee.function,
+        employee.profilePicture,
+        employee.teamId,
       ],
     );
     return newEmployee.rows[0];
