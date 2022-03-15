@@ -38,16 +38,6 @@
     }
   }
 
-  &__btns--desktop {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  &__btns--mobile {
-    display: none;
-  }
-
   &__avatar {
     width: 50px;
   }
@@ -73,7 +63,12 @@
   &__user-info-name {
     font-size: 1rem;
   }
-  &__buttton--container {
+
+  &__buttons--mobile {
+    display: none;
+  }
+
+  &__button-container {
     display: flex;
     column-gap: 1rem;
   }
@@ -85,20 +80,15 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .header {
-    &__btns--desktop {
+
+    &__buttons--desktop {
       display: none;
     }
 
-    &__btns--mobile {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-    }
-
-    &::before {
-      display: none;
+    &__buttons--mobile {
+      display: block;
     }
   }
 }
