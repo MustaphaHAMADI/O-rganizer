@@ -45,9 +45,14 @@ const Header = ({ logout, isLoggedIn, user }) => {
             </div>
             <div className='header__buttton--container'>
               {user.role === 'admin' ? (
-                <Button variant='contained'>
-                  <Link to='users'>Gestion des utilisateurs</Link>
-                </Button>
+                <React.Fragment>
+                  <Button variant='contained'>
+                    <Link to='users'>Gestion des utilisateurs</Link>
+                  </Button>
+                  <Button variant='contained'>
+                    <Link to='shifts'>Gestion des factions</Link>
+                  </Button>
+                </React.Fragment>
               ) : null}
               <Btn
                 text='Se déconnecter'

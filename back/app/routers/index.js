@@ -6,6 +6,7 @@ const employeeRouter = require('./employeeRouter');
 const affectedStatus = require('./affectedStatusRouter');
 const statusRouter = require('./statusRouter');
 const teamRouter = require('./teamRouter');
+const shiftRouter = require('./shiftRouter');
 const { errorHandler } = require('../helpers/errorHandler');
 const auth = require('../helpers/auth');
 
@@ -41,6 +42,11 @@ router.use('/status', statusRouter);
  * Redirection to the teamRouter all the routes start with /team
  */
 router.use('/team', teamRouter);
+
+/**
+ * Redirection to the shiftRouter all the routes start with /shift
+ */
+router.use('/shift', shiftRouter);
 
 /**
  * POST /login

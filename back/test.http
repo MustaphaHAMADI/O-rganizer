@@ -1,6 +1,6 @@
 
 @endpoint = http://localhost:3001
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY2NjUxMDIsImV4cCI6MTY0NjY3MjMwMn0.rOl0yeZ1PgOGNh2Y7Y29PsI2Ae18KVCGWIV3o9XVKOI
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZV9pZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjQ3MzMyODI0LCJleHAiOjE2NDczNDAwMjR9.nSh2SiQ5SJ9Uwui5ZrDJUkZvntCl5TH-vqjHUfisJ5M
 ### Login
 POST {{ endpoint }}/login
 content-type: application/json
@@ -26,7 +26,7 @@ content-type: application/json
 }
 
 ### Affiche un employé selon son ID
-GET {{ endpoint }}/employee/3
+GET {{ endpoint }}/employee/28
 x-access-token : {{token}}
 
 ### Supprime un employé selon son ID
@@ -34,12 +34,12 @@ DELETE {{ endpoint }}/employee/30
 x-access-token : {{token}}
 
 ### Modifier les données d'un employé selon son ID
-PATCH {{ endpoint }}/employee/29
+PATCH {{ endpoint }}/employee/28
 x-access-token : {{token}}
 content-type: application/json
 
 {
-"password": "U000101"
+"password": "U002388"
 }
 
 
@@ -81,3 +81,35 @@ x-access-token : {{token}}
 ### Affichage des teams
 GET {{ endpoint }}/team
 x-access-token : {{token}}
+
+### Ajout d'un nouveau shift
+POST {{ endpoint }}/shift
+x-access-token : {{token}}
+content-type: application/json
+
+{
+  "date": "2023-03-15",
+  "teams": [
+    {"team_id": 1, "shift": "AM"},
+    {"team_id": 2, "shift": ""},
+    {"team_id": 3, "shift": "M"},
+    {"team_id": 4, "shift": ""},
+    {"team_id": 5, "shift": "N"}
+  ]
+}
+
+### Modification des shifts
+PATCH {{ endpoint }}/shift
+x-access-token : {{token}}
+content-type: application/json
+
+{
+  "date": "2023-03-15",
+  "teams": [
+    {"team_id": 1, "shift": "N"},
+    {"team_id": 2, "shift": "N"},
+    {"team_id": 3, "shift": "N"},
+    {"team_id": 4, "shift": "N"},
+    {"team_id": 5, "shift": "N"}
+  ]
+}
