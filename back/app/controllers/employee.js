@@ -28,37 +28,36 @@ module.exports = {
    * @returns {object} Employee recently aded
    */
   async addEmployee(req, res) {
-    const {
-      regNumber,
-      role,
-      name,
-      lastname,
-      funct,
-      profilePicture,
-      teamId,
-    } = req.body;
+    let employee = {
+      regNumber: '',
+      role: '',
+      password: '',
+      name: '',
+      lastname: '',
+      function: '',
+      profilePicture: '',
+      teamId: null,
+    };
 
-    let {
-      password,
-    } = req.body;
-
-    const verifiedEmployee = await models.getOneEmployeeByReg_number(regNumber);
+    const verifiedEmployee = await models.getOneEmployeeByReg_number(req.body.regNumber);
     if (verifiedEmployee) {
       return res.status(400).send('This employee already exist in the database');
     }
 
-    if (!regNumber || !role || !password) {
+    if (!req.body.regNumber || !req.body.role || !req.body.password) {
       return res.status(400).send('The mandatory informations are missing : REG NUMBER, PASSWORD and/or ROLE');
     }
 
-    if (role !== 'user' && funct !== 'admin') {
+    if (req.body.role !== 'user' && req.body.role !== 'admin') {
       return res.status(400).send('The role must be "user" or "admin"');
     }
 
-    const encryptedPassword = await bcrypt.hash(password, 10);
-    password = encryptedPassword;
+    const encryptedPassword = await bcrypt.hash(req.body.password, 10);
+    req.body.password = encryptedPassword;
 
-    const answer = await models.addEmployee(regNumber, password, role, name, lastname, funct, profilePicture, teamId);
+    employee = { ...employee, ...req.body };
+
+    const answer = await models.addEmployee(employee);
     return res.json(answer);
   },
 
