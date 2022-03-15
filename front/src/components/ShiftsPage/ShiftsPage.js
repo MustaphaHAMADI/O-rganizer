@@ -66,19 +66,43 @@ const ShiftsPage = ({
 
     const handleSubmit = () => {
         console.log('j\'envoi les données');
-        const body = {};
+        const body = {
+            teams: []
+        };
         body.date = format(new Date(dayValue), 'yyyy-MM-dd');
         for (const key in selectedShift){
-            if(selectedShift[key] === '1'){
-                body[key] = 'M';
+            if(selectedShift[key] === '1'  && key !== 'name'){
+                const team = key
+                const shift = 'M';
+                body.teams.push({
+                    team_id: team,
+                    shift: shift
+                })
             }
-            else if(selectedShift[key] === '2'){
-                body[key] = 'AM';
+            else if(selectedShift[key] === '2'  && key !== 'name'){
+                const team = key
+                const shift = 'AM';
+                body.teams.push({
+                    team_id: team,
+                    shift: shift
+                })
             }
-            else if(selectedShift[key] === '3'){
-                body[key] = 'N';
+            else if(selectedShift[key] === '3'  && key !== 'name'){
+                const team = key
+                const shift = 'N';
+                body.teams.push({
+                    team_id: team,
+                    shift: shift
+                })
             } else {
-                body[key] = '';
+                if(key !== 'name'){
+                    const team = key
+                    const shift = '';
+                    body.teams.push({
+                        team_id: team,
+                        shift: shift
+                    }) 
+                }
             }
         }
         console.log(body);
