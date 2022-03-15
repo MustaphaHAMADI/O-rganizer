@@ -1,0 +1,64 @@
+@use 'src/styles/vars';
+
+.contact {
+  margin: 4rem;
+  text-align: center;
+
+  &__title {
+    font-family: vars.$special-font;
+    color: vars.$dark-purple;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 4rem;
+  }
+
+  &__container {
+    width: 100%;
+  }
+
+  &__members {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__member {
+    width: 20%;
+    color: vars.$dark-purple;
+
+    &-avatar {
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      filter: drop-shadow(4px 4px 0.3rem rgba(0, 0, 0, 0.596)) grayscale(50%);
+    }
+
+    &-name {
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &__button {
+    margin-top: 4rem;
+  }
+}
+
+@media (max-width: 1400px) {
+  .contact__member-avatar {
+    width: 175px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .contact {
+    
+    &__members {
+      flex-wrap: wrap;
+      row-gap: 2rem;
+    }
+
+    &__member {
+      width: 258px;
+    }
+  }
+}

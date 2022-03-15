@@ -13,7 +13,7 @@ import NoAuthRequired from '../NoAuthRequired/NoAuthRequired';
 import NotFound from '../NotFound/NotFound';
 import UsersPage from '../UsersPage/UsersPage';
 import User from '../User/User';
-import PageContact from '../PageContact/PageContact';
+import ContactPage from '../ContactPage/ContactPage';
 import ShiftsPageContainer from '../../Containers/ShiftsPageContainer/ShiftsPageContainer';
 
 // import style
@@ -36,6 +36,7 @@ const App = () => {
     <div className='app'>
       <ThemeProvider theme={theme}>
         <HeaderContainer />
+
         <Routes>
           <Route element={<NoAuthRequired />}>
             <Route path='/' element={<Home />} />
@@ -50,13 +51,12 @@ const App = () => {
             </Route>
             <Route path='/user/:id' element={<User />} />
           </Route>
-          <Route PageContact={<PageContact/>}>
-          <Route path='/PageContact' element={<PageContact />} />
-            </Route>
-
-        
+          <Route >
+            <Route path='/contact' element={<ContactPage />} />
+          </Route>
           <Route path='*' element={<NotFound />} />
         </Routes>
+
         <FooterContainer />
       </ThemeProvider>
     </div>
