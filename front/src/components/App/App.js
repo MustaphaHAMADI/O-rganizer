@@ -13,6 +13,7 @@ import NoAuthRequired from '../NoAuthRequired/NoAuthRequired';
 import NotFound from '../NotFound/NotFound';
 import UsersPage from '../UsersPage/UsersPage';
 import User from '../User/User';
+import PageContact from '../PageContact/PageContact';
 
 // import style
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -45,6 +46,8 @@ const App = () => {
             </Route>
             <Route path='/user/:id' element={<User />} />
           </Route>
+          <Route path='/PageContact' PageContact={<PageContact />} />
+        
           <Route path='*' element={<NotFound />} />
         </Routes>
         <FooterContainer />
