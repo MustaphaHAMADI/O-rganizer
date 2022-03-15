@@ -405,7 +405,7 @@ module.exports = {
     FROM
       "shift"
     JOIN "team" ON "shift"."team_id" = "team"."id"
-      `,
+    ORDER BY "shift"."date"`,
     );
     return result.rows;
   },
