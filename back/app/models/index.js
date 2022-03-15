@@ -11,7 +11,7 @@ const {
  * @property {string} reg_number - User code
  * @property {string} name - Employee firstname
  * @property {string} lastname - Employee lastname
- * @property {number} team_noun - Noun of the employee team
+ * @property {number} team_id - id of the employee team
  * @property {string} role - role of the user : user/admin
  * @property {string} function - Employee function
  * @property {string} profile_picture - URL of the profile picture
@@ -24,7 +24,7 @@ const {
  * @property {string} password - Password of the user
  * @property {string} name - Employee firstname
  * @property {string} lastname - Employee lastname
- * @property {number} team_noun - Noun of the employee team
+ * @property {number} team_id - Id of the employee team
  * @property {string} role - role of the user : user/admin
  * @property {string} function - Employee function
  * @property {string} profile_picture - URL of the profile picture
