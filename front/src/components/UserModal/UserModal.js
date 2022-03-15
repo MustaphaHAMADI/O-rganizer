@@ -76,13 +76,13 @@ const UserModal = ({ user, open, handleCloseModal, handleReload }) => {
       aria-describedby='modal-modal-description'
     >
       {user ? (
-        <div className='userModal'>
-          <div className='userModal__main'>
-            <div className='userModal__image'>
-              <img src={userAvatar} alt='avatar' />
+        <div className='user-modal'>
+          <div className='user-modal__main'>
+            <div className='user-modal__image-container'>
+              <img className='user-modal__image' src={userAvatar} alt='avatar' />
             </div>
-            <div className='userModal__info'>
-              <form action='submit' className='userModal__form'>
+            <div className='user-modal__info'>
+              <form action='submit' className='user-modal__form'>
                 <TextField
                   {...register('reg_number')}
                   sx={{ width: 200, marginTop: 2 }}
@@ -170,13 +170,13 @@ const UserModal = ({ user, open, handleCloseModal, handleReload }) => {
           </Button>
         </div>
       ) : (
-        <div className='userModal'>
-          <div className='userModal__main'>
-            <div className='userModal__image'>
-              <img src={userAvatar} alt='avatar' />
+        <div className='user-modal'>
+          <div className='user-modal__main'>
+            <div className='user-modal__image-container'>
+              <img className='user-modal__image' src={userAvatar} alt='avatar' />
             </div>
-            <div className='userModal__info'>
-              <form action='submit' className='userModal__form'>
+            <div className='user-modal__info'>
+              <form action='submit' className='user-modal__form'>
                 <TextField
                   {...register('regNumber')}
                   sx={{ width: 200, marginTop: 2 }}

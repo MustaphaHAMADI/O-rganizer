@@ -1,4 +1,4 @@
-.userModal {
+.user-modal {
   background-color: #fff;
   width: 70%;
   padding: 20px;
@@ -16,5 +16,21 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+  }
+}
+
+@media (max-width: 1000px) {
+  .user-modal__image {
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .user-modal__main {
+    flex-direction: column;
+  }
+
+  .user-modal__image {
+    width: 75px;
   }
 }
