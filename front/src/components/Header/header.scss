@@ -1,101 +1,94 @@
 @use 'src/styles/vars';
 
 .header {
-    position: relative;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: vars.$dark-purple;
+  color: vars.$light-color;
+  padding: 1.3rem;
+  height: 99px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    background-color: transparent;
+    bottom: -4rem;
+    left: 0;
+    height: 4rem;
+    width: 2rem;
+    border-top-left-radius: 2rem;
+    box-shadow: 0 -2rem 0 0 vars.$dark-purple;
+  }
+
+  &__banner {
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+
+    &-logo {
+      width: 60px;
+      filter: drop-shadow(0.5px 0.5px 1px #fafafa);
+    }
+
+    &-title {
+      font-family: vars.$special-font;
+      font-size: 2rem;
+    }
+  }
+
+  &__avatar {
+    width: 50px;
+  }
+
+  &__logged {
     display: flex;
     justify-content: space-between;
+    width: 100%;
+  }
+
+  &__user-info {
+    display: flex;
     align-items: center;
-    background-color: vars.$dark-purple;
-    color: vars.$light-color;
-    padding: 1.3rem;
-    height: 99px;
+    column-gap: 1rem;
+  }
 
-    &::before {
-        content:'';
-        position: absolute;
-        background-color: transparent;
-        bottom: -4rem;
-        left: 0;
-        height: 4rem;
-        width: 2rem;
-        border-top-left-radius: 2rem;
-        box-shadow: 0 -2rem 0 0 vars.$dark-purple;
-    }
+  &__user-info-number {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
 
-    &__banner {
-        display: flex;
-        align-items: center;
-        column-gap: 0.5rem;
+  &__user-info-name {
+    font-size: 1rem;
+  }
 
-        &-logo {
-            width: 60px;
-            filter: drop-shadow(0.5px 0.5px 1px #fafafa);
-        }
+  &__buttons--mobile {
+    display: none;
+  }
 
-        &-title {
-            font-family: vars.$special-font;
-            font-size: 2rem;
-        }
-    }
-
-    &__btns--desktop {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    &__btns--mobile {
-        display: none;
-    }
-
-    &__avatar {
-        width: 50px;
-    }
-
-    &__logged {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    &__user-info {
-        display: flex;
-        align-items: center;
-        column-gap: 1rem;
-    }
-
-    &__user-info-number {
-        margin-bottom: 0.5rem;
-        font-weight: bold;
-        font-size: 1.5rem;
-    }
-
-    &__user-info-name {
-        font-size: 1rem;
-    }
+  &__button-container {
+    display: flex;
+    column-gap: 1rem;
+  }
 }
 
 @media (max-width: 1200px) {
-    .header::before {
-        display: none;
-    }
+  .header::before {
+    display: none;
+  }
 }
 
-@media (max-width: 768px) {
-    .header {
+@media (max-width: 1000px) {
+  .header {
 
-        &__btns--desktop {
-            display: none;
-        }
-
-        &__btns--mobile {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-        }
-
-        &::before {
-            display: none;
-        }
+    &__buttons--desktop {
+      display: none;
     }
+
+    &__buttons--mobile {
+      display: block;
+    }
+  }
 }

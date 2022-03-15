@@ -64,69 +64,54 @@ const PlanningMobile = ({ planningData, teamData }) => {
                         ></AccordionSummary>
                         <AccordionDetails>
                           <Typography noWrap={false} component={'div'}>
-                            {teamData.length > 1
-                              ? teamData
-                                  .find(
-                                    (foundTeam) => foundTeam.id === team.teamId
-                                  )
-                                  .employees.map((employee) => (
-                                    <p
-                                      className='planning-mobile__accordion planning-mobile__accordion--members'
-                                      key={employee.id}
+                            <div className='planning-mobile__accordion-container'>
+                              <div className='planning-mobile__members-container'>
+                                <p className='planning-mobile__members-title'>
+                                  Liste des employés:
+                                </p>
+                                {teamData.length > 1
+                                  ? teamData
+                                      .find(
+                                        (foundTeam) =>
+                                          foundTeam.id === team.teamId
+                                      )
+                                      .employees.map((employee) => (
+                                        <p
+                                          className='planning-mobile__accordion'
+                                          key={employee.id}
+                                        >
+                                          {employee.firstName}{' '}
+                                          {employee.lastName}
+                                        </p>
+                                      ))
+                                  : null}
+                              </div>
+
+                              <div className='planning-mobile__status-container'>
+                                <p className='planning-mobile__members-title'>
+                                  Liste des statuts:
+                                </p>
+                                {team.status &&
+                                  team.status.map((event) => (
+                                    <div
+                                      className='planning-mobile__accordion planning-mobile__accordion--status'
+                                      key={event.statusId}
                                     >
-                                      {employee.firstName} {employee.lastName}
-                                    </p>
-                                  ))
-                              : null}
+                                      {event.firstName} {event.lastName}{' '}
+                                      <p className='planning-mobile__accordion--status-strong'>
+                                        {event.status} {event.replacementTeam}
+                                      </p>
+                                    </div>
+                                  ))}
+                              </div>
+                            </div>
                           </Typography>
                         </AccordionDetails>
                       </Accordion>
-                    </div>
-
-                    {team.status && (
-                      <div className='planning-mobile__status-warning'>
+                      {team.status && (
                         <div className='planning-mobile__event'></div>
-                        <Accordion
-                          expanded={expanded === `panel2${team.teamId}`}
-                          onChange={handleChange(`panel2${team.teamId}`)}
-                          elevation={0}
-                          disableGutters
-                          sx={{
-                            backgroundColor: 'transparent',
-                            '&:before': {
-                              display: 'none',
-                            },
-                          }}
-                        >
-                          <AccordionSummary
-                            aria-controls={`panel${team.teamId}bh-content`}
-                            id={`panel${team.teamId}bh-header`}
-                            expandIcon={<ExpandMoreIcon />}
-                            sx={{
-                              display: 'inline-block',
-                              width: '30%',
-                              marginTop: '-3.5rem',
-                              marginLeft: '0.9rem',
-                            }}
-                          ></AccordionSummary>
-                          <AccordionDetails>
-                            <Typography noWrap={false} component={'div'}>
-                              {team.status.map((event) => (
-                                <p
-                                  className='planning-mobile__accordion planning-mobile__accordion--status'
-                                  key={event.statusId}
-                                >
-                                  {event.firstName} {event.lastName}{' '}
-                                  <span className='planning-mobile__accordion--status-strong'>
-                                    {event.status} {event.replacementTeam}
-                                  </span>
-                                </p>
-                              ))}
-                            </Typography>
-                          </AccordionDetails>
-                        </Accordion>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                   <div className='planning-mobile__team-shift'>
                     {team.shift}

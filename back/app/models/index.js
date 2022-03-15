@@ -11,7 +11,7 @@ const {
  * @property {string} reg_number - User code
  * @property {string} name - Employee firstname
  * @property {string} lastname - Employee lastname
- * @property {number} team_noun - Noun of the employee team
+ * @property {number} team_id - id of the employee team
  * @property {string} role - role of the user : user/admin
  * @property {string} function - Employee function
  * @property {string} profile_picture - URL of the profile picture
@@ -24,7 +24,7 @@ const {
  * @property {string} password - Password of the user
  * @property {string} name - Employee firstname
  * @property {string} lastname - Employee lastname
- * @property {number} team_noun - Noun of the employee team
+ * @property {number} team_id - Id of the employee team
  * @property {string} role - role of the user : user/admin
  * @property {string} function - Employee function
  * @property {string} profile_picture - URL of the profile picture
@@ -46,6 +46,14 @@ const {
  * @property {number} status_id - ID of the status
  * @property {number} team_id - ID of the replacement team
  * @property {string} comment - Comment of the affected status
+ */
+
+/**
+ * @typedef {object} Shift
+ * @property {number} id - ID of the shift
+ * @property {string} label - Label of the shift
+ * @property {string} date - Date of the shift
+ * @property {number} team_id - ID of the team
  */
 
 module.exports = {
@@ -134,12 +142,12 @@ module.exports = {
    * @param {string} role - role of the employee : user/admin
    * @param {string} name - Name of the employee
    * @param {string} lastname - Lastname of the employee
-   * @param {string} funct - Function of the employee
+   * @param {string} function - Function of the employee
    * @param {string} profilePicture - Link to the picture/Avatar of the employee
    * @param {number} teamId - ID of the mployee team
    * @returns {object} - New created employee
    */
-  async addEmployee(regNumber, password, role, name = '', lastname = '', funct = '', profilePicture = '', teamId = null) {
+  async addEmployee(employee) {
     const newEmployee = await client.query(
       `INSERT INTO
         "employee" (
@@ -156,14 +164,14 @@ module.exports = {
       ($1,$2,$3,$4,$5,$6,$7,$8) 
       RETURNING *`,
       [
-        regNumber,
-        password,
-        role,
-        name,
-        lastname,
-        funct,
-        profilePicture,
-        teamId,
+        employee.regNumber,
+        employee.password,
+        employee.role,
+        employee.name,
+        employee.lastname,
+        employee.function,
+        employee.profilePicture,
+        employee.teamId,
       ],
     );
     return newEmployee.rows[0];
@@ -405,7 +413,7 @@ module.exports = {
     FROM
       "shift"
     JOIN "team" ON "shift"."team_id" = "team"."id"
-      `,
+    ORDER BY "shift"."date", "shift"."team_id"`,
     );
     return result.rows;
   },
@@ -432,5 +440,61 @@ module.exports = {
       LEFT JOIN "team" ON "affected_status"."team_id" = "team"."id"`,
     );
     return result.rows;
+  },
+
+  /**
+   * Add a new shift (used in shift controller)
+   * @param {string} date - date of shift
+   * @param {number} teamId - Id of team
+   * @param {string} label - Label of shift
+   * @returns - The new created shift
+   */
+  async addShift(date, teamId, label) {
+    const result = await client.query(
+      `INSERT INTO "shift" ("date","team_id","label")
+    VALUES
+    ($1,$2,$3)`,
+      [
+        date,
+        teamId,
+        label,
+      ],
+    );
+    return result.rows[0];
+  },
+
+  /**
+   * Update a shift (used in shift controller)
+   * @param {string} date - date of shift
+   * @param {number} teamId - Id of team
+   * @param {string} label - Label of shift
+   * @returns - The updated shift
+   */
+  async updateShift(date, teamId, label) {
+    const result = await client.query(
+      `UPDATE "shift" SET "label" = $3
+    WHERE "date" = $1 AND "team_id" = $2`,
+      [
+        date,
+        teamId,
+        label,
+      ],
+    );
+    return result.rows[0];
+  },
+
+  /**
+   * Delete a shift (used in shift controller)
+   * @param {string} date - date of shift
+   * @returns - validation of the deletion
+   */
+  async deleteShift(date) {
+    const result = await client.query(
+      'DELETE FROM "shift" WHERE "date" = $1',
+      [
+        date,
+      ],
+    );
+    return !!result.rowCount;
   },
 };
