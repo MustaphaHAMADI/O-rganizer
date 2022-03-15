@@ -10,7 +10,7 @@ const verifyToken = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, config.TOKEN_KEY);
     if (req.params.id) {
-      if (decoded.role !== 'admin' && decoded.employee_id !== req.params.id) {
+      if (decoded.role !== 'admin' && decoded.employee_id !== Number(req.params.id)) {
         return res.status(401).send('Permission not allowed');
       }
     }
