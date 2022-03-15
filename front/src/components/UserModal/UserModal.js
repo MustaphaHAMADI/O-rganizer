@@ -19,6 +19,9 @@ const UserModal = ({ user, open, handleCloseModal, handleReload }) => {
   };
 
   const handleCreate = (data) => {
+    if (data.teamId === '0') {
+      data.teamId = null;
+    }
     UserService.addEmployee(data);
     handleModalReset();
   };
@@ -224,7 +227,7 @@ const UserModal = ({ user, open, handleCloseModal, handleReload }) => {
                   label='status'
                   defaultValue='0'
                 >
-                  <MenuItem value='0'>Choissiez une equipe</MenuItem>
+                  <MenuItem value='0'>Pas d'équipe</MenuItem>
                   <MenuItem value='1'>Equipe A</MenuItem>
                   <MenuItem value='2'>Equipe B</MenuItem>
                   <MenuItem value='3'>Equipe C</MenuItem>
