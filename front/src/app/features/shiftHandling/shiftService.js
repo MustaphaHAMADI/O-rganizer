@@ -14,7 +14,7 @@ const authHeader = () => {
   }
 };
 
-const patchService = async (shiftData) => {
+const patchShift = async (shiftData) => {
     try {
         const response = await axiosClient.patch(`/shift/`, shiftData, {
           headers: authHeader(),
@@ -29,7 +29,10 @@ const patchService = async (shiftData) => {
 
 const postShift = async (shiftData) => {
     try {
-      const response = await axiosClient.post('/shift', shiftData, {
+      const response = await axiosClient.post(
+        '/shift', 
+        shiftData, 
+        {
         headers: authHeader(),
       });
       toast.success(`Shift ajouté`);
@@ -41,7 +44,7 @@ const postShift = async (shiftData) => {
 };
 
 const shiftService = {
-    patchService,
+    patchShift,
     postShift,
   };
   
