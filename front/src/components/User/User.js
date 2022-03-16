@@ -44,7 +44,7 @@ const User = () => {
 
   useEffect(() => {
     userService.getUser(userId).then((res) => setUser(res.data));
-  }, []);
+  }, [userId]);
 
   return (
     <div className='user'>
