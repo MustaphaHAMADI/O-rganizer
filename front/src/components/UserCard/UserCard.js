@@ -17,13 +17,13 @@ const UserCard = ({ user, handleOpenModal, handleSetUser, handleReload }) => {
   };
   return (
     <div className='usercard'>
+      <img className='usercard__avatar' src={avatar} alt='profil' />
       <div className='usercard__person'>
-        <img className='usercard__avatar' src={avatar} alt='profil' />
         <p className='usercard__name'>{`${user.lastname} ${user.name}`}</p>
-        <p className='usercard__regNumber'>{user.reg_number}</p>
+        <p className='usercard__id'>{user.reg_number}</p>
         <p className='usercard__role'>{`(${user.role})`}</p>
-        <p className='usercard__fonction'>{user.function}</p>
-        <p className='usercard__teamNoun'>{user.team_noun}</p>
+        <p className='usercard__function'>{user.function}</p>
+        <p className='usercard__team'>{user.team_noun ? user.team_noun : '-'}</p>
       </div>
       <div className='usercard__buttons'>
         <Button onClick={handleUserModification}>

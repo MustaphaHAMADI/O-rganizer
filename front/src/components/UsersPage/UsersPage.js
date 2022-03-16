@@ -39,14 +39,14 @@ const UsersPage = () => {
   };
 
   return (
-    <div className='usersPage'>
+    <div className='users-page'>
       <UserModal
         open={isModalOpen}
         handleCloseModal={handleCloseModal}
         user={modalUser}
         handleReload={handleReload}
       />
-      <div className='usersPage__header'>
+      <div className='users-page__header'>
         <Button variant='contained'>
           <Link to='/planning'>Retour au planning</Link>
         </Button>
@@ -54,7 +54,7 @@ const UsersPage = () => {
           <AddCircleOutline />
         </Button>
       </div>
-      <div className='usersPage__main'>
+      <div className='users-page__main'>
         {users &&
           users.map((user) => (
             <UserCard
