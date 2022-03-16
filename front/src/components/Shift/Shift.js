@@ -1,4 +1,4 @@
-import { format, getISOWeek, addDays } from 'date-fns';
+import { format, getISOWeek } from 'date-fns';
 
 import React, { useRef, useEffect, useState } from 'react';
 
